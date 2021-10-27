@@ -20,7 +20,7 @@ const initialValues={
   password:'',
 }
 
-function Register() {
+export const Register = ()=> {
 
 const handleSubmit=(values)=>{ 
    const dataUser={
@@ -45,7 +45,8 @@ return dataUser;
                                   <label htmlFor="firstName">Nombre:
                                       <Field type="text" className="form-control" name="firstName" id="firstName" required />
                                       <ErrorMessage name='firstName'>
-                                      {error => <div className='alert alert-danger'>{error}</div>}
+                                      {(error) =>( 
+                                      <div className='alert alert-danger'>{error}</div>)}
                                       </ErrorMessage>
                                   </label>
                               </div>
@@ -53,7 +54,8 @@ return dataUser;
                                   <label htmlFor="lastName">Apellido:
                                       <Field type="text" className="form-control" name="lastName" id="lastName" required />
                                       <ErrorMessage name='lastName' >
-                                      {error => <div className='alert alert-danger'>{error}</div>}
+                                      {(error) =>( 
+                                      <div className='alert alert-danger'>{error}</div>)}
                                       </ErrorMessage>
                                   </label>
                               </div>
@@ -61,7 +63,8 @@ return dataUser;
                                   <label htmlFor="email">Email:
                                       <Field type="email" className="form-control" name="email" id="email" required/>
                                       <ErrorMessage name='email'>
-                                          {error => <div className='alert alert-danger'>{error}</div>}
+                                      {(error) =>( 
+                                      <div className='alert alert-danger'>{error}</div>)}
                                       </ErrorMessage>
                                   </label>
                               </div>
@@ -69,7 +72,8 @@ return dataUser;
                                   <label htmlFor="password">Contraseña:
                                       <Field type="password" className="form-control" name="password" id="password" required />
                                       <ErrorMessage name='password' className="alert alert-danger">
-                                      {error => <div className='alert alert-danger'>{error}</div>}
+                                      {(error) =>( 
+                                      <div className='alert alert-danger'>{error}</div>)}
                                       </ErrorMessage>
                                   </label>
                               </div>
@@ -86,4 +90,3 @@ return dataUser;
 }
 
 
-export default Register;
