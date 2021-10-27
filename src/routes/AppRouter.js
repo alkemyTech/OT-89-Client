@@ -12,7 +12,8 @@ import {Contacts} from '../components/Contacts';
 import {Contribute} from '../components/Contribute';
 import {Login} from '../components/Login';
 import {Register} from '../components/Register';
-import {User} from '../components/User';
+import {Profile} from '../components/Profile';
+import {NotFound} from '../component/NotFound';
 
 export const AppRouter = () => {
     return(
@@ -32,7 +33,8 @@ export const AppRouter = () => {
                     <Route exact path = '/contribute' component = {Contribute}/>
                     <Route exact path = '/login' component = {Login}/>
                     <Route exact path = '/register' component = {Register}/>
-                    <Route exact path = '/user' component = {User}/>
+                    <Route exact path = '/profile' component = {Profile}/>
+                    <Route exact path = '*' component = {NotFound}/>
                 </Switch>
             <Footer />
         </Router>
