@@ -21,7 +21,7 @@ export default class AlertInformation extends Component {
     render() {
         return (
             <div>
-                <button class="btn btn-waring" onClick={this.HandleClick}>
+                <button class="btn btn-warning" onClick={this.HandleClick}>
                     Alerta
                 </button>
             </div>

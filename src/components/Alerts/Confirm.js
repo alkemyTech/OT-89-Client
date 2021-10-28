@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Swal from "sweetalert2";
 
 
-export default class AlertError extends Component {
+export default class AlertConfirm extends Component {
 
     constructor() {
         super();
@@ -21,7 +21,7 @@ export default class AlertError extends Component {
     render() {
         return (
             <div>
-                <button class="btn btn-danger" onClick={this.HandleClick}>
+                <button class="btn btn-success" onClick={this.HandleClick}>
                     Alerta
                 </button>
             </div>
