@@ -3,14 +3,24 @@ import { Link } from "react-router-dom";
 
 import { Squash as Hamburger } from "hamburger-react";
 
-import logoONG from "../../assets/images/logo.png";
-
 import "./Header.scss";
 
 export const Header = () => {
+  // GET Logo ONG
+  const logoONG = "/images/assets/logo.png";
+
+  //! This function will request the image url from a database
+  // const getLogo = async () => {
+  //   const response = await fetch(DATABASE_URL + "/logo");
+  //   const blob = await response.blob();
+  //   const src = URL.createObjectURL(blob);
+  //   return src;
+  // };
+
   const [isOpen, setOpen] = useState(false);
 
   const showNavbar = isOpen ? "show-navbar" : "";
+  console.log(showNavbar);
 
   const itemsNav = [
     { title: "Inicio", route: "" },
@@ -34,7 +44,11 @@ export const Header = () => {
 
         <ul className="navbar-list">
           {itemsNav.map((item, index) => (
-            <Link key={index} to={`/${item.route}`}>
+            <Link
+              onClick={() => setOpen(false)}
+              key={index}
+              to={`/${item.route}`}
+            >
               {item.title}
             </Link>
           ))}
