@@ -152,12 +152,13 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-left: auto;
     width: 27.2rem;
+    margin-left: auto;
     margin-top: 0;
 
     .button {
       &.login {
+        margin-right: 1.2rem;
         margin-bottom: 0rem;
       }
     }
