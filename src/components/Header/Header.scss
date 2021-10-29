@@ -1,0 +1,166 @@
+@import "../../assets/scss/vars";
+
+header {
+  position: relative;
+  width: 100%;
+  height: 6.2rem;
+  padding: $spacing-sm $spacing-md;
+
+  display: flex;
+  align-items: center;
+  font-size: $font-size-default;
+
+  .logo {
+    margin-top: $spacing-xs;
+    img {
+      width: 11rem;
+    }
+  }
+
+  .hamburger-react {
+    display: block;
+    position: fixed;
+    z-index: 99999;
+    margin-left: auto;
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: $font-size-medium;
+
+  background-color: #fff;
+  z-index: 999;
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: $spacing-xxl;
+
+    & > * {
+      font-size: $font-size-medium;
+      font-weight: 500;
+      color: $color-ligthblue;
+      text-decoration: none;
+      text-transform: capitalize;
+      cursor: pointer;
+      margin-bottom: $spacing-xs;
+    }
+
+    & > *:hover {
+      text-decoration: underline;
+      color: $color-ligthblue;
+    }
+  }
+
+  .navbar-logo {
+    display: block;
+    margin-top: $spacing-md;
+  }
+}
+
+.show-navbar {
+  right: 0;
+  transition: all 0.2s linear;
+}
+
+.buttons-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: $spacing-xxl;
+
+  .button {
+    display: block;
+    width: 16rem;
+    height: 100%;
+    padding: $spacing-xs $spacing-sm;
+    border: 1px solid $color-ligthblue;
+    border-radius: 6px;
+    font-size: $font-size-default;
+    font-weight: 500;
+    line-height: 1.8rem;
+    background-color: transparent;
+    cursor: pointer;
+
+    &.login {
+      color: $color-ligthblue;
+      margin-bottom: $spacing-xs;
+    }
+
+    &.signup {
+      color: #fff;
+      background-color: $color-ligthblue;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .hamburger-react {
+      display: none;
+    }
+  }
+
+  .navbar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 6.2rem;
+    right: 0;
+    transition: all 0.2s linear;
+
+    &-list {
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+      margin-left: $spacing-md;
+
+      & > * {
+        margin-bottom: 0;
+        margin-right: $spacing-lg;
+      }
+    }
+  }
+
+  .logo.navbar-logo {
+    display: none;
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 28rem;
+    margin-top: 0;
+    margin-left: auto;
+
+    .button {
+      &.login {
+        margin-right: 1.2rem;
+        margin-bottom: 0rem;
+      }
+    }
+  }
+}

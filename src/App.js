@@ -5,7 +5,6 @@ const App = () => {
   return (
     <>
       <AppRouter />
-      <h1>Hello Alkemy</h1>
     </>
   );
 };
