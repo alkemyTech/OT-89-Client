@@ -9,10 +9,12 @@ import { Novelties } from "../pages/Novelties";
 import { Testimonials } from "../pages/Testimonials";
 import { Contacts } from "../pages/Contacts";
 import { Contribute } from "../pages/Contribute";
-import { Login } from "../pages/Login.jsx";
+import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { User } from "../pages/User";
 import { NotFound } from "../pages/NotFound";
+
+import { Footer } from "../components/Footer/Footer.jsx";
 
 export const AppRouter = () => {
   return (
@@ -31,6 +33,7 @@ export const AppRouter = () => {
         <Route exact path="/user" component={User} />
         <Route path="*" component={NotFound} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };
