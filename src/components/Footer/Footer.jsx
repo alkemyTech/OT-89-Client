@@ -37,17 +37,17 @@ export const Footer = () => {
   return (
     <footer>
       <section className="footer-nav">
-        <ul className="footer-list footer-list--left">
+        <ul className="list-left">
           {itemsLeftFooter.map((item, index) => (
             <Link key={index} to={`/${item.route}`}>
               {item.title}
             </Link>
           ))}
         </ul>
-        <figure className="footer-logo">
+        <figure>
           <img src={logoONG} alt="Logo SOMOS ONG" />
         </figure>
-        <ul className="footer-list footer-list--right">
+        <ul className="list-right">
           {itemsRightFooter.map((item, index) => (
             <Link key={index} to={`/${item.route}`}>
               {item.title}
