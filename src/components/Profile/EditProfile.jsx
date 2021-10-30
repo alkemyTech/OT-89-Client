@@ -1,9 +1,12 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { setUser } from './profileSlice';
+import { useDispatch } from 'react-redux';
 
 export default function EditProfile(){
-
+    
+    const dispatch = useDispatch();
+    
     const actionEdit = () => {
         try{
           const {data} = await axios.put('/users/' + id, );
