@@ -8,7 +8,7 @@ export default function Profile(){
     const history = useHistory();
     const user = useSelector((state) => state.user);
 
-    const actionDelete = () => {  
+    const actionDelete = async() => {  
         try{
           await axios.delete('/users/' + id);
           dispatch(deleteUser());
@@ -18,7 +18,7 @@ export default function Profile(){
         }
       }
 
-    const handleDelete = async(id) => {
+    const handleDelete = (id) => {
         actionDelete(id);
         history.push('/');
     }
