@@ -3,9 +3,6 @@ import Swal from "sweetalert2";
 
 
 export const Alert=({title,text,icon,type,footer,buttonName})=>  {
-
-const [alert, setAlert] = useState(false)
-
   const  HandleClick=()=> {
         Swal.fire({
             title: title,    
