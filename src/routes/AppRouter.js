@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Home } from "../pages/Home";
-import { Header } from "../components/Header/Header.jsx";
 import { About } from "../pages/About";
 import { Activities } from "../pages/Activities";
 import { News } from "../pages/News";
@@ -15,10 +14,11 @@ import { Register } from "../pages/Register";
 import { User } from "../pages/User";
 import { NotFound } from "../pages/NotFound";
 
+import { Footer } from "../components/Footer/Footer.jsx";
+
 export const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
@@ -33,6 +33,7 @@ export const AppRouter = () => {
         <Route exact path="/user" component={User} />
         <Route path="*" component={NotFound} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };
