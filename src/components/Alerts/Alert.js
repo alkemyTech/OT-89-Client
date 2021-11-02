@@ -23,4 +23,4 @@ export const Alert=({title,text,icon,type,footer,buttonName})=>  {
             </div>
         );
     
-}
+};

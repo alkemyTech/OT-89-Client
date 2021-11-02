@@ -90,4 +90,4 @@ return dataUser;
   );
 }
 
-export default Register
+export default Register;
