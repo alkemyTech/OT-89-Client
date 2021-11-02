@@ -33,9 +33,7 @@ const handleSubmit=(values)=>{
 return dataUser;
 }
   return (
-    <div className="container text-center p-3">
-      
-     
+    <div className="container text-center p-3">     
       <div className="row">
       <div className="mx-auto col-lg-12 col-md-12 col-xs-12" >
         <Formik initialValues={initialValues}
