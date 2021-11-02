@@ -86,11 +86,8 @@ export const Home = () => {
           <LastNovelties novelties={ novelties } />
         </div>
         :
-        <div>
-          {/* <Slider />  */}
-          <h1>{ title }</h1>
-          <LastNovelties novelties={ novelties } />
-        </div>
+        // Loading spinner
+        null
         }
     </div>
   )
