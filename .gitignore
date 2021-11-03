@@ -54,6 +54,8 @@ Thumbs.db
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json
+yarn.lock
 
 # testing
 /coverage
