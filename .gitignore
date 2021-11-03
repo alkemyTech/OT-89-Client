@@ -19,6 +19,7 @@ package-lock.json
 
 # Package files
 *.jar
+yarn.lock
 
 # Maven
 target/
