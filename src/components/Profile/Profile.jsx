@@ -1,17 +1,34 @@
 import React from "react";
-import { useDispatch, useSelector, useHistory } from "react-redux";
+import { /* useDispatch, */ useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import "./profile.scss";
+import clienteAxios from "../../config/axios";
+import swal from "sweetalert";
 
 export default function Profile() {
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch(); */
   const history = useHistory();
   const user = useSelector((state) => state.user);
 
-  const actionDelete = async () => {
+  const actionDelete = async (id) => {
     try {
-      await axios.delete("/users/" + id);
-      dispatch(deleteUser());
+      const deleting = await swal({
+        title: '¿Eliminar usuario?',
+        text: 'Al aceptar su cuenta de usuario será eliminada',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+      });
+      if (deleting){
+        await clienteAxios.put('/users/' + id);
+
+        /* dispatch(deleteUser()) */
+
+        swal('Poof!', 'Usuario eliminado', 'success')
+      } else {
+        swal('Tu usuario se encuentra a salvo');
+      }
     } catch (e) {
       console.log(e.response.data);
     }
@@ -42,7 +59,7 @@ export default function Profile() {
 
               <button className="btn btn-danger" onClick={() => handleDelete(user.id)}>Eliminar</button>
 
-              <Link to={"/profile/edit/" + id}><button className="btn btn-primary">Editar</button></Link>
+              <Link to={"/profile/edit/" + user.id}><button className="btn btn-primary">Editar</button></Link>
             </td>
           </tr>
         </tbody>

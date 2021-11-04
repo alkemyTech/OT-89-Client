@@ -1,8 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { setUser } from './profileSlice';
-import { useDispatch, useHistory } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './editProfile.scss';
+import clienteAxios from '../../config/axios';
 
 export default function EditProfile() {
     
@@ -11,9 +13,9 @@ export default function EditProfile() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const actionEdit = async () => {
+  const actionEdit = async (id) => {
     try {
-      const { data } = await axios.put("/users/" + id);
+      const { data } = await clienteAxios.put("/users/" + id); /* Cambiar ruta segun corresponda*/
       dispatch(setUser(data));
     } catch (e) {
       console.log(e.response.data);
