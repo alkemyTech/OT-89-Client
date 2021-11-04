@@ -1,5 +1,7 @@
 import React from "react";
-import { AppRouter } from "./routes/AppRouter";
+import logo from "./logo.svg";
+import { Counter } from "./features/counter/Counter";
+import "./App.css";
 
 const App = () => {
   return (
