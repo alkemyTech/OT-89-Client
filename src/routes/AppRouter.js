@@ -4,8 +4,8 @@ import ListScreen from "../components/ListScreen/ListScreen";
 
 export const AppRouter = () => {
   return (
-    <>
+    <div>
       <ListScreen />
-    </>
+    </div>
   );
 };

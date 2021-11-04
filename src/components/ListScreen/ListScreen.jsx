@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import "./ListScreen.scss";
 
-const ListScreen = () => {
+const ListScreen = (props) => {
   const dataReceived = [
     { id: 1, name: "prueba1", image: "url", createdAt: "24-03-2012" },
     { id: 2, name: "prueba2", image: "url", createdAt: "24-03-2012" },
@@ -33,7 +33,6 @@ const ListScreen = () => {
       ...prevState,
       [name]: value,
     }));
-    /*     console.log(selected); */
   };
 
   const editar = () => {
@@ -43,8 +42,8 @@ const ListScreen = () => {
         list.name = selected.name;
         list.image = selected.image;
         list = toEdit;
-        return toEdit;
       }
+      return toEdit;
     });
     /*     setData(newData); */
     setModalEdit(false);
@@ -71,7 +70,7 @@ const ListScreen = () => {
         </thead>
         <tbody>
           {data.map((element) => (
-            <tr>
+            <tr key={element.id}>
               <td>{element.name}</td>
               <td>{element.image}</td>
               <td>{element.createdAt}</td>
@@ -94,75 +93,77 @@ const ListScreen = () => {
           ))}
         </tbody>
       </table>
+      <div className="container">
+        <Modal isOpen={modalEdit}>
+          <ModalHeader>
+            <div>
+              <h3>Editar</h3>
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <div className="form-group">
+              <label>ID</label>
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                name="id"
+                value={selected && selected.id}
+              />
+              <br />
 
-      <Modal isOpen={modalEdit}>
-        <ModalHeader>
-          <div>
-            <h3>Editar</h3>
-          </div>
-        </ModalHeader>
-        <ModalBody>
-          <div className="form-group">
-            <label>ID</label>
-            <input
-              className="form-control"
-              readOnly
-              type="text"
-              name="id"
-              value={selected && selected.id}
-            />
-            <br />
+              <label>Name</label>
+              <input
+                className="form-control"
+                type="text"
+                name="name"
+                value={selected && selected.name}
+                onChange={handleChange}
+              />
+              <br />
 
-            <label>Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="name"
-              value={selected && selected.name}
-              onChange={handleChange}
-            />
-            <br />
-
-            <label>Image</label>
-            <input
-              className="form-control"
-              type="text"
-              name="image"
-              value={selected && selected.image}
-              onChange={handleChange}
-            />
-            <br />
-          </div>
-        </ModalBody>
-        <ModalFooter>
-          <button className="btn btn-primary" onClick={() => editar()}>
-            Actualizar
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => setModalEdit(false)}
-          >
-            Cancelar
-          </button>
-        </ModalFooter>
-      </Modal>
-
-      <Modal isOpen={modalDelete}>
-        <ModalBody>
-          Estás Seguro que deseas eliminar el país {selected && selected.name}
-        </ModalBody>
-        <ModalFooter>
-          <button className="btn btn-danger" onClick={() => del()}>
-            Sí
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => setModalDelete(false)}
-          >
-            No
-          </button>
-        </ModalFooter>
-      </Modal>
+              <label>Image</label>
+              <input
+                className="form-control"
+                type="text"
+                name="image"
+                value={selected && selected.image}
+                onChange={handleChange}
+              />
+              <br />
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-primary" onClick={() => editar()}>
+              Actualizar
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => setModalEdit(false)}
+            >
+              Cancelar
+            </button>
+          </ModalFooter>
+        </Modal>
+      </div>
+      <div className="container">
+        <Modal fade={false} isOpen={modalDelete}>
+          <ModalBody>
+            Estás Seguro que deseas eliminar {selected && selected.name}
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-danger" onClick={() => del()}>
+              Sí
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setModalDelete(false)}
+            >
+              No
+            </button>
+          </ModalFooter>
+        </Modal>
+      </div>
     </div>
   );
 };
