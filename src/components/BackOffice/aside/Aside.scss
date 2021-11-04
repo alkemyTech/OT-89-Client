@@ -1,0 +1,49 @@
+@import "../../../assets/scss/vars";
+
+.Aside {
+  position: absolute;
+  border-top: 2px solid $color-black;
+  border-right: 2px solid $color-black;
+  background-color: $color-white;
+  width: 30rem;
+  left: -150%;
+  padding: 3rem;
+  min-height: 90vh;
+  transition: all .2s linear;
+  z-index: 99;
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+    }
+    span {
+      font-size: 2.3rem;
+    }
+  }
+  ul {
+    list-style: none;
+    .category {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      color: $color-black;
+      &:hover {
+        color: $color-lightblue-light;
+      }
+    }
+  }
+  @media (min-width: $breakpoint-lg) {
+    position: relative;
+    left: 0;
+  }
+}
+
+.open {
+  left: 0;
+}

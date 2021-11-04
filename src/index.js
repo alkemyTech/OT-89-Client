@@ -4,12 +4,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import "./assets/scss/_base.scss";
-import ListScreen from "./components/ListScreen/ListScreen";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <ListScreen></ListScreen>
   </React.StrictMode>,
   document.getElementById("root")
 );
