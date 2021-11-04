@@ -4,12 +4,12 @@ import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import Slider from "./components/Slider/Slider";
 
-function App() {
+const App = () => {
   return (
     <>
-      <Slider />
+      <AppRouter />
     </>
   );
-}
+};
 
 export default App;
