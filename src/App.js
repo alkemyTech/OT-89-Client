@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
-import Contact from "./components/Contact/Contact";
 
-function App() {
+import { AppRouter } from "./routes/AppRouter";
+
+const App = () => {
   return (
-    <div className="App">
-      <Contact />
-    </div>
+    <>
+      <AppRouter />
+    </>
   );
-}
+};
 
 export default App;
