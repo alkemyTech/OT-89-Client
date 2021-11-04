@@ -4,10 +4,30 @@ import "./ListScreen.scss";
 
 const ListScreen = (props) => {
   const dataReceived = [
-    { id: 1, name: "prueba1", image: "url", createdAt: "24-03-2012" },
-    { id: 2, name: "prueba2", image: "url", createdAt: "24-03-2012" },
-    { id: 3, name: "prueba3", image: "url", createdAt: "24-03-2012" },
-    { id: 4, name: "prueba4", image: "url", createdAt: "24-03-2012" },
+    {
+      id: 1,
+      name: "prueba1",
+      image: "https://getbootstrap.com/",
+      createdAt: "24-03-2012",
+    },
+    {
+      id: 2,
+      name: "prueba2",
+      image: "https://getbootstrap.com/",
+      createdAt: "24-03-2012",
+    },
+    {
+      id: 3,
+      name: "prueba3",
+      image: "uhttps://getbootstrap.com/rl",
+      createdAt: "24-03-2012",
+    },
+    {
+      id: 4,
+      name: "prueba4",
+      image: "https://getbootstrap.com/",
+      createdAt: "24-03-2012",
+    },
   ];
 
   const [data, setData] = useState(dataReceived);
@@ -76,14 +96,14 @@ const ListScreen = (props) => {
               <td>{element.createdAt}</td>
               <td>
                 <button
-                  className="btn btn-primary btn-lg"
+                  className="btn primary"
                   onClick={() => selectList(element, "Edit")}
                 >
                   editar
                 </button>
                 {"  "}
                 <button
-                  className="btn btn-danger btn-lg"
+                  className=" btn danger btn-danger "
                   onClick={() => selectList(element, "Delete")}
                 >
                   eliminar
@@ -134,11 +154,11 @@ const ListScreen = (props) => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-primary" onClick={() => editar()}>
+            <button className="btn primary" onClick={() => editar()}>
               Actualizar
             </button>
             <button
-              className="btn btn-danger"
+              className="btn danger btn-danger"
               onClick={() => setModalEdit(false)}
             >
               Cancelar
@@ -152,11 +172,11 @@ const ListScreen = (props) => {
             Estás Seguro que deseas eliminar {selected && selected.name}
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-danger" onClick={() => del()}>
+            <button className="btn danger btn-danger" onClick={() => del()}>
               Sí
             </button>
             <button
-              className="btn btn-secondary"
+              className="btn primary"
               onClick={() => setModalDelete(false)}
             >
               No
