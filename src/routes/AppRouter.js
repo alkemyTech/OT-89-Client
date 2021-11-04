@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import { Header } from "../components/Header/Header";
+
 import { Home } from "../pages/Home";
 import { About } from "../pages/About";
 import { Activities } from "../pages/Activities";
@@ -13,8 +15,6 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { User } from "../pages/User";
 import { NotFound } from "../pages/NotFound";
-
-import { Header } from "../components/Header/Header";
 
 export const AppRouter = () => {
   return (
