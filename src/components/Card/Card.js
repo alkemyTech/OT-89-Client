@@ -14,7 +14,6 @@ const Card = props => {
             </div>
             <div className="content">
                 <h2>{title}</h2>
-                {/* <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero, vitae.</p> */}
                 <Button className="button" title="Ver más" url={`/novelties/${id}`}/>
             </div>
         </div>        

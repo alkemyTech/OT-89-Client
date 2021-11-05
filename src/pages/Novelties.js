@@ -14,7 +14,7 @@ export const Novelties = () => {
 
   useEffect(() => {
 // Petocion a la base de datos con axios
-    setData(fakedata)
+    setData(fakedata.reverse())
   }, [])
 
   return (
