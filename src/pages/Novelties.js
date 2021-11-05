@@ -14,6 +14,19 @@ export const Novelties = () => {
 
   useEffect(() => {
 // Petocion a la base de datos con axios
+    // const getData = async () => {
+    // const res = axios.get("/news")
+    // const data = await res.data
+    // setData(data)
+    // }    
+    
+    // try {
+    //   getData()
+
+    // } catch (error) {
+    //   console.log(error)    
+    // }
+  
     setData(fakedata.reverse())
   }, [])
 
