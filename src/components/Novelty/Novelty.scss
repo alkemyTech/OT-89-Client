@@ -1,5 +1,7 @@
 .Novelty{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     margin: 2.4rem  4.8rem;
     align-items: center;
     &__description {
@@ -8,10 +10,13 @@
             font-size: 3.5rem;
         }
         p {
+            text-align: justify;
             font-size: 2rem;
         }
     }
     &__img {
+        width: 80%;
+        margin: 0 auto;
         border-radius: 4px;
     }
 }
