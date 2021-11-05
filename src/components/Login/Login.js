@@ -1,10 +1,14 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from "react-redux";
+import { login, logout } from "../../features/slices/authSlice";
 
 import logo from '../../assets/images/logo.png';
 
 function Login() {
+
+    const dispatch = useDispatch();
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -23,7 +27,7 @@ function Login() {
             email: values.email,
             password: values.password
         }
-        console.log(dataUser)
+        dispatch(login(dataUser));
     }
 
     return (
