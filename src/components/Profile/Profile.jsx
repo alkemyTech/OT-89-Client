@@ -3,7 +3,7 @@ import { /* useDispatch, */ useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import "./profile.scss";
-import clienteAxios from "../../config/axios";
+import apiService from '../../services/server';
 import swal from "sweetalert";
 
 export default function Profile() {
@@ -21,7 +21,7 @@ export default function Profile() {
         dangerMode: true
       });
       if (deleting){
-        await clienteAxios.put('/users/' + id);
+        await apiService.put('/users/' + id);
 
         /* dispatch(deleteUser()) */
 

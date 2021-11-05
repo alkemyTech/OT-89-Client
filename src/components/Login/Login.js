@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useHistory  } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import clienteAxios from '../../config/axios';
+import apiService from '../../services/server';
 
 function Login() {
     const history = useHistory();
@@ -25,7 +25,7 @@ function Login() {
             email: values.email,
             password: values.password
         }
-        clienteAxios.post('/login', dataUser) /* Cambiar ruta segun corresponda*/
+        apiService.post('/auth/login', dataUser) /* Cambiar ruta segun corresponda*/
             .then(res => {
                 console.log(res.data)
                 history.push('/') /* Redirige a la pantalla principal */

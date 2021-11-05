@@ -4,7 +4,7 @@ import { setUser } from './profileSlice';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './editProfile.scss';
-import clienteAxios from '../../config/axios';
+import apiService from '../../services/server';
 
 export default function EditProfile() {
     
@@ -15,7 +15,7 @@ export default function EditProfile() {
 
   const actionEdit = async (id) => {
     try {
-      const { data } = await clienteAxios.put("/users/" + id); /* Cambiar ruta segun corresponda*/
+      const { data } = await apiService.put("/users/" + id); /* Cambiar ruta segun corresponda*/
       dispatch(setUser(data));
     } catch (e) {
       console.log(e.response.data);

@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory  } from 'react-router-dom';
 import logo from "../../assets/images/logo.png";
-import clienteAxios from "../../config/axios";
+import apiService from '../../services/server';
 
 
 
@@ -32,7 +32,7 @@ export const Register = () => {
       email: values.email,
       password: values.password,
     };
-    clienteAxios.post("/register", dataUser) /* Cambiar ruta segun corresponda*/
+    apiService.post("/auth/register", dataUser) /* Cambiar ruta segun corresponda*/
       .then((res) => {
         console.log(res.data);
         history.push('/') /* Redirige a la pantalla principal */
