@@ -1,6 +1,8 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import logo from "../../assets/images/logo.png";
+import React from 'react';
+import { Formik,Field, Form, ErrorMessage} from 'formik';
+import * as Yup from 'yup'
+import logo from '../../assets/images/logo.png';
+
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("Required"),
