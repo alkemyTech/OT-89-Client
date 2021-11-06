@@ -1,6 +1,7 @@
+import React from 'react';
 import { Formik,Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup'
-import logo from '../../assets/images/logo.png';
+
 
 
 const validationSchema = Yup.object({
@@ -20,7 +21,7 @@ const initialValues={
   password:'',
 }
 
-export const Register = ()=> {
+function Register () {
 
 const handleSubmit=(values)=>{ 
    const dataUser={
@@ -32,9 +33,7 @@ const handleSubmit=(values)=>{
 return dataUser;
 }
   return (
-    <div className="container text-center p-3">
-         <img src={logo} alt="Somos Mas Logo"/>
-     
+    <div className="container text-center p-3">     
       <div className="row">
       <div className="mx-auto col-lg-12 col-md-12 col-xs-12" >
         <Formik initialValues={initialValues}
@@ -89,4 +88,4 @@ return dataUser;
   );
 }
 
-
+export default Register;
