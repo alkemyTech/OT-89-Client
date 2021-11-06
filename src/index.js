@@ -2,14 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BackOffice } from "./components/BackOffice/BackOffice";
+// import { BackOffice } from "./components/BackOffice/BackOffice";
 
 import "./assets/scss/_base.scss";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <BackOffice></BackOffice>
+    {/* <BackOffice></BackOffice> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
