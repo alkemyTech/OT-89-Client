@@ -1,0 +1,36 @@
+@import "../../../assets/scss/base";
+
+.btn {
+  display: block;
+  padding: $spacing-xs $spacing-sm;
+  border: 1px solid $color-ligthblue;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-default;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.8rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.primary {
+  background-color: $color-ligthblue;
+  color: $color-white;
+  &:hover {
+    background-color: lighten($color: $color-ligthblue, $amount: 5);
+    color: $color-white;
+  }
+}
+
+.outline {
+  border: 1px solid $color-ligthblue;
+  color: $color-ligthblue;
+
+  &:hover {
+    color: $color-ligthblue;
+  }
+}
+
+.center {
+  margin: 0 auto;
+}
