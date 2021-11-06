@@ -1,17 +1,15 @@
 import React from "react";
-import "./App.css";
 import { AppRouter } from "./routes/AppRouter";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
-import "./App.css";
+import { Provider } from "react-redux";
 
-import Slider from "./components/Slider/Slider";
+function App(){
 
-const App = () => {
+  const store = configureStore()
+
   return (
-    <>
+    <Provider store = {store}>
       <AppRouter />
-    </>
+    </Provider>
   );
 };
 

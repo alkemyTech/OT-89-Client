@@ -1,12 +1,16 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from "react-redux";
+import { login, logout } from "../../features/slices/authSlice";
 import { useHistory  } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import apiService from '../../services/server';
 
 function Login() {
     const history = useHistory();
+
+    const dispatch = useDispatch();
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -27,7 +31,7 @@ function Login() {
         }
         apiService.post('/auth/login', dataUser) /* Cambiar ruta segun corresponda*/
             .then(res => {
-                console.log(res.data)
+                dispatch(login(res.data));
                 history.push('/') /* Redirige a la pantalla principal */
             })
             .catch(error => {
