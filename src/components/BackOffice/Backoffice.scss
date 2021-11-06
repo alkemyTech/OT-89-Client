@@ -4,23 +4,6 @@
   position: relative;
   display: flex;
   margin-top: 7.7rem;
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid $color-black;
-    img {
-      width: 12rem;
-    }
-    @media (min-width: $breakpoint-lg) {
-      padding: 0 5rem;
-    }
-  }
   .Content {
     width: 100%;
     min-height: 90vh; /*Quitar cuando tenga contenido */
