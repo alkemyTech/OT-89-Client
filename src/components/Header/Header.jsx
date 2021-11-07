@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
 
 import "./Header.scss";
+import { Button } from "../utils/buttons/Button";
 
 export const Header = () => {
   // GET Logo ONG
@@ -32,9 +33,9 @@ export const Header = () => {
 
   return (
     <header>
-      <figure className="logo">
+      <Link className="logo" to="/">
         <img src={logoONG} alt="Logo SOMOS ONG" />
-      </figure>
+      </Link>
 
       <nav className={`navbar ${showNavbar}`}>
         <figure className="logo navbar-logo">
@@ -54,8 +55,8 @@ export const Header = () => {
         </ul>
 
         <div className="buttons-container">
-          <button className="button login">Iniciar sesión</button>
-          <button className="button signup">Registrarse</button>
+          <Button url="auth/login" className="btn primary" title="Login"/>
+          <Button url="auth/register" className="btn outline" title="Register"/>
         </div>
       </nav>
       <Hamburger toggled={isOpen} toggle={() => setOpen(!isOpen)} />
