@@ -55,8 +55,8 @@ export const Header = () => {
         </ul>
 
         <div className="buttons-container">
-          <Button url="auth/login" className="btn primary" title="Login"/>
-          <Button url="auth/register" className="btn outline" title="Register"/>
+          <Button url="auth/login" className="button button-primary" title="Login"/>
+          <Button url="auth/register" className="button button-outline" title="Register"/>
         </div>
       </nav>
       <Hamburger toggled={isOpen} toggle={() => setOpen(!isOpen)} />

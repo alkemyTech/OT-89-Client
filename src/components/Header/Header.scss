@@ -83,30 +83,6 @@ header {
   flex-direction: column;
   align-items: center;
   margin-top: $spacing-xxl;
-
-  .button {
-    display: block;
-    width: 16rem;
-    height: 100%;
-    padding: $spacing-xs $spacing-sm;
-    border: 1px solid $color-ligthblue;
-    border-radius: 6px;
-    font-size: $font-size-default;
-    font-weight: 500;
-    line-height: 1.8rem;
-    background-color: transparent;
-    cursor: pointer;
-
-    &.login {
-      color: $color-ligthblue;
-      margin-bottom: $spacing-xs;
-    }
-
-    &.signup {
-      color: #fff;
-      background-color: $color-ligthblue;
-    }
-  }
 }
 
 @media (min-width: $breakpoint-lg) {
@@ -153,15 +129,8 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 28rem;
     margin-top: 0;
     margin-left: auto;
-
-    .button {
-      &.login {
-        margin-right: 1.2rem;
-        margin-bottom: 0rem;
-      }
-    }
+    gap: 1rem;
   }
 }
