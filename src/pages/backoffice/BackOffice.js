@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Aside } from './aside/Aside';
 import './Backoffice.scss';
 import { Content } from './content/Content';
+import { Header } from '../../components/Header/Header';
 
 
 export const BackOffice = () => {
@@ -13,8 +14,11 @@ export const BackOffice = () => {
 
   return (
     <div className="Backoffice">
-      <Aside isOpen={isOpen}/>
-      <Content openAside={openAside} isLeft={isOpen}/>
+      <Header />
+      <div className="backoffice__content">
+        <Aside isOpen={isOpen}/>
+        <Content openAside={openAside} isLeft={isOpen}/>
+      </div>
     </div>
   );
 };

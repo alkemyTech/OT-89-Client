@@ -69,8 +69,8 @@ export const Novelty = () => {
                 {data.description.map(pgr => (
                     <p>{pgr}</p>
                 ))}
-                <div>
-                    <Button className="btn primary" title="Volver a novedades" url={`/novelties`}/>
+                <div className="buttons">
+                    <Button className="button button-primary" title="Volver a novedades" url={`/novelties`}/>
                 </div>
             </div>            
         </div>
