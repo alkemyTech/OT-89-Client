@@ -1,0 +1,58 @@
+@import "../../assets/scss/vars";
+
+.novelties-page{
+    display: grid;
+    padding: 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap:1.5rem;
+    .box{
+        border-radius: .5rem;
+        box-shadow: 0 0px 3px rgba($color: #000000, $alpha: .8);
+        .image{
+            height:25rem;
+            width: 100%;
+            padding:1.5rem;
+            position: relative;
+            img{
+                height:100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: .5rem;
+            }
+        }
+        .content{
+            padding:1.5rem;
+            padding-top: 0;
+            h2 {
+                font-weight: 600;
+                color: $color-black;
+                font-size: 2.5rem;
+                text-align: center;
+            }
+            p{
+                font-size: 1.5rem;
+                color: $color-black;
+                padding:.5rem 0;
+                line-height: 1.7;
+            }
+            .button {
+                display: block;
+                padding: $spacing-xs $spacing-sm;
+                border: 1px solid $color-ligthblue;
+                border-radius: $border-radius-sm;
+                font-size: $font-size-default;
+                font-weight: 500;
+                text-align: center;
+                line-height: 1.8rem;
+                cursor: pointer;
+                text-decoration: none;
+                background-color: $color-ligthblue;
+                color: $color-white;
+                &:hover {
+                  background-color: lighten($color: $color-ligthblue, $amount: 5);
+                  color: $color-white;
+                }
+            }
+        }
+    }
+}
