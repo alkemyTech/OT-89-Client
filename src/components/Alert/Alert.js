@@ -13,8 +13,7 @@ export const Alert = ({ title, text, icon, type, footer, buttonName }) => {
   };
 
   return (
-    <div>
-      <button onClick={HandleClick}>{buttonName}</button>
-    </div>
+    <>
+    </>
   );
 };
