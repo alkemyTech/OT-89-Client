@@ -22,7 +22,6 @@
     "react-scripts": "3.4.3",
     "reactstrap": "^9.0.0",
     "sass": "^1.43.4",
-    "sweetalert": "^2.1.2",
     "yup": "^0.32.11"
   },
   "scripts": {
