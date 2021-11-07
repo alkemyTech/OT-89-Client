@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Card/Card";
-import { fakedata } from "../components/Card/infofake";
+import Card from "../../components/Card/Card";
+import { fakedata } from "../../components/Card/infofake";
 
 export const Novelties = () => {
 

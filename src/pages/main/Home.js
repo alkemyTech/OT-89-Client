@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import Slider from "../components/Slider/Slider";
-import { LastNovelties } from '../components/LastNovelties/LastNovelties'
-import { Spinner } from "../components/spinner/Spinner";
+import Slider from "../../components/Slider/Slider";
+import { LastNovelties } from '../../components/LastNovelties/LastNovelties'
+import { Spinner } from "../../components/spinner/Spinner";
 import axios from 'axios'
 
 export function Home() {
@@ -83,7 +83,7 @@ export function Home() {
         { !data.loading  
         ?
         <div>
-          {/* <Slider />  */}
+          <Slider />
           <h1>{ title }</h1>
           <LastNovelties novelties={ novelties } />
         </div>

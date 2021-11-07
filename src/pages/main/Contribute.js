@@ -1,5 +1,5 @@
 import React from "react";
 
 export const Contribute = () => {
-  return <div></div>;
+  return <div>Contribute</div>;
 };
