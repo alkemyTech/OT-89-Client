@@ -6,7 +6,7 @@ import './Novelty.scss'
 
 export const Novelty = () => {
     
-    let localization = useLocation()
+    const localization = useLocation()
 
     const [idnovelty, setIdNovelty] = useState(0)
     const [ data, setData ] = useState({
@@ -17,8 +17,8 @@ export const Novelty = () => {
     }) 
 
     useEffect(() => {
-        const id = async () => {
-            const id = await localization.pathname.split("/", 3)
+        const id = () => {
+            const id =  localization.pathname.split("/", 3)
             setIdNovelty(parseInt(id[2]))
         }
         id()
@@ -63,7 +63,7 @@ export const Novelty = () => {
 
     return (
         <div className="Novelty">
-            <img className="Novelty__img" src={ data.image}/>
+            <img className="Novelty__img" src={ data.image} alt={data.title}/>
             <div className="Novelty__description">
                 <h2>{data.title}</h2>
                 {data.description.map(pgr => (

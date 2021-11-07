@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './index.scss'
+import { Button } from '../utils/buttons/Button'
 
 export const LastNovelties = React.memo(props => {
     
@@ -22,16 +23,11 @@ export const LastNovelties = React.memo(props => {
                 }
             </div>
             <div className="novelties-links">
-                
-                <div className="novelties-links-primary">
-                    <div className="novelties-links-secondary">
-                        <button>Testimonios</button>
-                        <button>Novedades</button>
-                        {/* <Link>Testimonios</Link>
-                        <Link>Novedades</Link>  */}
-                    </div>
-                    <button >Ver Todas</button>
+                <div className="links">
+                    <Button className="button" title="Testimonios"/>
+                    <Button className="button" title="Novedades"/>
                 </div>
+                <Button className="button button-primary" url="/novelties" title="Ver todas"/>
             </div>
             
         </div>

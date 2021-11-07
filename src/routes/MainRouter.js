@@ -8,8 +8,7 @@ import { Novelties } from "../pages/main/Novelties";
 import { Testimonials } from "../pages/main/Testimonials";
 import { Contacts } from "../pages/main/Contacts";
 import { Contribute } from "../pages/main/Contribute";
-import { BackOffice } from "../pages/backoffice/BackOffice";
-import { NoveltiesIndividual } from "../pages/main/NoveltiesIndividual";
+import { Novelty } from "../components/Novelty/Novelty";
 
 export const MainRouter = () => {
   return (
@@ -19,11 +18,10 @@ export const MainRouter = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/novelties" component={Novelties} />
-        <Route exact path="/novelties/:id" component={NoveltiesIndividual} />
+        <Route exact path="/novelties/:id" component={Novelty} />
         <Route exact path="/testimonials" component={Testimonials} />
         <Route exact path="/contacts" component={Contacts} />
         <Route exact path="/contribute" component={Contribute} />
-        <Route path="/backoffice" exact component={BackOffice} />
       </Switch>
       <Footer />
     </>
