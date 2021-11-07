@@ -1,20 +1,34 @@
-import React from "react";
 import Swal from "sweetalert2";
-export const Alert = ({ title, text, icon, type, footer, buttonName }) => {
-  const HandleClick = () => {
+
+export const Alert = (title, text, icon) => {
     Swal.fire({
+      position: 'center',
+      icon: icon,
       title: title,
       text: text,
-      type: type,
-      icon: icon,
-      button: buttonName,
-      footer: footer,
-    });
+      showConfirmButton: false,
+      timer: 1500
+    })
   };
 
-  return (
-    <div>
-      <button onClick={HandleClick}>{buttonName}</button>
-    </div>
-  );
-};
+  export const Confirm = (title, text) => {
+    Swal.file({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado',
+          'Ha sido eliminado!',
+          'success'
+        )
+      }
+    })
+  };
+
+ 
