@@ -1,12 +1,6 @@
-.carousel {
-}
-img {
-  max-height: 70vh !important;
-  height: auto;
-  width: auto;
-}
-.carousel-caption {
-}
-.sliderText {
-  font-size: 2rem;
+@import "../../assets/scss/vars";
+
+.Slider {
+  max-width: 1200px;
+  margin: $spacing-lg auto;
 }

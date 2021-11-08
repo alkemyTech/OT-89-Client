@@ -1,22 +1,37 @@
+@import '../../assets/scss/vars';
+
 .Novelty{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: $color-white;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin: 2.4rem  4.8rem;
+    flex-direction: column;
     align-items: center;
+    padding: 5rem 10rem;
     &__description {
-        padding: 20px;
+        text-align: center;
+        padding: 2rem 10rem;
+        line-height: 1.5;
         h2 {
             font-size: 3.5rem;
+            margin-bottom: 2rem;
         }
         p {
-            text-align: justify;
             font-size: 2rem;
         }
     }
     &__img {
-        width: 80%;
-        margin: 0 auto;
+        width: 60%;
         border-radius: 4px;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
     }
 }
