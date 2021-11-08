@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
 import "./Header.scss";
+import { Button } from "../utils/buttons/Button";
+
 export const Header = () => {
   // GET Logo ONG
   const logoONG = "/images/logo.png";
@@ -33,9 +35,10 @@ export const Header = () => {
   }, [location.pathname]);
   return (
     <header>
-      <figure className="logo">
+      <Link className="logo" to="/">
         <img src={logoONG} alt="Logo SOMOS ONG" />
-      </figure>
+      </Link>
+
       <nav className={`navbar ${showNavbar}`}>
         <figure className="logo navbar-logo">
           <img src={logoONG} alt="Logo SOMOS ONG" />
@@ -52,12 +55,8 @@ export const Header = () => {
           ))}
         </ul>
         <div className="buttons-container">
-          <Link to="/auth/login" className="btn outline">
-            Iniciar sesión
-          </Link>
-          <Link to="/auth/register" className="btn primary">
-            Registrarse
-          </Link>
+          <Button url="auth/login" className="button button-primary" title="Ingresar"/>
+          <Button url="auth/register" className="button button-outline" title="Registrarse"/>
         </div>
       </nav>
       <Hamburger toggled={isOpen} toggle={() => setOpen(!isOpen)} />

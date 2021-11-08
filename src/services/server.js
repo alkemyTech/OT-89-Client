@@ -1,11 +1,11 @@
 import axios from 'axios'
-const url = 'localhost:3000/'
-const token = await localStorage.getItem('token')
+
+const token = localStorage.getItem('token')
 
 const apiService = axios.create({
-    baseURL: url,
+    baseURL: URL,
 });
 
-if (token != '') { apiService.defaults.headers.common['Authorization'] = token }
+if (token !== '') { apiService.defaults.headers.common['Authorization'] = token }
 
 export default apiService;

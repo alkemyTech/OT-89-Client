@@ -1,5 +1,5 @@
 import React from "react";
 
 export const Contacts = () => {
-  return <div></div>;
+  return <div>Contacts</div>;
 };

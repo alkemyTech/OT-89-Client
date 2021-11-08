@@ -1,9 +1,8 @@
 @import "../../../assets/scss/base";
 
-.btn {
+.button {
   display: block;
-  padding: $spacing-xs $spacing-sm;
-  border: 1px solid $color-ligthblue;
+  padding: $spacing-xs $spacing-xxl;
   border-radius: $border-radius-sm;
   font-size: $font-size-default;
   font-weight: 500;
@@ -13,7 +12,7 @@
   text-decoration: none;
 }
 
-.primary {
+.button-primary {
   background-color: $color-ligthblue;
   color: $color-white;
   &:hover {
@@ -22,7 +21,7 @@
   }
 }
 
-.outline {
+.button-outline {
   border: 1px solid $color-ligthblue;
   color: $color-ligthblue;
 
