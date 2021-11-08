@@ -9,7 +9,7 @@ header {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-  border-bottom: 1px solid $color-black;
+
   .logo {
     margin-top: $spacing-xs;
     img {
@@ -34,7 +34,6 @@ header {
   justify-content: flex-start;
   align-items: center;
   font-size: $font-size-medium;
-  border-bottom: 1px solid $color-black;
   transition: all 0.2s linear;
   background-color: #fff;
   z-index: 999;

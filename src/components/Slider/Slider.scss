@@ -1,4 +1,6 @@
+@import "../../assets/scss/vars";
+
 .Slider {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: $spacing-lg auto;
 }
