@@ -1,5 +1,5 @@
 import React from "react";
 
 export const Activities = () => {
-  return <div></div>;
+  return <div>Activities</div>;
 };
