@@ -5,19 +5,17 @@ header {
   position: relative;
   width: 100%;
   height: 6.2rem;
-  padding: $spacing-sm $spacing-md;
-
+  padding: $spacing-md;
   display: flex;
   align-items: center;
-  font-size: $font-size-default;
-
+  font-size: 1.5rem;
+  border-bottom: 1px solid $color-black;
   .logo {
     margin-top: $spacing-xs;
     img {
       width: 11rem;
     }
   }
-
   .hamburger-react {
     display: block;
     position: fixed;
@@ -25,7 +23,6 @@ header {
     margin-left: auto;
   }
 }
-
 .navbar {
   position: fixed;
   top: 0;
@@ -37,11 +34,10 @@ header {
   justify-content: flex-start;
   align-items: center;
   font-size: $font-size-medium;
-
+  border-bottom: 1px solid $color-black;
+  transition: all 0.2s linear;
   background-color: #fff;
   z-index: 999;
-  transition: all 0.2s linear;
-
   &-list {
     display: flex;
     flex-direction: column;
@@ -49,35 +45,34 @@ header {
     list-style: none;
     padding: 0;
     margin: 0;
-    margin-top: $spacing-xxl;
-
+    margin-top: 10%;
     & > * {
-      font-size: $font-size-medium;
-      font-weight: 500;
+      margin-bottom: $spacing-xs;
       color: $color-ligthblue;
+      font-weight: 500;
       text-decoration: none;
       text-transform: capitalize;
       cursor: pointer;
-      margin-bottom: $spacing-xs;
-    }
-
-    & > *:hover {
-      text-decoration: underline;
-      color: $color-ligthblue;
+      transition: all 0.2s linear;
+      &:hover {
+        color: $color-ligthblue;
+      }
+      &.active {
+        background-color: rgba($color-ligthblue, 0.1);
+        padding: $spacing-xs $spacing-xs;
+        border-radius: $border-radius-md;
+      }
     }
   }
-
   .navbar-logo {
     display: block;
     margin-top: $spacing-md;
   }
 }
-
 .show-navbar {
   right: 0;
   transition: all 0.2s linear;
 }
-
 .buttons-container {
   position: relative;
   display: flex;
@@ -85,18 +80,15 @@ header {
   align-items: center;
   margin-top: $spacing-xxl;
 }
-
 @media (min-width: $breakpoint-lg) {
   header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-
     .hamburger-react {
       display: none;
     }
   }
-
   .navbar {
     position: relative;
     display: flex;
@@ -107,24 +99,20 @@ header {
     height: 6.2rem;
     right: 0;
     transition: all 0.2s linear;
-
     &-list {
       display: flex;
       flex-direction: row;
       margin: 0;
       margin-left: $spacing-md;
-
       & > * {
         margin-bottom: 0;
         margin-right: $spacing-lg;
       }
     }
   }
-
   .logo.navbar-logo {
     display: none;
   }
-
   .buttons-container {
     display: flex;
     flex-direction: row;
