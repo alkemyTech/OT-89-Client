@@ -5,8 +5,7 @@ import "./Header.scss";
 import { Button } from "../utils/buttons/Button";
 
 export const Header = () => {
-  // GET Logo ONG
-  const logoONG = "/images/logo.png";
+  const logoONG = "/images/assets/logo.png";
   //! This function will request the image url from a database
   // const getLogo = async () => {
   //   const response = await fetch(DATABASE_URL + "/logo");
