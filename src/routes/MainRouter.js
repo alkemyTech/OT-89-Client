@@ -9,6 +9,7 @@ import { Testimonials } from "../pages/main/Testimonials";
 import { Contacts } from "../pages/main/Contacts";
 import { Contribute } from "../pages/main/Contribute";
 import { Novelty } from "../components/Novelty/Novelty";
+import Profile from "../components/Profile/Profile";
 
 export const MainRouter = () => {
   return (
@@ -22,6 +23,7 @@ export const MainRouter = () => {
         <Route exact path="/testimonials" component={Testimonials} />
         <Route exact path="/contacts" component={Contacts} />
         <Route exact path="/contribute" component={Contribute} />
+        <Route exact path="/profile" component={Profile} />
       </Switch>
       <Footer />
     </>
