@@ -29,8 +29,7 @@ export const Login = () => {
       email: values.email,
       password: values.password,
     };
-    apiService
-      .post("/auth/login", dataUser) /* Cambiar ruta segun corresponda*/
+    apiService.post("/auth/login", dataUser) /* Cambiar ruta segun corresponda*/
       .then((res) => {
         dispatch(login(res.data));
         history.push("/"); /* Redirige a la pantalla principal */
