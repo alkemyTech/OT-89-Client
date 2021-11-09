@@ -7,7 +7,7 @@ export const Alert = (title, text, icon) => {
       title: title,
       text: text,
       showConfirmButton: false,
-      timer: 1500
+      timer: 2000
     })
   };
 
