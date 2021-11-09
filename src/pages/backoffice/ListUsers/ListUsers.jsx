@@ -6,19 +6,19 @@ export const ListUsers = () => {
     //API para probar renderizado de usuarios
   const usersArray = [
     {
-        id: "1",
+      userId: "1",
       firstName: "Leanne Graham",
       lastName: "Bret",
       email: "sincere@april.biz",
     },
     {
-        id: "2",
+      userId: "2",
       firstName: "Ignacio",
       lastName: "Garcia",
       email: "ig.ignacio@gmail.com",
     },
     {
-        id: "3",
+      userId: "3",
       firstName: "Mirna Ayelen Graham",
       lastName: "Garcia",
       email: "mirnaayelen@gmail.com",
@@ -63,7 +63,7 @@ export const ListUsers = () => {
               <tbody>
                   {usersArray.map((oneUser) => 
                     oneUser ? (
-                      <tr key={oneUser.id}>
+                      <tr key={oneUser.userId}>
                           <td>{oneUser.firstName}</td>
                           <td>{oneUser.lastName}</td>
                           <td>{oneUser.email}</td>
