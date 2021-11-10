@@ -12,7 +12,7 @@ export const Alert = (title, text, icon) => {
   };
 
   export const Confirm = (title, text) => {
-    Swal.file({
+    Swal.fire({
       title: title,
       text: text,
       icon: 'warning',

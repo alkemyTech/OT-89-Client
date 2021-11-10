@@ -6,10 +6,10 @@ import { login } from "../../features/slices/authSlice";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import apiService from "../../services/server";
+import { Alert } from "../../components/Alert/Alert";
 
 export const Login = () => {
   const history = useHistory();
-
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
@@ -29,14 +29,24 @@ export const Login = () => {
       email: values.email,
       password: values.password,
     };
-    apiService.post("/auth/login", dataUser) /* Cambiar ruta segun corresponda*/
+    apiService
+      .post("/auth/login", dataUser) /* Cambiar ruta segun corresponda*/
       .then((res) => {
-        dispatch(login(res.data));
-        history.push("/"); /* Redirige a la pantalla principal */
+        const { message, token } = res.data;
+        if (message === "Login Successful.") {
+          Alert("Exito!","Haz iniciado sesión con exito!", "success")
+          localStorage.setItem("token", token)
+          apiService.get("/auth/me")
+            .then((resUser) => {
+              dispatch(login(resUser.data.data))
+            })
+          setTimeout(() => {
+            history.push('/') 
+          }, 3000)
+        } else {
+          Alert("Oops!","El correo electronico y/o la contraseña son incorrectas","error")
+        }
       })
-      .catch((error) => {
-        console.log(error); /* Se debe importar el alert y pasar el error */
-      });
   };
 
   return (
