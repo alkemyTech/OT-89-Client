@@ -18,7 +18,7 @@ export const Content = ({ openAside, isLeft }) => {
       <div className="heading">
         <h1>Novedades</h1>{" "}
         {/*Este H1 se debe renderizar segun las lista que contenga */}
-        <Button title="Add new" className="btn primary" />
+        <Button title="Agregar Novedades" className="button primary" />
       </div>
       <ul className="list"></ul>
       <ListScreen></ListScreen>
