@@ -5,7 +5,7 @@ import { useHistory  } from 'react-router-dom';
 import logo from "../../assets/images/logo.png";
 import apiService from '../../services/server';
 import { Alert } from "../../components/Alert/Alert";
-import { login } from "../../features/slices/authSlice";
+import { getUserAction} from "../../features/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -42,10 +42,7 @@ export const Register = () => {
         if (message === "¡User created successfully!") {
           Alert("Exito!", "Te haz registrado correctamente", "success")
           localStorage.setItem("token", token)
-          apiService.get("/auth/me")
-            .then((resUser) => {
-              dispatch(login(resUser.data.data))
-            })
+          dispatch(getUserAction())
           setTimeout(() => {
             history.push('/') 
           }, 3000)

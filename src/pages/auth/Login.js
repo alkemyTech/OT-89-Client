@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { login } from "../../features/slices/authSlice";
+import { getUserAction } from "../../features/slices/authSlice";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import apiService from "../../services/server";
@@ -36,10 +36,7 @@ export const Login = () => {
         if (message === "Login Successful.") {
           Alert("Exito!","Haz iniciado sesión con exito!", "success")
           localStorage.setItem("token", token)
-          apiService.get("/auth/me")
-            .then((resUser) => {
-              dispatch(login(resUser.data.data))
-            })
+          dispatch(getUserAction())
           setTimeout(() => {
             history.push('/') 
           }, 3000)
