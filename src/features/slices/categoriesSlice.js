@@ -9,7 +9,7 @@ export const categoriesSlice = createSlice({
     initialState: initialState,
     reducers: {
         deleteCategory: (state, action) => {
-            state.categories = state.categories.filter(a => a != action.payload);
+            state.categories = state.categories.filter(a => a.CategoryId != action.payload);
         }
     }
 });
