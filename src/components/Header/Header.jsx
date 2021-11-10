@@ -75,7 +75,7 @@ export const Header = () => {
                 <Button url="auth/login" className="button button-primary" title="Ingresar"/>
                 <Button url="auth/register" className="button button-outline" title="Registrarse"/>
               </>
-              : <button className="button button-primary" onClick={handleLogout}>Cerrar sesión</button>
+              : <Button url="/" className="button button-primary" onClick={handleLogout} title="Cerrar sesión"/>
           }
         </div>
       </nav>
