@@ -1,5 +1,5 @@
 import React from "react";
-import { /* useDispatch, */ useSelector } from "react-redux";
+import {  useDispatch,  useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./profile.scss";
@@ -7,9 +7,9 @@ import apiService from "../../services/server";
 import swal from "sweetalert2";
 
 export default function Profile() {
-  /* const dispatch = useDispatch(); */
   const history = useHistory();
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.auth.value);
+
 
   const actionDelete = async (id) => {
     try {

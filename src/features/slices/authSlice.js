@@ -29,8 +29,8 @@ export const getUserAction = () => async dispatch => {
 }
 
 export const removeUserAction = () => dispatch => {
-  dispatch(logout())
   localStorage.removeItem("token")
+  dispatch(logout())
 }
 
 export default authSlice.reducer;

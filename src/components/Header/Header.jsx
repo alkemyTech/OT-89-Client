@@ -3,8 +3,24 @@ import { Link, useLocation } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
 import "./Header.scss";
 import { Button } from "../utils/buttons/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAction, removeUserAction } from "../../features/slices/authSlice";
 
 export const Header = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth.value);
+  
+  useEffect(() => {
+    const getData = () => {
+      dispatch(getUserAction())
+    }
+    getData()
+  }, [])
+
+  const handleLogout = () => {
+    dispatch(removeUserAction())
+  }
+
   const logoONG = "/images/assets/logo.png";
   //! This function will request the image url from a database
   // const getLogo = async () => {
@@ -54,8 +70,13 @@ export const Header = () => {
           ))}
         </ul>
         <div className="buttons-container">
-          <Button url="auth/login" className="button button-primary" title="Ingresar"/>
-          <Button url="auth/register" className="button button-outline" title="Registrarse"/>
+          {!user? 
+              <>
+                <Button url="auth/login" className="button button-primary" title="Ingresar"/>
+                <Button url="auth/register" className="button button-outline" title="Registrarse"/>
+              </>
+              : <button className="button button-primary" onClick={handleLogout}>Cerrar sesión</button>
+          }
         </div>
       </nav>
       <Hamburger toggled={isOpen} toggle={() => setOpen(!isOpen)} />
