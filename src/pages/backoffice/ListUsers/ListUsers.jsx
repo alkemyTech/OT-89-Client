@@ -13,7 +13,7 @@ export const ListUsers = () => {
       const response = await apiService.get("/users");
 
       dispatch(usersList(response.data));
-      
+
     } catch (e) {
       console.log(e.response.data);
     }
@@ -31,10 +31,7 @@ export const ListUsers = () => {
   // };
 
   return (
-    <>
-      <div>
-          <h1>Listado de usuarios:</h1>
-      </div>
+    <div>     
       <div>
           <table>
               <thead>
@@ -47,7 +44,6 @@ export const ListUsers = () => {
                   </tr>
               </thead>
               <tbody>
-                {/* users.map */}
                   {users.map((oneUser) => 
                     oneUser ? (
                       <tr key={oneUser.userId}>
@@ -66,6 +62,6 @@ export const ListUsers = () => {
               </tbody>
           </table>
       </div>
-    </>
+    </div>
   );
 };
