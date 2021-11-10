@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { usersList } from "../../../features/slices/usersSlice";
 import apiService from "../../../services/server";
 
 export const ListUsers = () => {
@@ -11,9 +12,8 @@ export const ListUsers = () => {
     try {
       const response = await apiService.get("/users");
 
-      dispatch({
-        response
-      })
+      dispatch(usersList(response.data));
+      
     } catch (e) {
       console.log(e.response.data);
     }
