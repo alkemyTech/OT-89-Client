@@ -1,44 +1,38 @@
 import React, {Component} from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import CKEditor from '@ckeditor/ckeditor5-react'
+import {CKEditor} from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import apiService from "../../../services/server";
 
 
-export const  Newovelities=()=>{
+export const NewNovelities = ()=>{
 
 
-    const validationSchema = Yup.object({
-        title: Yup.string()
-          .title("Titulo requerido para la novedad")
-          .required("Required"),              
-        category:Yup.string().category("Categoria requerida para las novedades").required("Required")
-
-      });
 
     const initialValues = {
-        title: "",
-        img:"",
+        name: "",
+        image:"",
         content: "",
         category:""
       };
     
       const handleSubmit = (values) => {
-        const novedades = {
-          title: values.title,
-          img: values.img,
-          content:values.content,
+        const FormNovelities = {
+          name: values.name,
+          image: values.image,
+          content:values.editor,
           category:values.category
         };
-        apiService.post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
-          .then((res) => {
-           console.log(res)
-          })
-          .catch((error) => {
-            console.log(error); /* Se debe importar el alert y pasar el error */
-          });
+        console.log("novedades",FormNovelities)
+       // apiService.post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
+        //   .then((res) => {
+         //   console.log(res)
+         //  })
+        //   .catch((error) => {
+        //     console.log(error); /* Se debe importar el alert y pasar el error */
+        //  });
       };
+     
 
     return (  
 <div className="container">
@@ -46,21 +40,20 @@ export const  Newovelities=()=>{
   <div className="row">
     <div className=" col-lg-12 col-md-12 col-xs-12">
       <Formik
-            initialValues={initialValues} 
-            validationSchema={validationSchema}
+            initialValues={initialValues}            
             onSubmit={handleSubmit} >
         <Form className="mt-3">
           <div className="form-group mb-3">
             <label htmlFor="title">
-              title:
+              Titulo:
               <Field
-                type="title"
+                type="text"
                 className="form-control"
-                name="title"
-                id="title"
+                name="name"
+                id="name"
                 required
               />
-              <ErrorMessage name="title">
+              <ErrorMessage name="name">
                 {(error) => (
                   <div className="alert alert-danger">{error}</div>
                 )}
@@ -68,13 +61,13 @@ export const  Newovelities=()=>{
             </label>
           </div>
           <div className="form-group mb-3">
-            <label htmlFor="img">
+            <label htmlFor="image">
               Imagen:
               <Field
                 type="file"
                 className="form-control"
-                name="img"
-                id="img"
+                name="image"
+                id="image"
                 required />
               <ErrorMessage name="img">
                 {(error) => (
@@ -84,28 +77,30 @@ export const  Newovelities=()=>{
             </label>
           </div>
           <div className="form-group mb-3">
+           
           <CKEditor
-                    editor={ ClassicEditor }
+           editor={ ClassicEditor } content={this.state.content}
                     data=""
-                    onInit={ editor => {
-                        // You can store the "editor" and use when it's needed.
+                    onReady={ editor => {
+                        // You can store the "editor" and use when it is needed.
                         console.log( 'Editor is ready to use!', editor );
                     } }
-                    
+                    onChange={this.handleCKEditorState}
                     
                 />
-          </div>
+            
+          </div> 
           <div className="form-group mb-3">
             <label htmlFor="category">
               categoria:
               <Field
-                type="category"
+                type="text"
                 className="form-control"
-                name="category"
-                id="category"
+                name="type"
+                id="type"
                 required
               />
-              <ErrorMessage name="category">
+              <ErrorMessage name="type">
                 {(error) => (
                   <div className="alert alert-danger">{error}</div>
                 )}
