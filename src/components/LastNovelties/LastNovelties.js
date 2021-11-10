@@ -23,11 +23,9 @@ export const LastNovelties = React.memo(props => {
                 }
             </div>
             <div className="novelties-links">
-                <div className="links">
-                    <Button className="button" title="Testimonios"/>
-                    <Button className="button" title="Novedades"/>
-                </div>
+                <Button className="button" title="Testimonios"/>
                 <Button className="button button-primary" url="/novelties" title="Ver todas"/>
+                <Button className="button" title="Novedades"/>
             </div>
             
         </div>
