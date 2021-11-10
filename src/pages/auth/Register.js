@@ -36,7 +36,7 @@ export const Register = () => {
       email: values.email,
       password: values.password,
     };
-    apiService.post("/auth/register", dataUser) /* Cambiar ruta segun corresponda*/
+    apiService.post("/auth/register", dataUser)
       .then((res) => {
         const { message, token } = res.data
         if (message === "¡User created successfully!") {
@@ -52,6 +52,9 @@ export const Register = () => {
         } else {
           Alert("Oops!","El correo electronico y/o la contraseña son incorrectas","error")
         }
+      })
+      .catch((error) => {
+        console.log(error)
       })
   };
   return (

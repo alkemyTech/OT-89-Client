@@ -30,7 +30,7 @@ export const Login = () => {
       password: values.password,
     };
     apiService
-      .post("/auth/login", dataUser) /* Cambiar ruta segun corresponda*/
+      .post("/auth/login", dataUser)
       .then((res) => {
         const { message, token } = res.data;
         if (message === "Login Successful.") {
@@ -46,6 +46,9 @@ export const Login = () => {
         } else {
           Alert("Oops!","El correo electronico y/o la contraseña son incorrectas","error")
         }
+      })
+      .catch((error) => {
+        console.log(error)
       })
   };
 
