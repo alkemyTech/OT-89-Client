@@ -1,10 +1,10 @@
 import React from "react";
 import {  useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import "./profile.scss";
 import apiService from "../../services/server";
 import swal from "sweetalert2";
+import { Button } from "../utils/buttons/Button";
 
 export default function Profile() {
   const history = useHistory();
@@ -40,36 +40,35 @@ export default function Profile() {
   };
 
   return (
-    <div id="profile-table_container" className="table-responsive-sm">
-      <table id="profile-table" className="table table-hover table-bordered">
-        <thead>
-          <tr className="table-dark">
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{user.firstName}</td>
-            <td>{user.lastName}</td>
-            <td>{user.email}</td>
-            <td className="buttons-container">
-              <button
-                className="btn btn-danger"
-                onClick={() => handleDelete(user.id)}
-              >
-                Eliminar
-              </button>
-
-              <Link to={"/profile/edit/" + user.id}>
-                <button className="btn btn-primary">Editar</button>
-              </Link>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="Profile">
+      <h2>Profile</h2>
+      <div className="picture">
+        <img src="https://picsum.photos/100/100" alt="user"/>
+      </div>
+      <div className="data-content">
+        <div className="data-names">
+          <div className="data-box">
+            <span>Nombre</span>
+            <li>{user.firstName}</li>
+          </div>
+          <div className="data-box">
+            <span>Apellido</span>
+            <li>{user.lastName}</li>
+          </div>
+        </div>
+        <div className="data-location">
+          <div className="data-box">
+            <span>Correo electrónico</span>
+            <li>{user.email}</li>
+          </div>
+          <div className="data-box">
+            <div className="buttons">
+              <Button title="Editar" className="button button-primary" url="/"/>
+              <Button title="Eliminar" className="button button-secondary" url="/"/>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
