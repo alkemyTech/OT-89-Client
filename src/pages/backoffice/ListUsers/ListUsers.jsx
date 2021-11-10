@@ -1,7 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import apiService from "../../../services/server";
 
 export const ListUsers = () => {
+
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users);
 
     //API para probar renderizado de usuarios
   const usersArray = [
@@ -27,7 +31,11 @@ export const ListUsers = () => {
 
   React.useEffect(async () => {
     try {
-      const users = await apiService.get("/users");
+      const response = await apiService.get("/users");
+
+      dispatch({
+        response
+      })
     } catch (e) {
       console.log(e.response.data);
     }
@@ -61,6 +69,7 @@ export const ListUsers = () => {
                   </tr>
               </thead>
               <tbody>
+                {/* users.map */}
                   {usersArray.map((oneUser) => 
                     oneUser ? (
                       <tr key={oneUser.userId}>
