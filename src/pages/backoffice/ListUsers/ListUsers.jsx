@@ -5,29 +5,7 @@ import apiService from "../../../services/server";
 export const ListUsers = () => {
 
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
-
-    //API para probar renderizado de usuarios
-  const usersArray = [
-    {
-      userId: "1",
-      firstName: "Leanne Graham",
-      lastName: "Bret",
-      email: "sincere@april.biz",
-    },
-    {
-      userId: "2",
-      firstName: "Ignacio",
-      lastName: "Garcia",
-      email: "ig.ignacio@gmail.com",
-    },
-    {
-      userId: "3",
-      firstName: "Mirna Ayelen Graham",
-      lastName: "Garcia",
-      email: "mirnaayelen@gmail.com",
-    },
-  ];
+  const users = useSelector((state) => state.users.value);
 
   React.useEffect(async () => {
     try {
@@ -39,7 +17,7 @@ export const ListUsers = () => {
     } catch (e) {
       console.log(e.response.data);
     }
-  }, []);
+  }, [users]);
 
   //FUNCION PARA ELIMINAR USUARIO:
 
@@ -70,7 +48,7 @@ export const ListUsers = () => {
               </thead>
               <tbody>
                 {/* users.map */}
-                  {usersArray.map((oneUser) => 
+                  {users.map((oneUser) => 
                     oneUser ? (
                       <tr key={oneUser.userId}>
                           <td>{oneUser.firstName}</td>
