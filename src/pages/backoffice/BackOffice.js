@@ -3,6 +3,8 @@ import { Aside } from './aside/Aside';
 import './Backoffice.scss';
 import { Content } from './content/Content';
 import { Header } from '../../components/Header/Header';
+import { NewNovelities } from './novedades/newNovelities';
+import Example from './novedades/example';
 
 
 export const BackOffice = () => {

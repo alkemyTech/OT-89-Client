@@ -1,91 +1,101 @@
-import React, {Component} from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import React from "react";
 import {CKEditor} from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import apiService from "../../../services/server";
 
+export default class Example extends React.Component{
+  state = {
+    name: "",
+    image: "",
+    content: "",
+    categoryId: ""
+  }
 
-export const NewNovelities = ()=>{
+  handleChange = (event) => {
+      const target = event.target
+      const {
+        name,
+        value
+      } = target
 
+      this.setState({
+        [name]: value
+      })
+}
+handleCkeditorState = (event, editor) => {
+  const data = editor.getData()
+  this.setState({
+    content: data
+  })
+  console.log(data)
 
+}
+  handleSubmit = (values) => {
+   const FormNovelities = {
+     name: values.name,
+     image: values.image,
+     content: values.editor,
+     categoryId: values.categoryId
+   };
+ 
+  console.log("novedades", FormNovelities)
+  apiService.post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error) => {
+      console.log(error); /* Se debe importar el alert y pasar el error */
+    });
+}; 
 
-    const initialValues = {
-        name: "",
-        image:"",
-        content: "",
-        category:""
-      };
-    
-      const handleSubmit = (values) => {
-        const FormNovelities = {
-          name: values.name,
-          image: values.image,
-          content:values.editor,
-          category:values.category
-        };
-        console.log("novedades",FormNovelities)
-       // apiService.post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
-        //   .then((res) => {
-         //   console.log(res)
-         //  })
-        //   .catch((error) => {
-        //     console.log(error); /* Se debe importar el alert y pasar el error */
-        //  });
-      };
-     
+    render(){
+console.log("STATE",this.state)
+      
 
-    return (  
+        return(
+            
 <div className="container">
   
   <div className="row">
-    <div className=" col-lg-12 col-md-12 col-xs-12">
-      <Formik
-            initialValues={initialValues}            
-            onSubmit={handleSubmit} >
-        <Form className="mt-3">
+    <div className=" col-lg-12 col-md-12 col-xs-12">     
+        <form className="mt-3">
           <div className="form-group mb-3">
             <label htmlFor="title">
               Titulo:
-              <Field
+              <input
                 type="text"
                 className="form-control"
+                value={this.state.name}
+                onChange={this.handleChange}
                 name="name"
                 id="name"
                 required
               />
-              <ErrorMessage name="name">
-                {(error) => (
-                  <div className="alert alert-danger">{error}</div>
-                )}
-              </ErrorMessage>
+             
             </label>
           </div>
           <div className="form-group mb-3">
             <label htmlFor="image">
               Imagen:
-              <Field
+              <input
                 type="file"
                 className="form-control"
                 name="image"
                 id="image"
-                required />
-              <ErrorMessage name="img">
-                {(error) => (
-                  <div className="alert alert-danger">{error}</div>
-                )}
-              </ErrorMessage>
+                value={this.state.image}
+                onChange={this.handleChange}
+                required />              
             </label>
           </div>
-          <div className="form-group mb-3">
-           
+          <div className="form-group mb-3">           
           <CKEditor
-           editor={ ClassicEditor } content={this.state.content}
+           editor={ ClassicEditor }
                     data=""
                     onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
+                        
                     } }
-                    onChange={this.handleCKEditorState}
+                    name="content"                 
+                    onChange={this.handleCkeditorState}
                     
                 />
             
@@ -93,32 +103,30 @@ export const NewNovelities = ()=>{
           <div className="form-group mb-3">
             <label htmlFor="category">
               categoria:
-              <Field
+              <input
                 type="text"
                 className="form-control"
-                name="type"
-                id="type"
+                name="categoryId"
+                id="categoryId"
+                
+                onChange={this.handleChange}
                 required
+                
               />
-              <ErrorMessage name="type">
-                {(error) => (
-                  <div className="alert alert-danger">{error}</div>
-                )}
-              </ErrorMessage>
+             
             </label>
-          </div>
-        
+          </div>        
           <div className="form-group my-3">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >
               Agregar
             </button>
           </div>
           
-        </Form>
-      </Formik>
+        </form>      
     </div>
   </div>
 </div>
-      );  
+      
+        )
+    }
 }
-
