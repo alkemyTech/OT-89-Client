@@ -9,7 +9,7 @@
   left: -150%;
   padding: 3rem;
   min-height: 90vh;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
   z-index: 99;
   .user {
     display: flex;
@@ -26,13 +26,18 @@
       font-size: 2.3rem;
     }
   }
-  ul {
+  .list-aside {
     list-style: none;
-    .category {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      text-decoration: none;
       font-size: 2rem;
       margin-bottom: 1rem;
       cursor: pointer;
       color: $color-black;
+
       &:hover {
         color: $color-lightblue-light;
       }
