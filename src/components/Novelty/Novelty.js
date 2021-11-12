@@ -18,10 +18,14 @@ export const Novelty = ({id}) => {
             try{
                 const response = await apiService.get(`/novelties/${id}`);
             
-                setData(response);
+                if(!response){
+                    Alert("Error", "La novedad que intenta visualizar no existe en la base de datos", "error");
+                }else{
+                    setData(response);
+                }
             }
             catch(e){
-                Alert("Error", e, "error");
+                console.log(e.response.data);
             }
         }
         getData();      
