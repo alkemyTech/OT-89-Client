@@ -94,7 +94,7 @@ const ListScreen = (props) => {
       <table className="table">
         <thead>
           <tr>
-            <th>Tittulo</th>
+            <th>Titulo</th>
             <th>Image</th>
             <th>CreatedAt</th>
           </tr>
