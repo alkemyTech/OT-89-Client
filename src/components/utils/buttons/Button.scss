@@ -10,6 +10,7 @@
   line-height: 1.8rem;
   cursor: pointer;
   text-decoration: none;
+  border: none;
 }
 
 .button-primary {
@@ -17,6 +18,15 @@
   color: $color-white;
   &:hover {
     background-color: lighten($color: $color-ligthblue, $amount: 5);
+    color: $color-white;
+  }
+}
+
+.button-secondary {
+  background-color: $color-red;
+  color: $color-white;
+  &:hover {
+    background-color: lighten($color: $color-red, $amount: 5);
     color: $color-white;
   }
 }

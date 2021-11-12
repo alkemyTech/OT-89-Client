@@ -7,12 +7,12 @@ export const Alert = (title, text, icon) => {
       title: title,
       text: text,
       showConfirmButton: false,
-      timer: 1500
+      timer: 2000
     })
   };
 
   export const Confirm = (title, text) => {
-    Swal.file({
+    Swal.fire({
       title: title,
       text: text,
       icon: 'warning',

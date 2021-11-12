@@ -1,10 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Squash as Hamburger } from "hamburger-react";
 import "./Header.scss";
 import { Button } from "../utils/buttons/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAction, removeUserAction } from "../../features/slices/authSlice";
+import getToken from '../../helpers/useGetToken'
 
 export const Header = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth.value);
+  const token = useCallback(getToken());
+  
+  useEffect(() => {
+    const getData = () => {
+      dispatch(getUserAction())
+    }
+    getData()
+  }, [token])
+
+  const handleLogout = () => {
+    dispatch(removeUserAction())
+  }
+
   const logoONG = "/images/assets/logo.png";
   //! This function will request the image url from a database
   // const getLogo = async () => {
@@ -22,6 +40,7 @@ export const Header = () => {
     { title: "Testimonios", route: "testimonials" },
     { title: "contacto", route: "contacts" },
     { title: "Contribuye", route: "contribute" },
+    
   ];
   const location = useLocation();
   useEffect(() => {
@@ -54,8 +73,17 @@ export const Header = () => {
           ))}
         </ul>
         <div className="buttons-container">
-          <Button url="auth/login" className="button button-primary" title="Ingresar"/>
-          <Button url="auth/register" className="button button-outline" title="Registrarse"/>
+          {!user? 
+              <>
+                <Button url="auth/login" className="button button-primary" title="Ingresar"/>
+                <Button url="auth/register" className="button button-outline" title="Registrarse"/>
+              </>
+              : 
+              <>
+                <Button url="/" className="button button-primary" onClick={handleLogout} title="Cerrar sesión"/>
+                <Button url="/profile" className="button button-primary" title="Perfil" />
+              </>
+          }
         </div>
       </nav>
       <Hamburger toggled={isOpen} toggle={() => setOpen(!isOpen)} />

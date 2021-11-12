@@ -4,11 +4,15 @@ import * as Yup from "yup";
 import { useHistory  } from 'react-router-dom';
 import logo from "../../assets/images/logo.png";
 import apiService from '../../services/server';
+import { Alert } from "../../components/Alert/Alert";
+import { getUserAction} from "../../features/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 
 
 export const Register = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Required"),
@@ -32,14 +36,23 @@ export const Register = () => {
       email: values.email,
       password: values.password,
     };
-    apiService.post("/auth/register", dataUser) /* Cambiar ruta segun corresponda*/
+    apiService.post("/auth/register", dataUser)
       .then((res) => {
-        console.log(res.data);
-        history.push('/') /* Redirige a la pantalla principal */
+        const { message, token } = res.data
+        if (message === "¡User created successfully!") {
+          Alert("Exito!", "Te haz registrado correctamente", "success")
+          localStorage.setItem("token", token)
+          dispatch(getUserAction())
+          setTimeout(() => {
+            history.push('/') 
+          }, 3000)
+        } else {
+          Alert("Oops!","El correo electronico y/o la contraseña son incorrectas","error")
+        }
       })
       .catch((error) => {
-        console.log(error); /* Se debe importar el alert y pasar el error */
-      }); 
+        console.log(error)
+      })
   };
   return (
     <div className="container text-center p-3">
