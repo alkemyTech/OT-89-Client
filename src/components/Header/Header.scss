@@ -79,6 +79,48 @@ header {
   align-items: center;
   margin-top: $spacing-xxl;
 }
+
+.user-image {
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -1rem;
+}
+
+.menu-container {
+  position: absolute;
+  width: 25rem;
+  height: 12rem;
+  top: 10rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  ul {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.4s linear;
+
+    // items list
+    & > * {
+      font-family: $font-primary;
+      color: $color-ligthblue;
+      font-weight: 500;
+      text-decoration: none;
+      text-transform: capitalize;
+      cursor: pointer;
+      margin-bottom: $spacing-xs;
+
+      &:hover {
+        color: $color-ligthblue;
+      }
+    }
+  }
+}
+
 @media (min-width: $breakpoint-lg) {
   header {
     display: flex;
@@ -113,6 +155,7 @@ header {
     display: none;
   }
   .buttons-container {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -120,5 +163,41 @@ header {
     margin-top: 0;
     margin-left: auto;
     gap: 1rem;
+  }
+
+  .menu-container {
+    position: absolute;
+    width: 25rem;
+    height: 12rem;
+    top: 10rem;
+    left: 0rem;
+    background-color: $color-white;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s linear;
+
+    ul {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+
+      // items list
+      & > * {
+        font-family: $font-primary;
+        color: $color-ligthblue;
+        font-weight: 500;
+        text-decoration: none;
+        text-transform: capitalize;
+        cursor: pointer;
+        margin-bottom: $spacing-xs;
+        transition: all 0.4s linear;
+
+        &:hover {
+          color: $color-ligthblue;
+        }
+      }
+    }
   }
 }
