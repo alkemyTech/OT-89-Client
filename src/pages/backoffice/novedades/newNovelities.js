@@ -3,7 +3,8 @@ import {CKEditor} from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import apiService from "../../../services/server";
 
-export default class Example extends React.Component{
+export default class Novedad extends React.Component{
+
   state = {
     name: "",
     image: "",
@@ -48,14 +49,9 @@ handleCkeditorState = (event, editor) => {
     });
 }; 
 
-    render(){
-console.log("STATE",this.state)
-      
-
-        return(
-            
-<div className="container">
-  
+    render(){ 
+        return(            
+<div className="container">  
   <div className="row">
     <div className=" col-lg-12 col-md-12 col-xs-12">     
         <form className="mt-3">
@@ -70,8 +66,7 @@ console.log("STATE",this.state)
                 name="name"
                 id="name"
                 required
-              />
-             
+              />             
             </label>
           </div>
           <div className="form-group mb-3">
@@ -97,8 +92,7 @@ console.log("STATE",this.state)
                     name="content"                 
                     onChange={this.handleCkeditorState}
                     
-                />
-            
+                />            
           </div> 
           <div className="form-group mb-3">
             <label htmlFor="category">
@@ -107,26 +101,21 @@ console.log("STATE",this.state)
                 type="text"
                 className="form-control"
                 name="categoryId"
-                id="categoryId"
-                
+                id="categoryId"                
                 onChange={this.handleChange}
-                required
-                
-              />
-             
+                required                
+              />             
             </label>
           </div>        
           <div className="form-group my-3">
             <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >
               Agregar
             </button>
-          </div>
-          
+          </div>          
         </form>      
     </div>
   </div>
-</div>
-      
+</div>      
         )
     }
 }

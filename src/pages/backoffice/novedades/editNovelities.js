@@ -1,132 +1,123 @@
-import React, {Component} from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
-import * as Yup from "yup";
-import CKEditor from '@ckeditor/ckeditor5-react'
+import React from "react";
+import {CKEditor} from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import apiService from "../../../services/server";
 
+export default class EditNoveleties extends React.Component{
 
-export const  EditNovelities=()=>{
+  state = {
+    name: "",
+    image: "",
+    content: "",
+    categoryId: ""
+  }
 
+  handleChange = (event) => {
+      const target = event.target
+      const {
+        name,
+        value
+      } = target
 
-    const dispatch = useDispatch();
+      this.setState({
+        [name]: value
+      })
+}
+handleCkeditorState = (event, editor) => {
+  const data = editor.getData()
+  this.setState({
+    content: data
+  })
+  console.log(data)
 
-    const validationSchema = Yup.object({
-        title: Yup.string()
-          .title("Titulo requerido para la novedad")
-          .required("Required"),   
-            category:Yup.string().category("Categoria requerida para las novedades").required("Required")
+}
+  handleSubmit = (values) => {
+   const FormNovelities = {
+     name: values.name,
+     image: values.image,
+     content: values.editor,
+     categoryId: values.categoryId
+   };
+ 
+  console.log("novedades", FormNovelities)
+  apiService.patch("/news/:id", FormNovelities) /* Cambiar ruta segun corresponda*/
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error) => {
+      console.log(error); /* Se debe importar el alert y pasar el error */
+    });
+}; 
 
-      });
+    render(){
+console.log("STATE",this.state)     
 
-    const initialValues = {
-        title: "",
-        img:"",
-        content: "",
-        category:""
-      };
-    
-      const handleSubmit = (values) => {
-        const novedades = {
-          title: values.title,
-          img: values.img,
-          content:values.content,
-          category:values.category
-        };
-        apiService.patch("/news/:id", FormNovelities) /* Cambiar ruta segun corresponda*/
-          .then((res) => {
-           console.log(res)
-          })
-          .catch((error) => {
-            console.log(error); /* Se debe importar el alert y pasar el error */
-          });
-      };
-
-    return (  
-<div className="container">
-  
+        return(            
+<div className="container">  
   <div className="row">
-    <div className=" col-lg-12 col-md-12 col-xs-12">
-      <Formik
-        initialValues={initialValues} 
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit} >
-        <Form className="mt-3">
+    <div className=" col-lg-12 col-md-12 col-xs-12">     
+        <form className="mt-3">
           <div className="form-group mb-3">
             <label htmlFor="title">
-              title:
-              <Field
-                type="title"
+              Titulo:
+              <input
+                type="text"
                 className="form-control"
-                name="title"
-                id="title"
+                value={this.state.name}
+                onChange={this.handleChange}
+                name="name"
+                id="name"
                 required
-              />
-              <ErrorMessage name="title">
-                {(error) => (
-                  <div className="alert alert-danger">{error}</div>
-                )}
-              </ErrorMessage>
+              />             
             </label>
           </div>
           <div className="form-group mb-3">
-            <label htmlFor="img">
+            <label htmlFor="image">
               Imagen:
-              <Field
+              <input
                 type="file"
                 className="form-control"
-                name="img"
-                id="img"
-                required />
-              <ErrorMessage name="img">
-                {(error) => (
-                  <div className="alert alert-danger">{error}</div>
-                )}
-              </ErrorMessage>
+                name="image"
+                id="image"
+                value={this.state.image}
+                onChange={this.handleChange}
+                required />              
             </label>
           </div>
-          <div className="form-group mb-3">
+          <div className="form-group mb-3">           
           <CKEditor
-                    editor={ ClassicEditor }
+           editor={ ClassicEditor }
                     data=""
-                    onInit={ editor => {
-                        // You can store the "editor" and use when it's needed.
-                        console.log( 'Editor is ready to use!', editor );
+                    onReady={ editor => {
+                        
                     } }
+                    name="content"                 
+                    onChange={this.handleCkeditorState}
                     
-                    
-                />
-          </div>
+                />            
+          </div> 
           <div className="form-group mb-3">
             <label htmlFor="category">
               categoria:
-              <Field
-                type="category"
+              <input
+                type="text"
                 className="form-control"
-                name="category"
-                id="category"
-                required
-              />
-              <ErrorMessage name="category">
-                {(error) => (
-                  <div className="alert alert-danger">{error}</div>
-                )}
-              </ErrorMessage>
+                name="categoryId"
+                id="categoryId"                
+                onChange={this.handleChange}
+                required                
+              />             
             </label>
-          </div>
-        
+          </div>        
           <div className="form-group my-3">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >
               Agregar
             </button>
-          </div>
-          
-        </Form>
-      </Formik>
+          </div>          
+        </form>      
     </div>
   </div>
-</div>
-      );  
+</div>      
+        )
+    }
 }
-

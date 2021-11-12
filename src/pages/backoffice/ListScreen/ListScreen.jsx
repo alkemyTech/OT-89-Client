@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import "./ListScreen.scss";
-import { Formik, Field, Form, ErrorMessage } from "formik";
 import {CKEditor} from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import EditNoveleties from "../novedades/editNovelities";
 
 const ListScreen = (props) => {
   const dataReceived = [
@@ -50,13 +50,7 @@ const ListScreen = (props) => {
     cas === "Edit" ? setModalEdit(true) : setModalDelete(true);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSelected((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  
 
   const editar = () => {
     var newData = data;
@@ -138,83 +132,8 @@ const ListScreen = (props) => {
             </div>
           </ModalHeader>
           <ModalBody>
-                <div className="container">  
-                        <div className="row">
-                          <div className=" col-lg-12 col-md-12 col-xs-12">
-                            <Formik
-                                            
-                                  onSubmit={handleSubmit} >
-                              <Form className="mt-3">
-                                <div className="form-group mb-3">
-                                  <label htmlFor="title">
-                                    Titulo:
-                                    <Field
-                                      type="title"
-                                      className="form-control"
-                                      name="title"
-                                      id="title"
-                                      required
-                                    />
-                                    <ErrorMessage name="title">
-                                      {(error) => (
-                                        <div className="alert alert-danger">{error}</div>
-                                      )}
-                                    </ErrorMessage>
-                                  </label>
-                                </div>
-                                <div className="form-group mb-3">
-                                  <label htmlFor="img">
-                                    Imagen:
-                                    <Field
-                                      type="file"
-                                      className="form-control"
-                                      name="img"
-                                      id="img"
-                                      required />
-                                    <ErrorMessage name="img">
-                                      {(error) => (
-                                        <div className="alert alert-danger">{error}</div>
-                                      )}
-                                    </ErrorMessage>
-                                  </label>
-                                </div>
-                                <div className="form-group mb-3">
-                                
-                                <CKEditor
-                                          editor={ ClassicEditor }
-                                          data=""
-                                          onInit={ editor => {
-                                              // You can store the "editor" and use when it's needed.
-                                              console.log( 'Editor is ready to use!', editor );
-                                          } }
-                                          
-                                          
-                                      />
-                                  
-                                </div> 
-                                <div className="form-group mb-3">
-                                  <label htmlFor="category">
-                                    categoria:
-                                    <Field
-                                      type="category"
-                                      className="form-control"
-                                      name="category"
-                                      id="category"
-                                      required
-                                    />
-                                    <ErrorMessage name="category">
-                                      {(error) => (
-                                        <div className="alert alert-danger">{error}</div>
-                                      )}
-                                    </ErrorMessage>
-                                  </label>
-                                </div>                 
-                              </Form>
-                            </Formik>
-                          </div>
-                    </div>
-                  </div>
-          </ModalBody>
+               <EditNoveleties/>
+          </ModalBody> 
           <ModalFooter>
             <button className="btn primary" onClick={() => editar()}>
               Actualizar

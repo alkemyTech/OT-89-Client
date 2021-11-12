@@ -3,8 +3,8 @@ import { Aside } from './aside/Aside';
 import './Backoffice.scss';
 import { Content } from './content/Content';
 import { Header } from '../../components/Header/Header';
-import { NewNovelities } from './novedades/newNovelities';
-import Example from './novedades/example';
+
+
 
 
 export const BackOffice = () => {
@@ -19,7 +19,7 @@ export const BackOffice = () => {
       <Header />
       <div className="backoffice__content">
         <Aside isOpen={isOpen}/>
-        <Content openAside={openAside} isLeft={isOpen}/>
+        <Content openAside={openAside} isLeft={isOpen}/>  
       </div>
     </div>
   );
