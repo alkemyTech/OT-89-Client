@@ -71,22 +71,7 @@ const ListScreen = (props) => {
     );
     setModalDelete(false);
     return toDelete;
-  }; const handleSubmit = (values) => {
-    const FormNovelities = {
-      title: values.title,
-      img: values.img,
-      content:values.content,
-      category:values.category
-    };
-   // apiService.patch("/news/:id", FormNovelities) /* Cambiar ruta segun corresponda*/
-    //   .then((res) => {
-     //   console.log(res)
-     //  })
-    //   .catch((error) => {
-    //     console.log(error); /* Se debe importar el alert y pasar el error */
-    //  });
   };
-
   return (
     <div className="container">
       <table className="table">
