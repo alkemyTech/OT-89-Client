@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import "./ListScreen.scss";
-import {CKEditor} from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import EditNoveleties from "../novedades/editNovelities";
+import Novedad from "../novedades/newNovelities";
 
 const ListScreen = (props) => {
   const dataReceived = [
@@ -132,7 +130,7 @@ const ListScreen = (props) => {
             </div>
           </ModalHeader>
           <ModalBody>
-               <EditNoveleties/>
+               <Novedad/>
           </ModalBody> 
           <ModalFooter>
             <button className="btn primary" onClick={() => editar()}>
