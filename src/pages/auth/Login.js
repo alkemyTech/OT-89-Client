@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import apiService from "../../services/server";
 import { Alert } from "../../components/Alert/Alert";
+import getToken from "../../helpers/useGetToken";
 
 export const Login = () => {
   const history = useHistory();
@@ -25,6 +26,7 @@ export const Login = () => {
   };
 
   const handleSubmit = (values) => {
+    console.log('me dispare dentro del login')
     const dataUser = {
       email: values.email,
       password: values.password,
@@ -36,7 +38,7 @@ export const Login = () => {
         if (message === "Login Successful.") {
           Alert("Exito!","Haz iniciado sesión con exito!", "success")
           localStorage.setItem("token", token)
-          dispatch(getUserAction())
+          dispatch(() => getUserAction())
           setTimeout(() => {
             history.push('/') 
           }, 3000)

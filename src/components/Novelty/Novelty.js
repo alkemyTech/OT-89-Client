@@ -33,14 +33,14 @@ export const Novelty = ({id}) => {
 
     return (      
         <div className="Novelty">
-            <img className="Novelty__img" src={ data.image} alt={data.title}/>
+            <img className="Novelty__img" src={data.image} alt={data.title} />
             <div className="Novelty__description">
                 <h2>{data.title}</h2>
                 <h3>{data.description}</h3>
                 <div className="buttons">
                     <Button className="button button-primary" title="Volver a novedades" url="/novelties"/>
                 </div>
-            </div>            
+            </div>
         </div>
     )
 }
