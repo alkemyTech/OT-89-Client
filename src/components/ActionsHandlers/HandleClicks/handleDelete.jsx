@@ -14,13 +14,3 @@ export const HandleDeleteCategory = async (id) => {
         }
     }
 }
-export const HandleDeleteNovelty = async (id) => {
-    const dispatch = useDispatch()
-    const alertResult = await Confirm("Eliminar novedad", "Esta intentando eliminar una novedad, ¿desea continuar?")
-    if (alertResult) {
-        const deleteResult = await apiService.delete("/categories", { id })
-        if (deleteResult.data.message === "¡Novelty deleted successfully!") {
-            dispatch(deleteNovelty(id))
-        }
-    }
-}

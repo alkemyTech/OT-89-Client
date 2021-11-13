@@ -4,7 +4,6 @@ import categoriesReducer from './slices/categoriesSlice'
 
 export default configureStore({
   reducer: {
-    user: userReducer,
     auth: authReducer,
     categories: categoriesReducer
   }

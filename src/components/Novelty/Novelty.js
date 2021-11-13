@@ -5,20 +5,19 @@ import { Button } from '../utils/buttons/Button';
 import './Novelty.scss'
 
 export const Novelty = () => {
-    
     const localization = useLocation()
 
     const [idnovelty, setIdNovelty] = useState(0)
-    const [ data, setData ] = useState({
+    const [data, setData] = useState({
         id: 0,
         title: "",
         description: [],
         image: ""
-    }) 
+    })
 
     useEffect(() => {
         const id = () => {
-            const id =  localization.pathname.split("/", 3)
+            const id = localization.pathname.split("/", 3)
             setIdNovelty(parseInt(id[2]))
         }
         id()
@@ -26,7 +25,7 @@ export const Novelty = () => {
 
     useEffect(() => {
 
-        const noveltyFinderFake = () => { //FAKE 
+        const noveltyFinderFake = () => { //FAKE
             const item = fakedata.find(element => element.id === idnovelty)
             const { title, description, image } = item
             const descFiltered = description.split("\n", -1)
@@ -46,14 +45,14 @@ export const Novelty = () => {
         //         id: idnovelty,
         //         title: title,
         //         description: description,
-        //         image: image                
+        //         image: image
         //     })
         //     } catch (error) {
         //         console.log(error)
-        //     }    
+        //     }
         // }
 
-        if(idnovelty !== 0) { 
+        if (idnovelty !== 0) {
             noveltyFinderFake()
         } else {
             return
@@ -63,16 +62,16 @@ export const Novelty = () => {
 
     return (
         <div className="Novelty">
-            <img className="Novelty__img" src={ data.image} alt={data.title}/>
+            <img className="Novelty__img" src={data.image} alt={data.title} />
             <div className="Novelty__description">
                 <h2>{data.title}</h2>
                 {data.description.map(pgr => (
                     <p>{pgr}</p>
                 ))}
                 <div className="buttons">
-                    <Button className="button button-primary" title="Volver a novedades" url={`/novelties`}/>
+                    <Button className="button button-primary" title="Volver a novedades" url={`/novelties`} />
                 </div>
-            </div>            
+            </div>
         </div>
     )
 }

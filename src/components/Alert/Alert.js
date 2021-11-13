@@ -11,8 +11,8 @@ export const Alert = (title, text, icon) => {
     })
   };
 
-  export const Confirm = (title, text) => {
-    Swal.fire({
+  export const Confirm = async (title, text) => {
+    const res = await Swal.fire({
       title: title,
       text: text,
       icon: 'warning',
@@ -30,6 +30,7 @@ export const Alert = (title, text, icon) => {
       }
       return result.isConfirmed
     })
+    return res;
   };
 
 
