@@ -28,7 +28,8 @@ export const Alert = (title, text, icon) => {
           'success'
         )
       }
+      return result.isConfirmed
     })
   };
 
- 
+
