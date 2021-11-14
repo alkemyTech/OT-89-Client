@@ -14,6 +14,7 @@ const ListScreen = (props) => {
   const HandleDeleteNovelty = async (id) => {
     const alertResult = await Confirm("Eliminar novedad", "Esta intentando eliminar una novedad, ¿desea continuar?")
     if (alertResult) {
+      setData(data.filter((item) => item.id !== id));
       const deleteResult = await apiService.delete("/categories", { id })
       console.log(deleteResult)
       if (deleteResult.data.message === "¡Novelty deleted successfully!") {
@@ -21,7 +22,8 @@ const ListScreen = (props) => {
       }
     }
   }
-  const dataReceived = [
+
+  const [data, setData] = useState([
     {
       id: 1,
       name: "prueba1",
@@ -46,9 +48,7 @@ const ListScreen = (props) => {
       image: "https://getbootstrap.com/",
       createdAt: "24-03-2012",
     },
-  ];
-
-  const [data, setData] = useState(dataReceived);
+  ]);
   const [modalEdit, setModalEdit] = useState(false);
   const [selected, setSelected] = useState({
     id: "",
