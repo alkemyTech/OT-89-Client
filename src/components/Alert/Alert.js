@@ -11,7 +11,7 @@ export const Alert = (title, text, icon, timeout = 2000) => {
   })
 };
 
-export const Confirm = async (title, text) => {
+export const Confirm = async (title, text,confirmTitle,confirmText,confirmIcon) => {
   return Swal.fire({
     title: title,
     text: text,
@@ -19,14 +19,15 @@ export const Confirm = async (title, text) => {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, eliminar'
+    confirmButtonText: 'Aceptar'
   }).then((result) => {
     if (result.isConfirmed) {
+      if (confirmTitle && confirmText && confirmIcon) {
       Swal.fire(
-        'Eliminado',
-        'Ha sido eliminado!',
-        'success'
-      )
+        confirmTitle,
+        confirmText,
+        confirmIcon
+      )}
     }
     return result.isConfirmed
   })
