@@ -14,7 +14,10 @@ const Card = props => {
             </div>
             <div className="content">
                 <h2>{title}</h2>
-                <Button className="button" title="Ver más" url={`/novelties/${id}`}/>
+                <Button className="button" title="Ver más" url={{
+                    pathname: `/novelties/${id}`,
+                    id: id
+                }}/>
             </div>
         </div>        
     )

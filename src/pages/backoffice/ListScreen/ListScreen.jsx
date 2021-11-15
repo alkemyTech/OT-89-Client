@@ -1,9 +1,29 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Confirm } from "../../../components/Alert/Alert";
+import { deleteNovelty } from "../../../features/slices/noveltySlice";
+import apiService from "../../../services/server";
 import "./ListScreen.scss";
 
+
+
+
 const ListScreen = (props) => {
-  const dataReceived = [
+  const dispatch = useDispatch()
+  const HandleDeleteNovelty = async (id) => {
+    const alertResult = await Confirm("Eliminar novedad", "Esta intentando eliminar una novedad, ¿desea continuar?")
+    if (alertResult) {
+      setData(data.filter((item) => item.id !== id));
+      const deleteResult = await apiService.delete("/categories", { id })
+      console.log(deleteResult)
+      if (deleteResult.data.message === "¡Novelty deleted successfully!") {
+        dispatch(deleteNovelty(id))
+      }
+    }
+  }
+
+  const [data, setData] = useState([
     {
       id: 1,
       name: "prueba1",
@@ -28,11 +48,8 @@ const ListScreen = (props) => {
       image: "https://getbootstrap.com/",
       createdAt: "24-03-2012",
     },
-  ];
-
-  const [data, setData] = useState(dataReceived);
+  ]);
   const [modalEdit, setModalEdit] = useState(false);
-  const [modalDelete, setModalDelete] = useState(false);
   const [selected, setSelected] = useState({
     id: "",
     name: "",
@@ -40,13 +57,11 @@ const ListScreen = (props) => {
     createdAt: "",
   });
   let toEdit = { id: "", name: "", image: "", createdAt: "" };
-  let toDelete = { id: "" };
 
-  const selectList = (element, cas) => {
+  const handleEdit = (element) => {
     setSelected(element);
-    cas === "Edit" ? setModalEdit(true) : setModalDelete(true);
-  };
-
+    setModalEdit(true)
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSelected((prevState) => ({
@@ -70,14 +85,6 @@ const ListScreen = (props) => {
     console.log(toEdit);
   };
 
-  const del = () => {
-    setData(
-      data.filter((dat) => dat.id !== selected.id, (toDelete = selected.id))
-    );
-    setModalDelete(false);
-    return toDelete;
-  };
-
   return (
     <div className="container">
       <table className="table">
@@ -97,14 +104,14 @@ const ListScreen = (props) => {
               <td>
                 <button
                   className="btn primary"
-                  onClick={() => selectList(element, "Edit")}
+                  onClick={() => {handleEdit(element)}}
                 >
                   editar
                 </button>
                 {"  "}
                 <button
                   className=" btn danger btn-danger "
-                  onClick={() => selectList(element, "Delete")}
+                  onClick={() => { HandleDeleteNovelty(element.id) }}
                 >
                   eliminar
                 </button>
@@ -128,7 +135,7 @@ const ListScreen = (props) => {
                 readOnly
                 type="text"
                 name="id"
-                value={selected && selected.id}
+                value={selected.id}
               />
               <br />
 
@@ -162,24 +169,6 @@ const ListScreen = (props) => {
               onClick={() => setModalEdit(false)}
             >
               Cancelar
-            </button>
-          </ModalFooter>
-        </Modal>
-      </div>
-      <div className="container">
-        <Modal fade={false} isOpen={modalDelete}>
-          <ModalBody>
-            Estás Seguro que deseas eliminar {selected && selected.name}
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn danger btn-danger" onClick={() => del()}>
-              Sí
-            </button>
-            <button
-              className="btn primary"
-              onClick={() => setModalDelete(false)}
-            >
-              No
             </button>
           </ModalFooter>
         </Modal>

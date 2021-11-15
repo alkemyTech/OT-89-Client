@@ -11,7 +11,7 @@ export const Header = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.auth.value);
   const token = useCallback(getToken());
-  
+
   useEffect(() => {
     const getData = () => {
       dispatch(getUserAction())
@@ -40,7 +40,7 @@ export const Header = () => {
     { title: "Testimonios", route: "testimonials" },
     { title: "contacto", route: "contacts" },
     { title: "Contribuye", route: "contribute" },
-    
+
   ];
   const location = useLocation();
   useEffect(() => {
@@ -73,16 +73,16 @@ export const Header = () => {
           ))}
         </ul>
         <div className="buttons-container">
-          {!user? 
-              <>
-                <Button url="auth/login" className="button button-primary" title="Ingresar"/>
-                <Button url="auth/register" className="button button-outline" title="Registrarse"/>
-              </>
-              : 
-              <>
-                <Button url="/" className="button button-primary" onClick={handleLogout} title="Cerrar sesión"/>
-                <Button url="/profile" className="button button-primary" title="Perfil" />
-              </>
+          {!user ?
+            <>
+              <Button url="auth/login" className="button button-primary" title="Ingresar" />
+              <Button url="auth/register" className="button button-outline" title="Registrarse" />
+            </>
+            :
+            <>
+              <Button url="/" className="button button-primary" onClick={handleLogout} title="Cerrar sesión" />
+              <Button url="/profile" className="button button-primary" title="Perfil" />
+            </>
           }
         </div>
       </nav>
