@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./profile.scss";
 import apiService from "../../services/server";
-import swal from "sweetalert2";
-import { Button } from "../utils/buttons/Button";
 import EditProfile from "../EditProfile/EditProfile";
 import { Alert, Confirm } from "../Alert/Alert";
 
@@ -26,7 +24,6 @@ export default function Profile() {
         } else {
           Alert("Error!", "No se pudo eliminar el usuario", "error");
         }
-        /* dispatch(deleteUser()) */
       } else {
         Alert("Cancelado", "No se elimino el usuario", "error");
       }
