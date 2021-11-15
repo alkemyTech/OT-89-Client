@@ -10,7 +10,7 @@ export const AuthRouter = () => {
     <Switch>
       <Route exact path="/auth/login" component={Login} />
       <Route exact path="/auth/register" component={Register} />
-      <Route path="/auth/backoffice" exact component={BackOffice} />
+      <Route path="/auth/backoffice" component={BackOffice} />
       <Route path="/auth/backoffice/users" exact component={ListUsers} />
     </Switch>
   );

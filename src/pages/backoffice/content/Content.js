@@ -1,8 +1,10 @@
 import React from "react";
-import { Button } from "../../../components/utils/buttons/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import ListScreen from "../ListScreen/ListScreen";
+import { EditOrganization } from "../EditOrganization/EditOrganization";
+import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
+
+import { Switch, Route } from "react-router-dom";
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -15,13 +17,19 @@ export const Content = ({ openAside, isLeft }) => {
         className={left}
         onClick={openAside}
       />
-      <div className="heading">
-        <h1>Novedades</h1>{" "}
-        {/*Este H1 se debe renderizar segun las lista que contenga */}
-        <Button title="Add new" className="btn primary" />
-      </div>
-      <ul className="list"></ul>
-      <ListScreen></ListScreen>
+
+      <Switch>
+        <Route
+          path="/auth/backoffice/edit-activities"
+          component={ListScreen}
+          exact
+        />
+        <Route
+          path="/auth/backoffice/edit-organization"
+          component={EditOrganization}
+          exact
+        />
+      </Switch>
     </section>
   );
 };
