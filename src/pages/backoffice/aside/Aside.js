@@ -24,6 +24,9 @@ export const Aside = ({ isOpen }) => {
         <Link to="/auth/backoffice/edit-organization" className="category">
           Organización
         </Link>
+        <Link to="/auth/backoffice/users" className="category">
+          Usuarios
+        </Link>
       </ul>
     </aside>
   );

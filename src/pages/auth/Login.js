@@ -7,7 +7,6 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import apiService from "../../services/server";
 import { Alert } from "../../components/Alert/Alert";
-import getToken from "../../helpers/useGetToken";
 
 export const Login = () => {
   const history = useHistory();
@@ -26,28 +25,28 @@ export const Login = () => {
   };
 
   const handleSubmit = (values) => {
-    console.log('me dispare dentro del login')
     const dataUser = {
       email: values.email,
       password: values.password,
     };
     apiService
       .post("/auth/login", dataUser)
-      .then((res) => {
+      .then(async (res) => {
+        console.log(res);
         const { message, token } = res.data;
         if (message === "Login Successful.") {
-          Alert("Exito!","Haz iniciado sesión con exito!", "success")
+          await Alert("Exito!", "Haz iniciado sesión con exito!", "success")
           localStorage.setItem("token", token)
           dispatch(() => getUserAction())
-          setTimeout(() => {
-            history.push('/') 
-          }, 3000)
-        } else {
-          Alert("Oops!","El correo electronico y/o la contraseña son incorrectas","error")
+          history.push('/')
         }
       })
       .catch((error) => {
-        console.log(error)
+        if (error.response.status === 401) {
+          Alert("Oops!", "El correo electronico y/o la contraseña son incorrectas", "error")
+        } else {
+          Alert("Oops!", "Hubo un error desconocido.")
+        }
       })
   };
 
