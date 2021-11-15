@@ -53,7 +53,6 @@ export const Header = () => {
   //   const src = URL.createObjectURL(blob);
   //   return src;
   // };
-
   const location = useLocation();
   useEffect(() => {
     const itemsHeader = Array.from(document.querySelectorAll(".navbar-list a"));
