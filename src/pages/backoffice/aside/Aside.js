@@ -15,7 +15,7 @@ export const Aside = ({ isOpen }) => {
         <span>Role</span> {/* Aca se debe renderizar el rol del usuario*/}
       </div>
       <ul className="list-aside">
-        <Link to="/auth/backoffice/edit-activities" className="category">
+        <Link to="/auth/backoffice/" className="category">
           Actividades
         </Link>
         <Link to="/auth/backoffice/edit-testomonials" className="category">

@@ -19,11 +19,7 @@ export const Content = ({ openAside, isLeft }) => {
       />
 
       <Switch>
-        <Route
-          path="/auth/backoffice/edit-activities"
-          component={ListScreen}
-          exact
-        />
+        <Route path="/auth/backoffice/" component={ListScreen} exact />
         <Route
           path="/auth/backoffice/edit-organization"
           component={EditOrganization}
