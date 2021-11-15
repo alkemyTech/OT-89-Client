@@ -5,6 +5,7 @@ import { EditOrganization } from "../EditOrganization/EditOrganization";
 import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
 
 import { Switch, Route } from "react-router-dom";
+import { ListUsers } from "../ListUsers/ListUsers";
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -19,10 +20,18 @@ export const Content = ({ openAside, isLeft }) => {
       />
 
       <Switch>
-        <Route path="/auth/backoffice/" component={ListScreen} exact />
+        <Route path="/auth/backoffice/"
+          component={ListScreen}
+          exact
+        />
         <Route
           path="/auth/backoffice/edit-organization"
           component={EditOrganization}
+          exact
+        />
+        <Route
+          path="/auth/backoffice/users"
+          component={ListUsers}
           exact
         />
       </Switch>
