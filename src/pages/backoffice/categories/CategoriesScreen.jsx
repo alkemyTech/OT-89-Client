@@ -1,11 +1,12 @@
 import React from 'react'
+import CategoriesList from './CategoriesList'
 
 const CategoriesScreen = () => {
     return (
         <div>
-            <p>Title</p>
+            <h1>Listado de Categorias</h1>
             <p>add category</p>
-            <p>List</p>
+            <CategoriesList />
         </div>
     )
 }
