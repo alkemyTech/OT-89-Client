@@ -27,7 +27,7 @@ export const Footer = () => {
   React.useEffect(() => {
     const getSocialMedia = async () => {
       try{
-        
+        const response = await apiService.get("/public")
       }
       catch(e){
         console.log(e.response.data);
@@ -70,19 +70,19 @@ export const Footer = () => {
         </ul>
       </section>
       <div className="social-media">
-        <a href="/">
+        <a href="{response.fb}">
           <img className="icon" src={iconFacebook} alt="Icono de Facebook" />
         </a>
 
-        <a href="/">
+        <a href="{response.Insta}">
           <img className="icon" src={iconInstagram} alt="Icono de Instagram" />
         </a>
 
-        <a href="/">
+        <a href="{response.tw}">
           <img className="icon" src={iconTwitter} alt="Icono de Twitter" />
         </a>
 
-        <a href="/">
+        <a href="{response.yt}">
           <img className="icon" src={iconYoutube} alt="Icono de Youtube" />
         </a>
       </div>
