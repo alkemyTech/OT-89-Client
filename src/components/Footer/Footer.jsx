@@ -1,5 +1,5 @@
 import React from "react";
-
+import apiService from "../../services/server";
 import { Link } from "react-router-dom";
 
 // Icons
@@ -21,6 +21,20 @@ export const Footer = () => {
   //   const src = URL.createObjectURL(blob);
   //   return src;
   // };
+
+
+  //Function to bring social media urls
+  React.useEffect(() => {
+    const getSocialMedia = async () => {
+      try{
+        
+      }
+      catch(e){
+        console.log(e.response.data);
+      }
+    }
+    getSocialMedia();
+  }, [])
 
   const itemsLeftFooter = [
     { title: "Noticias", route: "news" },
