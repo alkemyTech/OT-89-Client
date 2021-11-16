@@ -68,3 +68,23 @@
   padding: $spacing-lg;
 }
 
+.add__category {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 2rem 0 1rem;
+  button {
+    min-width: 4rem;
+    min-height: 2.625rem;
+    padding: 0.3rem 1.5rem;
+    background-color: $color-ligthblue;
+    border-radius: $border-radius-md;
+    font-weight: bold;
+
+    font-size: $font-size-small;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: $font-size-medium;
+    }
+  }
+}

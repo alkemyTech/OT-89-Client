@@ -1,14 +1,21 @@
-import React from 'react'
-import CategoriesList from './CategoriesList'
+import React from "react";
+import CategoriesList from "./CategoriesList";
+import "./Categories.scss";
 
 const CategoriesScreen = () => {
-    return (
-        <div>
-            <h1>Listado de Categorias</h1>
-            <p>add category</p>
-            <CategoriesList />
-        </div>
-    )
-}
+  const handleNewCategory = () => {
+    console.log("Vincular al ticket OT89-460");
+  };
 
-export default CategoriesScreen
+  return (
+    <main>
+      <h1>Listado de Categorias</h1>
+      <div className="add__category">
+        <button onClick={handleNewCategory}>Agregar Categoria</button>
+      </div>
+      <CategoriesList />
+    </main>
+  );
+};
+
+export default CategoriesScreen;
