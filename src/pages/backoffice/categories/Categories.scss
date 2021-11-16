@@ -4,38 +4,59 @@
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
+
   gap: $spacing-sm;
+
   @media (min-width: $breakpoint-lg) {
     gap: $spacing-lg;
   }
+
   section {
     display: inline-grid;
     grid-template-columns: 3fr 1fr 1fr;
-    gap: $spacing-sm;
-    font-size: $font-size-small;
-    font-weight: bold;
     align-items: center;
     justify-items: center;
+    box-shadow: 0 2px $color-grey-light;
+
+    gap: $spacing-sm;
+    font-size: $font-size-small;
+
     @media (min-width: $breakpoint-lg) {
-      font-size: $font-size-medium;
       gap: $spacing-lg;
+      font-size: $font-size-medium;
     }
+
+    span {
+      font-weight: bold;
+
+      max-width: 95%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     button {
+      min-width: 80%;
+      border-radius: $border-radius-md;
+
       font-size: $font-size-small;
       padding: 0.3rem 1rem;
-      min-width: 80%;
+
       @media (min-width: $breakpoint-lg) {
-        padding: inherit 0;
         font-size: $font-size-default;
+        padding: inherit 0;
       }
     }
+
     .btn__edit {
       background-color: $color-yellow-light;
     }
+
     .btn__delete {
       background-color: $color-red-light;
     }
   }
+
   .warning {
     background-color: $color-red-light;
     padding: $spacing-lg;
@@ -46,3 +67,4 @@
   background-color: $color-lightblue-light;
   padding: $spacing-lg;
 }
+

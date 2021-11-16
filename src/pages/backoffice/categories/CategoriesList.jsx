@@ -28,10 +28,12 @@ const CategoriesList = () => {
   console.log(categories);
   const handleEdit = (category) => {
     console.log("Modificame a: ", category);
+    console.log("Vincular al ticket OT89-460");
   };
-
+  
   const handleDelete = (id) => {
     console.log("Elmininame el: ", id);
+    console.log("Vincular al ticket OT89-461");
   };
 
   if (isLoading) return <Loading />;
