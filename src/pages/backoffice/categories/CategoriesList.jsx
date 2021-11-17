@@ -4,12 +4,14 @@ import "./Categories.scss";
 import "../../../components/utils/buttons/Button.scss";
 import { Spinner } from "../../../components/spinner/Spinner";
 import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
+import { HandleDeleteCategory } from "../../../components/ActionsHandlers/HandleClicks/handleDelete";
 
 const CategoriesList = () => {
   const [categories, setCategories] = useState("loading");//
   const [warning, setWarning] = useState(
     "This will show if something went horribly wrong"
   );
+  const [ reload, setReload ] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -33,16 +35,18 @@ const CategoriesList = () => {
         setWarning(err.message);
       }
     })();
-  }, []);
+  }, [reload]);
 
   const handleEdit = (category) => {
     console.log("Modificame a: ", category);
     console.log("Vincular al ticket OT89-460");
   };
 
-  const handleDelete = (id) => {
-    console.log("Elmininame el: ", id);
-    console.log("Vincular al ticket OT89-461");
+  const handleDelete = async (id) => {
+    const res = await HandleDeleteCategory(id);
+    if (res === 'categoria eliminada') {
+      setReload((current) => !current);
+    }
   };
 
   return (
