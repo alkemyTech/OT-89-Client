@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiService from "../../../services/server";
 import "./Categories.scss";
+import "../../../components/utils/buttons/Button.scss";
 
 const CategoriesList = () => {
   const [categories, setCategories] = useState(null);
@@ -30,7 +31,7 @@ const CategoriesList = () => {
     console.log("Modificame a: ", category);
     console.log("Vincular al ticket OT89-460");
   };
-  
+
   const handleDelete = (id) => {
     console.log("Elmininame el: ", id);
     console.log("Vincular al ticket OT89-461");
@@ -68,10 +69,16 @@ const CategoryItem = React.memo(({ category, handleEdit, handleDelete }) => {
     <>
       <section>
         <span>{name}</span>
-        <button className="btn__edit" onClick={() => handleEdit(category)}>
+        <button
+          className="btn__edit button button-outline"
+          onClick={() => handleEdit(category)}
+        >
           Editar
         </button>
-        <button className="btn__delete" onClick={() => handleDelete(id)}>
+        <button
+          className="btn__delete button button-secondary-outline "
+          onClick={() => handleDelete(id)}
+        >
           Eliminar
         </button>
       </section>

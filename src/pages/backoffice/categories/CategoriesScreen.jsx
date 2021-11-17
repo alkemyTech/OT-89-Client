@@ -1,6 +1,8 @@
 import React from "react";
 import CategoriesList from "./CategoriesList";
 import "./Categories.scss";
+import "../../../components/utils/buttons/Button.scss";
+
 
 const CategoriesScreen = () => {
   const handleNewCategory = () => {
@@ -11,7 +13,7 @@ const CategoriesScreen = () => {
     <main>
       <h1>Listado de Categorias</h1>
       <div className="add__category">
-        <button onClick={handleNewCategory}>Agregar Categoria</button>
+        <button onClick={handleNewCategory} className="button button-primary">Agregar Categoria</button>
       </div>
       <CategoriesList />
     </main>

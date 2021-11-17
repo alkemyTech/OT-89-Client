@@ -36,7 +36,17 @@
   color: $color-ligthblue;
 
   &:hover {
-    color: $color-ligthblue;
+    background-color: lighten($color: $color-ligthblue, $amount: 5);
+    color: $color-white;
+  }
+}
+
+.button-secondary-outline {
+  border: 1px solid $color-red;
+  color: $color-ligthblue;
+  &:hover {
+    background-color: lighten($color: $color-red, $amount: 5);
+    color: $color-white;
   }
 }
 
