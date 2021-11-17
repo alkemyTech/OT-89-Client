@@ -83,13 +83,9 @@ export const Footer = () => {
         </a>
 
         <a href={data.linkedin}>
-          {/* PONER ICONO DE LINKEDIN */}
+          {/* ARREGLAR ICONO DE LINKEDIN */}
           <img className="icon" src={iconLinkedin} alt="Icono de Twitter" />
         </a>
-
-        {/* <a href="{response.yt}">
-          <img className="icon" src={iconYoutube} alt="Icono de Youtube" />
-        </a> */}
       </div>
       <p className="terms-and-condition">
         2021 by Alkemy. All Rights Reserved.
