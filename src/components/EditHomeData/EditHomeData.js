@@ -39,14 +39,11 @@ export const EditHomeData = () => {
   }, []);
 
   // Handler change para capturar datos del usuario admin
-
   const fileValidator = (e, index) => {
     const file = e.target.files[0];
-    console.log(file);
     const imgUrl = e.target.value;
     // let fileTo = new FormData();
     // fileTo.append("files", file, imgUrl);
-    // console.log("El tamanho de este archivo es de: " + file.size);
     if (file.size <= 26214400) {
       setDescription({
         ...description,
@@ -97,24 +94,22 @@ export const EditHomeData = () => {
       // ],
       // });
     }
-    console.log(e.target.files[0]);
-    console.log(description);
   };
 
   // Funcion onSubmit
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     description.slider.forEach(async ({ file, text }) => {
+      console.log("Esto es la info de el archivo" + file);
       let data = new FormData();
-      await data.set("file", file);
+      data.append("file", file);
       const res = await apiService.post("/aws/upload", data, {
         headers: {
-          //     accept: "application/json",
-          //     // 'Accept-Language': 'en-US,en;q=0.8',
           "Content-Type": `multipart/form-data;`,
         },
       });
       console.log(res);
+      console.log("Esto es la info de la data" + data);
     });
   };
   return (
