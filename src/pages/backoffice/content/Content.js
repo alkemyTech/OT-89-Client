@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { EditOrganization } from "../EditOrganization/EditOrganization";
 import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
+import { ListActivities } from "../ListActivities/ListActivities";
 
 import { Switch, Route } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
@@ -20,8 +21,9 @@ export const Content = ({ openAside, isLeft }) => {
       />
 
       <Switch>
-        <Route path="/auth/backoffice/"
-          component={ListScreen}
+        <Route
+          path="/auth/backoffice/activities"
+          component={ListActivities}
           exact
         />
         <Route
@@ -29,11 +31,7 @@ export const Content = ({ openAside, isLeft }) => {
           component={EditOrganization}
           exact
         />
-        <Route
-          path="/auth/backoffice/users"
-          component={ListUsers}
-          exact
-        />
+        <Route path="/auth/backoffice/users" component={ListUsers} exact />
       </Switch>
     </section>
   );
