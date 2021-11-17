@@ -38,7 +38,7 @@ export const Content = ({ openAside, isLeft }) => {
         />
          <Route
           path="/auth/backoffice/contacts"
-          component={ListContact}
+          component={ListContact}/>
         <Route
           path="/auth/backoffice/categories"
           component={CategoriesScreen}
