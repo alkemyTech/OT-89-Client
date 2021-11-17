@@ -1,0 +1,17 @@
+@import "../../../assets/scss/vars";
+
+.warning {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: $color-red-light;
+  font-weight: bold;
+
+  padding: $spacing-sm;
+  font-size: $font-size-default;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: $spacing-lg;
+    font-size: $font-size-large;
+  }
+}
