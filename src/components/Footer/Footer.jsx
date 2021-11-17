@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // Icons
 import iconFacebook from "../../assets/icons/facebook.svg";
 import iconTwitter from "../../assets/icons/twitter.svg";
-import iconYoutube from "../../assets/icons/youtube.svg";
+// import iconYoutube from "../../assets/icons/youtube.svg";
 import iconInstagram from "../../assets/icons/instagram.svg";
 
 import "./Footer.scss";
@@ -24,10 +24,15 @@ export const Footer = () => {
 
 
   //Function to bring social media urls
+
+  const [data, setData] = React.useState({});
+
   React.useEffect(() => {
     const getSocialMedia = async () => {
       try{
-        const response = await apiService.get("/public")
+        const response = await apiService.get("/public");
+
+        setData(response.data.data);
       }
       catch(e){
         console.log(e.response.data);
@@ -70,21 +75,22 @@ export const Footer = () => {
         </ul>
       </section>
       <div className="social-media">
-        <a href="{response.fb}">
+        <a href={data.facebook}>
           <img className="icon" src={iconFacebook} alt="Icono de Facebook" />
         </a>
 
-        <a href="{response.Insta}">
+        <a href={data.instagram}>
           <img className="icon" src={iconInstagram} alt="Icono de Instagram" />
         </a>
 
-        <a href="{response.tw}">
+        <a href={data.linkedin}>
+          {/* PONER ICONO DE LINKEDIN */}
           <img className="icon" src={iconTwitter} alt="Icono de Twitter" />
         </a>
 
-        <a href="{response.yt}">
+        {/* <a href="{response.yt}">
           <img className="icon" src={iconYoutube} alt="Icono de Youtube" />
-        </a>
+        </a> */}
       </div>
       <p className="terms-and-condition">
         2021 by Alkemy. All Rights Reserved.
