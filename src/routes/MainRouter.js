@@ -10,6 +10,7 @@ import { Contacts } from "../pages/main/Contacts";
 import { Contribute } from "../pages/main/Contribute";
 import { Novelty } from "../components/Novelty/Novelty";
 import Profile from "../components/Profile/Profile";
+import ViewActivity from "../components/ViewActivity/ViewActivity";
 
 export const MainRouter = () => {
   return (
@@ -24,6 +25,7 @@ export const MainRouter = () => {
         <Route exact path="/contacts" component={Contacts} />
         <Route exact path="/contribute" component={Contribute} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/activities/:id" component={ViewActivity} />
       </Switch>
       <Footer />
     </>
