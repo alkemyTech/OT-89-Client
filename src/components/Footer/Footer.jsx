@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 
 // Icons
 import iconFacebook from "../../assets/icons/facebook.svg";
-import iconTwitter from "../../assets/icons/twitter.svg";
-// import iconYoutube from "../../assets/icons/youtube.svg";
 import iconInstagram from "../../assets/icons/instagram.svg";
+import iconLinkedin from "../../assets/icons/linkedin.svg";
 
 import "./Footer.scss";
 
@@ -85,7 +84,7 @@ export const Footer = () => {
 
         <a href={data.linkedin}>
           {/* PONER ICONO DE LINKEDIN */}
-          <img className="icon" src={iconTwitter} alt="Icono de Twitter" />
+          <img className="icon" src={iconLinkedin} alt="Icono de Twitter" />
         </a>
 
         {/* <a href="{response.yt}">
