@@ -2,31 +2,38 @@ import React, { useEffect, useState } from "react";
 import apiService from "../../../services/server";
 import "./Categories.scss";
 import "../../../components/utils/buttons/Button.scss";
+import { Spinner } from "../../../components/spinner/Spinner";
 
 const CategoriesList = () => {
-  const [categories, setCategories] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState("loading");
   const [warning, setWarning] = useState(
     "This will show if something went horribly wrong"
   );
 
   useEffect(() => {
     (async () => {
-      const categoriesResponse = await apiService.get("/categories");
-      if (categoriesResponse.status === 200) {
-        setCategories(categoriesResponse.data.data);
-      } else if (categoriesResponse.status === 204) {
-        setWarning("No hay categorias en la base de datos");
-      } else if (categoriesResponse.data.message) {
-        setWarning(categoriesResponse.data.message);
-      } else {
-        setWarning("Error inesperado");
+      try {
+        const categoriesResponse = await apiService.get("/categories");
+        if (categoriesResponse.status === 200) {
+          setCategories(categoriesResponse.data.data);
+        } else if (categoriesResponse.status === 204) {
+          setCategories(null);
+          setWarning("No hay categorias en la base de datos");
+        } else if (categoriesResponse.data.message) {
+          setCategories(null);
+          setWarning(categoriesResponse.data.message);
+        } else {
+          setCategories(null);
+          setWarning("Error inesperado");
+        }
+      } catch (err) {
+        //triggers when server is offline
+        setCategories(null);
+        setWarning(err.message);
       }
-      setIsLoading(false);
     })();
   }, []);
 
-  console.log(categories);
   const handleEdit = (category) => {
     console.log("Modificame a: ", category);
     console.log("Vincular al ticket OT89-460");
@@ -37,11 +44,11 @@ const CategoriesList = () => {
     console.log("Vincular al ticket OT89-461");
   };
 
-  if (isLoading) return <Loading />;
-
   return (
     <article className="categories__list">
-      {categories ? (
+      {categories === "loading" ? (
+        <Spinner size={50} center />
+      ) : categories ? (
         <>
           {categories.map((category) => (
             <CategoryItem
@@ -90,14 +97,6 @@ const Warning = ({ text }) => {
   return (
     <>
       <h3 className="warning">{text}</h3>
-    </>
-  );
-};
-
-const Loading = () => {
-  return (
-    <>
-      <h3 className="loading">Cargando...</h3>
     </>
   );
 };
