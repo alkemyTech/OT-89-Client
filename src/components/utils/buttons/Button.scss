@@ -2,7 +2,6 @@
 
 .button {
   display: block;
-  padding: $spacing-xs $spacing-xxl;
   border-radius: $border-radius-sm;
   font-size: $font-size-default;
   font-weight: 500;
@@ -11,6 +10,12 @@
   cursor: pointer;
   text-decoration: none;
   border: none;
+
+  padding: $spacing-xs $spacing-xs;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: $spacing-xs $spacing-xxl;
+  }
 }
 
 .button-primary {
