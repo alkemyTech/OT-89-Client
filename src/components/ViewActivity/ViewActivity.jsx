@@ -33,7 +33,14 @@ export const Activity = ({id}) => {
 
     return (      
         <div>
-           
+            <img src={data.image} alt={data.name} />
+            <div>
+                <h2>{data.name}</h2>
+                <h3>{data.content}</h3>
+                <div className="buttons">
+                    <Button className="button button-primary" title="Volver a actividades" url="/activities"/>
+                </div>
+            </div>
         </div>
     )
 }
