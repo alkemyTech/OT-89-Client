@@ -3,9 +3,10 @@ import apiService from "../../../services/server";
 import "./Categories.scss";
 import "../../../components/utils/buttons/Button.scss";
 import { Spinner } from "../../../components/spinner/Spinner";
+import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
 
 const CategoriesList = () => {
-  const [categories, setCategories] = useState("loading");
+  const [categories, setCategories] = useState("loading");//
   const [warning, setWarning] = useState(
     "This will show if something went horribly wrong"
   );
@@ -60,7 +61,7 @@ const CategoriesList = () => {
           ))}
         </>
       ) : (
-        <Warning text={warning} />
+        <WarningDisplay text={warning} />
       )}
     </article>
   );
@@ -71,19 +72,19 @@ export default CategoriesList;
 //poco seguro sobre este memo
 const CategoryItem = React.memo(({ category, handleEdit, handleDelete }) => {
   const { name, id } = category;
-  console.log("Hola, soy CategoryItem key: ", id, " y me renderice");
+  //console.log("Hola, soy CategoryItem key: ", id, " y me renderice");
   return (
     <>
       <section>
         <span>{name}</span>
         <button
-          className="btn__edit button button-outline"
+          className="button button-outline"
           onClick={() => handleEdit(category)}
         >
           Editar
         </button>
         <button
-          className="btn__delete button button-secondary-outline "
+          className="button button-secondary-outline "
           onClick={() => handleDelete(id)}
         >
           Eliminar
@@ -92,11 +93,3 @@ const CategoryItem = React.memo(({ category, handleEdit, handleDelete }) => {
     </>
   );
 });
-
-const Warning = ({ text }) => {
-  return (
-    <>
-      <h3 className="warning">{text}</h3>
-    </>
-  );
-};
