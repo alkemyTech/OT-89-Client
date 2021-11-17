@@ -8,13 +8,13 @@ import "./ListContact.scss";
 export const ListContact =()=>{
 
    const dispatch = useDispatch()
-   const contacts=useSelector((state)=>state.contacts.value)
+   const contacts=useSelector((state)=>state.contacts.value)//cuando esta activo se cae la página, revisar
   
 
    React.useEffect(() => {
      const exec = async () => {
        try {
-         const response = await apiService.get("/contacts");//Revisar esa petición, si existe un modelo así
+         const response = await apiService.get("/contacts");//Revisar esa petición, si existe un modelo así         
          dispatch(contactsList(response.data.data));
        } catch (e) {
          console.log(e.response.data.data);
@@ -36,15 +36,15 @@ export const ListContact =()=>{
                    </tr>
                </thead>
                <tbody>
-           {contacts && contacts.map((oneContact) =>
-            oneContact ? (
-              <tr key={oneContact.userId}>
+          {contacts && contacts.map((oneContact) =>
+           oneContact ? (
+              <tr key={oneContact.email}>
                 <td className="borders">{oneContact.name}</td>
                 <td className="borders">{oneContact.email}</td>
                 <td className="borders">{oneContact.phone}</td>                
               </tr>
             ) : null
-          )} 
+          )}
         </tbody>
 
            </table>        

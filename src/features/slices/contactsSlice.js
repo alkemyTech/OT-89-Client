@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateValue=[]
+const initialStateValue = [];
 
-export const contactsSlice=createSlice({
-    name:'contacts',
-    initialStateValue:{value:initialStateValue},
-    reducers:{
-        contactsList:(state,action)=>{
-            state.value=action.payload
+export const contactSlice = createSlice({
+    name: "contacts",
+    initialState: { value: initialStateValue},
+    reducers: {
+        contactsList: (state, action) => {
+            state.value = action.payload;
         }
     }
-})
+});
 
-export const {contactsList}=contactsSlice.actions
+export const {contactsList} = contactSlice.actions;
 
-export default contactsSlice.reducer;
+export default contactSlice.reducer;
