@@ -5,7 +5,7 @@ import { Button } from "../utils/buttons/Button";
 
 //Activity details
 //Faltan implementar estilos
-export const Activity = ({id}) => {
+const Activity = ({id}) => {
 
     const [ data, setData ] = useState({
         id: 0,
@@ -44,3 +44,5 @@ export const Activity = ({id}) => {
         </div>
     )
 }
+
+export default Activity;
