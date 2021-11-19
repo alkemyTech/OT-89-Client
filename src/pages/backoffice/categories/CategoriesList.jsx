@@ -6,7 +6,7 @@ import { Spinner } from "../../../components/spinner/Spinner";
 import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
 
 const CategoriesList = () => {
-  const [categories, setCategories] = useState("loading");//
+  const [categories, setCategories] = useState("loading"); //
   const [warning, setWarning] = useState(
     "This will show if something went horribly wrong"
   );
