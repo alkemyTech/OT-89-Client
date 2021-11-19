@@ -7,6 +7,7 @@ import { ListActivities } from "../ListActivities/ListActivities";
 import { EditHomeData } from "../EditHomeData/EditHomeData";
 import { Switch, Route } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
+import { ListContact } from "../ListContact/ListContact";
 import CategoriesScreen from "../categories/CategoriesScreen";
 import EditActivities from "../../../components/EditActivities/EditActivities";
 
@@ -40,6 +41,9 @@ export const Content = ({ openAside, isLeft }) => {
           component={EditHomeData}
           exact
         />
+         <Route
+          path="/auth/backoffice/contacts"
+          component={ListContact}/>
         <Route
           path="/auth/backoffice/categories"
           component={CategoriesScreen}
