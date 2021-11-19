@@ -22,13 +22,7 @@ export const Content = ({ openAside, isLeft }) => {
         className={left}
         onClick={openAside}
       />
-      <div className="heading">
-        <h1>Novedades</h1>{" "}
-        {/*Este H1 se debe renderizar segun las lista que contenga */}
-        <Button title="Agregar Novedades" className="button primary" />
-      </div>
-      <ul className="list"></ul>
-      <ListScreen></ListScreen>
+  
 
       <Switch>
         <Route
@@ -54,6 +48,11 @@ export const Content = ({ openAside, isLeft }) => {
         <Route
           path="/auth/backoffice/categories"
           component={CategoriesScreen}
+          exact
+        />
+        <Route
+          path="/auth/backoffice/novelties"
+          component={ListScreen}
           exact
         />
 
