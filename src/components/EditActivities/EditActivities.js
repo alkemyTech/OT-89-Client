@@ -57,7 +57,7 @@ const EditActivities = ({ actId = 0 }) => {
       }
     } else {
       //actualizacion de actividades
-      const res = await apiService.put("/actividades", values);
+      const res = await apiService.put(`/actividades/${actId}`, values);
       if (res.status === 200) {
         const { data, message } = await res.data;
         setData(data);
