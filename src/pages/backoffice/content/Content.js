@@ -8,6 +8,7 @@ import { EditHomeData } from "../EditHomeData/EditHomeData";
 import { Switch, Route } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
 import CategoriesScreen from "../categories/CategoriesScreen";
+import EditActivities from "../../../components/EditActivities/EditActivities";
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -27,6 +28,7 @@ export const Content = ({ openAside, isLeft }) => {
           component={ListActivities}
           exact
         />
+
         <Route
           path="/auth/backoffice/edit-organization"
           component={EditOrganization}
