@@ -4,7 +4,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { EditOrganization } from "../EditOrganization/EditOrganization";
 import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
 import { ListActivities } from "../ListActivities/ListActivities";
-
+import { EditHomeData } from "../EditHomeData/EditHomeData";
 import { Switch, Route } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
 import CategoriesScreen from "../categories/CategoriesScreen";
@@ -32,10 +32,10 @@ export const Content = ({ openAside, isLeft }) => {
           component={EditOrganization}
           exact
         />
-
+        <Route path="/auth/backoffice/users" component={ListUsers} exact />
         <Route
-          path="/auth/backoffice/users"
-          component={ListUsers}
+          path="/auth/backoffice/info-home"
+          component={EditHomeData}
           exact
         />
         <Route
