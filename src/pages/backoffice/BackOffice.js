@@ -5,6 +5,8 @@ import { Content } from './content/Content';
 import { Header } from '../../components/Header/Header';
 
 
+
+
 export const BackOffice = () => {
   const [isOpen, setOpen] = useState(false);
 
@@ -17,7 +19,7 @@ export const BackOffice = () => {
       <Header />
       <div className="backoffice__content">
         <Aside isOpen={isOpen}/>
-        <Content openAside={openAside} isLeft={isOpen}/>
+        <Content openAside={openAside} isLeft={isOpen}/>  
       </div>
     </div>
   );

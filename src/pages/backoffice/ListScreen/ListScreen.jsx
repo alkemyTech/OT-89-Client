@@ -5,6 +5,7 @@ import { Confirm } from "../../../components/Alert/Alert";
 import { deleteNovelty } from "../../../features/slices/noveltySlice";
 import apiService from "../../../services/server";
 import "./ListScreen.scss";
+import Novedad from "../novedades/newNovelities";
 
 
 
@@ -90,7 +91,7 @@ const ListScreen = (props) => {
       <table className="table">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Titulo</th>
             <th>Image</th>
             <th>CreatedAt</th>
           </tr>
@@ -128,6 +129,8 @@ const ListScreen = (props) => {
             </div>
           </ModalHeader>
           <ModalBody>
+               <Novedad/>
+          </ModalBody> 
             <div className="form-group">
               <label>ID</label>
               <input
