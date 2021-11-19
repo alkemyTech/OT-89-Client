@@ -9,8 +9,9 @@ export const HandleDeleteCategory = async (id) => {
     const alertResult = await Confirm("Eliminar categoria", "Esta intentando eliminar una categoria, ¿desea continuar?")
     if (alertResult) {
         const deleteResult = await apiService.delete("/categories", { id })
-        if (deleteResult.data.message === "¡Category deleted successfully!") {
+        if (deleteResult.data.message === "categoria eliminada") {
             dispatch(deleteCategory(id))
         }
+        return deleteResult.data.message
     }
 }
