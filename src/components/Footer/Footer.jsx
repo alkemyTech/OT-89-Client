@@ -1,12 +1,11 @@
 import React from "react";
-
+import apiService from "../../services/server";
 import { Link } from "react-router-dom";
 
 // Icons
 import iconFacebook from "../../assets/icons/facebook.svg";
-import iconTwitter from "../../assets/icons/twitter.svg";
-import iconYoutube from "../../assets/icons/youtube.svg";
 import iconInstagram from "../../assets/icons/instagram.svg";
+import iconLinkedin from "../../assets/icons/linkedin.svg";
 
 import "./Footer.scss";
 
@@ -21,6 +20,25 @@ export const Footer = () => {
   //   const src = URL.createObjectURL(blob);
   //   return src;
   // };
+
+
+  //Function to bring social media urls
+
+  const [data, setData] = React.useState({});
+
+  React.useEffect(() => {
+    const getSocialMedia = async () => {
+      try{
+        const response = await apiService.get("/public");
+
+        setData(response.data.data);
+      }
+      catch(e){
+        console.log(e.response.data);
+      }
+    }
+    getSocialMedia();
+  }, [])
 
   const itemsLeftFooter = [
     { title: "Noticias", route: "news" },
@@ -56,20 +74,17 @@ export const Footer = () => {
         </ul>
       </section>
       <div className="social-media">
-        <a href="/">
+        <a href={data.facebook}>
           <img className="icon" src={iconFacebook} alt="Icono de Facebook" />
         </a>
 
-        <a href="/">
+        <a href={data.instagram}>
           <img className="icon" src={iconInstagram} alt="Icono de Instagram" />
         </a>
 
-        <a href="/">
-          <img className="icon" src={iconTwitter} alt="Icono de Twitter" />
-        </a>
-
-        <a href="/">
-          <img className="icon" src={iconYoutube} alt="Icono de Youtube" />
+        <a href={data.linkedin}>
+          {/* ARREGLAR ICONO DE LINKEDIN */}
+          <img className="icon" src={iconLinkedin} alt="Icono de Twitter" />
         </a>
       </div>
       <p className="terms-and-condition">

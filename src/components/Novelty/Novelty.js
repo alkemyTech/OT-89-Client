@@ -1,46 +1,52 @@
-import React, { useState, useEffect } from 'react'
-import { Button } from '../utils/buttons/Button';
-import './Novelty.scss'
+import React, { useState, useEffect } from "react";
+import { Button } from "../utils/buttons/Button";
+import "./Novelty.scss";
 import apiService from "../../services/server";
 import { Alert } from "../Alert/Alert";
 
-export const Novelty = ({id}) => {
+export const Novelty = ({ id }) => {
+  const [data, setData] = useState({
+    id: 0,
+    title: "",
+    description: [],
+    image: "",
+  });
 
-    const [ data, setData ] = useState({
-        id: 0,
-        title: "",
-        description: [],
-        image: ""
-    }) 
-    useEffect(() => {
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await apiService.get(`/news/${id}`);
 
-        const getData = async () => {
-            try{
-                const response = await apiService.get(`/novelties/${id}`);
-            
-                if(!response){
-                    Alert("Error", "La novedad que intenta visualizar no existe en la base de datos", "error");
-                }else{
-                    setData(response);
-                }
-            }
-            catch(e){
-                console.log(e.response.data);
-            }
+        if (!response) {
+          Alert(
+            "Error",
+            "La novedad que intenta visualizar no existe en la base de datos",
+            "error"
+          );
+        } else {
+          setData(response.data.data);
         }
-        getData();      
-    }, [])
+      } catch (e) {
+        console.log(e.response.data);
+      }
+    };
+    getData();
+  }, []);
 
-    return (      
-        <div className="Novelty">
-            <img className="Novelty__img" src={data.image} alt={data.title} />
-            <div className="Novelty__description">
-                <h2>{data.title}</h2>
-                <h3>{data.description}</h3>
-                <div className="buttons">
-                    <Button className="button button-primary" title="Volver a novedades" url="/novelties"/>
-                </div>
-            </div>
+  return (
+    <div className="Novelty">
+      <img className="Novelty__img" src={data.image} alt={data.title} />
+      <div className="Novelty__description">
+        <h2>{data.title}</h2>
+        <h3>{data.description}</h3>
+        <div className="buttons">
+          <Button
+            className="button button-primary"
+            title="Volver a novedades"
+            url="/novelties"
+          />
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
