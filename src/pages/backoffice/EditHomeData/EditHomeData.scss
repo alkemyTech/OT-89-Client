@@ -1,0 +1,55 @@
+@import "../../../assets/scss/vars";
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+.container-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem;
+  .slider-main {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    .input {
+      height: 10rem;
+      padding: 1rem;
+    }
+  }
+  &__container {
+    display: flex;
+    &_box {
+      margin-bottom: 1rem;
+    }
+  }
+  &__text {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+  }
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    &__title {
+      width: 40rem;
+      margin: 0 5rem;
+    }
+    &__container_box {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  @media (min-width: $breakpoint-md) {
+    justify-content: flex-end;
+  }
+}

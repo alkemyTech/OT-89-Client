@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { EditOrganization } from "../EditOrganization/EditOrganization";
 import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
-
+import { ListActivities } from "../ListActivities/ListActivities";
+import { EditHomeData } from "../EditHomeData/EditHomeData";
 import { Switch, Route } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
 import CategoriesScreen from "../categories/CategoriesScreen";
@@ -22,7 +23,12 @@ export const Content = ({ openAside, isLeft }) => {
       />
 
       <Switch>
-        <Route path="/auth/backoffice/" component={EditActivities} exact />
+        <Route
+          path="/auth/backoffice/activities"
+          component={ListActivities}
+          exact
+        />
+
         <Route
           path="/auth/backoffice/edit-organization"
           component={EditOrganization}
@@ -30,10 +36,16 @@ export const Content = ({ openAside, isLeft }) => {
         />
         <Route path="/auth/backoffice/users" component={ListUsers} exact />
         <Route
+          path="/auth/backoffice/info-home"
+          component={EditHomeData}
+          exact
+        />
+        <Route
           path="/auth/backoffice/categories"
           component={CategoriesScreen}
           exact
         />
+
       </Switch>
     </section>
   );
