@@ -7,32 +7,29 @@ import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
 import { HandleDeleteCategory } from "../../../components/ActionsHandlers/HandleClicks/handleDelete";
 
 const CategoriesList = () => {
-  const [categories, setCategories] = useState("loading");//
+  const [categories, setCategories] = useState("loading"); //
   const [warning, setWarning] = useState(
     "This will show if something went horribly wrong"
   );
-  const [ reload, setReload ] = useState(null);
+  const [reload, setReload] = useState(null);
 
   useEffect(() => {
     (async () => {
-      try {
-        const categoriesResponse = await apiService.get("/categories");
-        if (categoriesResponse.status === 200) {
-          setCategories(categoriesResponse.data.data);
-        } else if (categoriesResponse.status === 204) {
-          setCategories(null);
-          setWarning("No hay categorias en la base de datos");
-        } else if (categoriesResponse.data.message) {
-          setCategories(null);
-          setWarning(categoriesResponse.data.message);
-        } else {
-          setCategories(null);
-          setWarning("Error inesperado");
-        }
-      } catch (err) {
-        //triggers when server is offline
+      const categoriesResponse = await apiService
+        .get("/categories")
+        .catch((err) => {
+          //It triggers when server is offline or user is unauthorized
+          console.error(err);
+          return err;
+        });
+      if (categoriesResponse.status === 200) {
+        setCategories(categoriesResponse.data.data);
+      } else if (categoriesResponse.status === 204) {
         setCategories(null);
-        setWarning(err.message);
+        setWarning("No hay categorias en la base de datos");
+      } else {
+        setCategories(null);
+        setWarning("Error inesperado");
       }
     })();
   }, [reload]);
@@ -44,7 +41,7 @@ const CategoriesList = () => {
 
   const handleDelete = async (id) => {
     const res = await HandleDeleteCategory(id);
-    if (res === 'categoria eliminada') {
+    if (res === "categoria eliminada") {
       setReload((current) => !current);
     }
   };
