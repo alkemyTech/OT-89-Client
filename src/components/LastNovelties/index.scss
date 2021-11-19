@@ -69,11 +69,7 @@ h3 {
     }
     @media (min-width:$breakpoint-lg) {
         flex-direction: row;
+        justify-content: space-around;
         padding: 0 4rem;
-        .links {
-            display: flex;
-            align-items: center;
-            margin-right: 25rem;
-        }
     }
 }

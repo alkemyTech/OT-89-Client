@@ -1,75 +1,76 @@
-import React from "react";
-import { /* useDispatch, */ useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import "./profile.scss";
 import apiService from "../../services/server";
-import swal from "sweetalert2";
+import EditProfile from "../EditProfile/EditProfile";
+import { Alert, Confirm } from "../Alert/Alert";
+import { logout } from "../../features/slices/authSlice";
 
 export default function Profile() {
-  /* const dispatch = useDispatch(); */
   const history = useHistory();
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.auth.value);
 
-  const actionDelete = async (id) => {
+  const [visible, setVisible] = useState(false)
+  const dispatch = useDispatch();
+  const handleDelete = async (id) => {
     try {
-      const deleting = await swal({
-        title: "¿Eliminar usuario?",
-        text: "Al aceptar su cuenta de usuario será eliminada",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      });
-      if (deleting) {
-        await apiService.put("/users/" + id);
-
-        /* dispatch(deleteUser()) */
-
-        swal("Poof!", "Usuario eliminado", "success");
+      const result = await Confirm("Cuidado!", "¿Deseas eliminar el usuario?")
+      if (result) {
+        const res = await apiService.delete("/users/" + id);
+        if (res.status === 200) {
+          await Alert("Exito!", "Usuario eliminado correctamente", "success");
+          dispatch(logout());
+          history.go(0);
+        } else {
+          Alert("Error!", "No se pudo eliminar el usuario", "error");
+        }
       } else {
-        swal("Tu usuario se encuentra a salvo");
+        Alert("Cancelado", "No se elimino el usuario", "error");
       }
     } catch (e) {
-      console.log(e.response.data);
+      console.log(e);
     }
   };
 
-  const handleDelete = (id) => {
-    actionDelete(id);
-    history.push("/");
-  };
 
   return (
-    <div id="profile-table_container" className="table-responsive-sm">
-      <table id="profile-table" className="table table-hover table-bordered">
-        <thead>
-          <tr className="table-dark">
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{user.firstName}</td>
-            <td>{user.lastName}</td>
-            <td>{user.email}</td>
-            <td className="buttons-container">
-              <button
-                className="btn btn-danger"
-                onClick={() => handleDelete(user.id)}
-              >
-                Eliminar
-              </button>
-
-              <Link to={"/profile/edit/" + user.id}>
-                <button className="btn btn-primary">Editar</button>
-              </Link>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="Profile">
+      <h2>Profile</h2>
+      <div className="picture">
+        <img src="https://picsum.photos/100/100" alt="user" />
+      </div>
+      {
+        visible
+          ?
+          <div><EditProfile setVisible={setVisible} /></div>
+          :
+          <div className="data-content">
+            <div className="data-names">
+              <div className="data-box">
+                <span className="label">Nombre</span>
+                <li className="input" >{user.firstName}</li>
+              </div>
+              <div className="data-box">
+                <span className="label">Apellido</span>
+                <li className="input" >{user.lastName}</li>
+              </div>
+            </div>
+            <div className="data-location">
+              <div className="data-box">
+                <span className="label">Correo electrónico</span>
+                <li className="input" >{user.email}</li>
+              </div>
+            </div>
+          </div>
+      }
+      <div className="data-box">
+        <div className="buttons">
+          {!visible && <> <button className="button button-primary" onClick={() => setVisible(!visible)}>Editar</button>
+            <button onClick={() => { handleDelete(user.userId) }} title="Eliminar" className="button button-secondary" >Eliminar cuenta</button>
+          </>}
+        </div>
+      </div>
     </div>
   );
 }

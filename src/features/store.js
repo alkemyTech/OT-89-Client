@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice'
-import authReducer from './slices/authSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./slices/authSlice";
+import usersReducer from "./slices/usersSlice";
+import categoriesReducer from "./slices/categoriesSlice";
+import contactReducer from "./slices/contactsSlice";
 
 export default configureStore({
   reducer: {
-    user: userReducer,
-    auth: authReducer
-  }
+    auth: authReducer,
+    users: usersReducer,
+    categories: categoriesReducer,
+    contacts: contactReducer,
+  },
 });

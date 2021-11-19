@@ -4,7 +4,6 @@ import './index.scss'
 import { Button } from '../utils/buttons/Button'
 
 export const LastNovelties = React.memo(props => {
-    
     const { novelties } = props
 
     return (
@@ -18,18 +17,15 @@ export const LastNovelties = React.memo(props => {
                             <div className="text-content">
                                 <h4>{noveltie.title}</h4>
                             </div>
-                        </div> 
+                        </div>
                     ))
                 }
             </div>
             <div className="novelties-links">
-                <div className="links">
-                    <Button className="button" title="Testimonios"/>
-                    <Button className="button" title="Novedades"/>
-                </div>
-                <Button className="button button-primary" url="/novelties" title="Ver todas"/>
+                <Button className="button" title="Testimonios" />
+                <Button className="button button-primary" url="/novelties" title="Ver todas" />
+                <Button className="button" title="Novedades" />
             </div>
-            
         </div>
     )
 })
@@ -38,4 +34,4 @@ LastNovelties.propTypes = {
     novelties: PropTypes.array.isRequired
 }
 
- 
+

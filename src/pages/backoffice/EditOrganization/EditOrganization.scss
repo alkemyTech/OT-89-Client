@@ -1,0 +1,26 @@
+@import "../../../assets/scss/vars";
+
+.form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+
+  .label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+  }
+
+  .input {
+    margin-bottom: 0.8rem;
+    height: 3.2rem;
+    font-size: $font-size-default;
+  }
+
+  .input-text {
+    padding: 0 1rem;
+  }
+}
