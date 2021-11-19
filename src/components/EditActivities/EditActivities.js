@@ -11,7 +11,7 @@ const EditActivities = ({ actId = 0 }) => {
   const [visible, setVisible] = useState(false);
 
   const [data, setData] = useState({
-    actname: "",
+    name: "",
     content: "",
   });
 
@@ -44,11 +44,11 @@ const EditActivities = ({ actId = 0 }) => {
   const handlerSubmit = async (values) => {
     setData({
       ...data,
-      actname: values.actname,
+      name: values.name,
     });
     if (actId !== 0) {
       // Creacion de actividades
-      if (data.actname !== "" && data.content !== "") {
+      if (data.name !== "" && data.content !== "") {
         const res = await apiService.post("/actividades", data);
         if (res.status === 201) {
           const { data, message } = await res.data;
@@ -62,7 +62,7 @@ const EditActivities = ({ actId = 0 }) => {
         Alert("error", "Tienes que completar todos los campos", "error");
       }
     } else {
-      if (data.actname !== "" && data.content !== "") {
+      if (data.name !== "" && data.content !== "") {
         //actualizacion de actividades
         const res = await apiService.put(`/actividades/${actId}`, data);
         if (res.status === 200) {
@@ -99,9 +99,9 @@ const EditActivities = ({ actId = 0 }) => {
                 <div className="input-box">
                   <Field
                     placeholder="Nombre de la actividad"
-                    name="actname"
+                    name="name"
                     text="text"
-                    value={values.actname}
+                    value={values.name}
                     onChange={handleChange}
                   />
                 </div>
