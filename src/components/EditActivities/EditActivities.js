@@ -12,14 +12,13 @@ const EditActivities = ({ actId = 0 }) => {
 
   const [data, setData] = useState({
     actname: "",
-    file: "",
     content: "",
   });
 
   const handlerchange = (editor) => {
-    const data = editor.getData();
+    const dataEdited = editor.getData();
     console.log(data);
-    // setData({ ...data, content: data });
+    setData({ ...data, content: dataEdited });
   };
 
   // Peticion de get en caso de que id !== 0
@@ -43,28 +42,39 @@ const EditActivities = ({ actId = 0 }) => {
 
   //Peticiones a la base de datos
   const handlerSubmit = async (values) => {
-    console.log(values);
+    setData({
+      ...data,
+      actname: values.actname,
+    });
     if (actId !== 0) {
       // Creacion de actividades
-      const res = await apiService.post("/actividades", values);
-      if (res.status === 201) {
-        const { data, message } = await res.data;
-        setData(data);
-        Alert("error", message, "success");
+      if (data.actname !== "" && data.content !== "") {
+        const res = await apiService.post("/actividades", data);
+        if (res.status === 201) {
+          const { data, message } = await res.data;
+          setData(data);
+          Alert("error", message, "success");
+        } else {
+          const { message } = await res.data;
+          Alert("error", message, "error");
+        }
       } else {
-        const { message } = await res.data;
-        Alert("error", message, "error");
+        Alert("error", "Tienes que completar todos los campos", "error");
       }
     } else {
-      //actualizacion de actividades
-      const res = await apiService.put(`/actividades/${actId}`, values);
-      if (res.status === 200) {
-        const { data, message } = await res.data;
-        setData(data);
-        Alert("error", message, "success");
+      if (data.actname !== "" && data.content !== "") {
+        //actualizacion de actividades
+        const res = await apiService.put(`/actividades/${actId}`, data);
+        if (res.status === 200) {
+          const { data, message } = await res.data;
+          setData(data);
+          Alert("error", message, "success");
+        } else {
+          const { message } = await res.data;
+          Alert("error", message);
+        }
       } else {
-        const { message } = await res.data;
-        Alert("error", message);
+        Alert("error", "Tienes que completar todos los campos", "error");
       }
     }
   };
@@ -112,15 +122,6 @@ const EditActivities = ({ actId = 0 }) => {
                       onChange={handlerchange}
                     />
                   )}
-                </div>
-                <div className="input-box">
-                  <label htmlFor="file">Imagenes de las actividades</label>
-                  <Field
-                    name="file"
-                    type="file"
-                    onChange={handleChange}
-                    value={values.file}
-                  />
                 </div>
                 <button
                   type="submit"
