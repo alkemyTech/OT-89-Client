@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./profile.scss";
 import apiService from "../../services/server";
-import swal from "sweetalert2";
-import { Button } from "../utils/buttons/Button";
 import EditProfile from "../EditProfile/EditProfile";
 import { Alert, Confirm } from "../Alert/Alert";
+import { logout } from "../../features/slices/authSlice";
 
 export default function Profile() {
   const history = useHistory();
@@ -21,12 +20,11 @@ export default function Profile() {
         const res = await apiService.delete("/users/" + id);
         if (res.status === 200) {
           await Alert("Exito!", "Usuario eliminado correctamente", "success");
-          dispatch({ type: "LOGOUT" });
-          history.push("/");
+          dispatch(logout());
+          history.go(0);
         } else {
           Alert("Error!", "No se pudo eliminar el usuario", "error");
         }
-        /* dispatch(deleteUser()) */
       } else {
         Alert("Cancelado", "No se elimino el usuario", "error");
       }

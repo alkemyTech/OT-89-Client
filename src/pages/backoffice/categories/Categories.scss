@@ -1,0 +1,45 @@
+@import "../../../assets/scss/vars";
+
+.categories__list {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+
+  gap: $spacing-sm;
+
+  @media (min-width: $breakpoint-lg) {
+    gap: $spacing-lg;
+  }
+
+  section {
+    display: inline-grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 0 2px $color-grey-light;
+
+    gap: $spacing-sm;
+    font-size: $font-size-small;
+
+    @media (min-width: $breakpoint-lg) {
+      gap: $spacing-lg;
+      font-size: $font-size-medium;
+    }
+
+    span {
+      font-weight: bold;
+
+      max-width: 95%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.add__category {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 2rem 0 1rem;
+}
