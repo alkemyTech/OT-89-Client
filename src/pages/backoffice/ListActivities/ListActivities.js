@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
 import { fakeActivities } from "./fakeActivities";
+import EditActivities from "../../../components/EditActivities/EditActivities";
+
 import "./ListActivities.scss";
 
 export const ListActivities = () => {
@@ -25,23 +27,17 @@ export const ListActivities = () => {
     getData();
   }, []);
 
+  console.log(activities);
   return (
     <div className="container-activities">
       <h1>Listado de Actividades</h1>
       {/* Aca metemos un campo para que el administrador pueda crear una nueva actividad */}
       <div className="container-activities__table">
         {activities.length !== 0 ? (
-          activities.map((act) => (
+          activities?.map((act) => (
             <div className="container-activities__table--items" key={act.id}>
-              <p>{act.title}</p>
-              <button
-                className="button button-primary"
-                onClick={() =>
-                  console.log("se esta editando el elemento " + act.id)
-                }
-              >
-                Editar
-              </button>
+              <p>{act.name}</p>
+              <EditActivities actId={act.id} />
               <button
                 className="button button-secondary"
                 onClick={() =>

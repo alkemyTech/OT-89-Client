@@ -33,7 +33,7 @@ const EditActivities = ({ actId = 0 }) => {
         Alert("error", message, "error", 3000);
       }
     };
-    if (actId !== 0) {
+    if (actId !== 0 && visible === true) {
       getData();
     } else {
       return;
@@ -46,35 +46,40 @@ const EditActivities = ({ actId = 0 }) => {
       ...data,
       name: values.name,
     });
-    if (actId !== 0) {
+    if (actId === 0) {
       // Creacion de actividades
-      if (data.name !== "" && data.content !== "") {
-        const res = await apiService.post("/actividades", data);
+      if (data.name !== "" || data.content !== "") {
+        const res = await apiService.post("/activities", data);
         if (res.status === 201) {
           const { data, message } = await res.data;
           setData(data);
-          Alert("error", message, "success");
+          Alert("Éxito", message, "success");
         } else {
           const { message } = await res.data;
-          Alert("error", message, "error");
+          Alert("Error", message, "error");
         }
       } else {
-        Alert("error", "Tienes que completar todos los campos", "error");
+        Alert("Error", "Tienes que completar todos los campos", "error");
       }
     } else {
-      if (data.name !== "" && data.content !== "") {
+      if (data.name !== "" || data.content !== "") {
         //actualizacion de actividades
-        const res = await apiService.put(`/actividades/${actId}`, data);
+        const res = await apiService.put(`/activities/${actId}`, data);
         if (res.status === 200) {
-          const { data, message } = await res.data;
+          const { data } = await res.data;
           setData(data);
-          Alert("error", message, "success");
+          Alert(
+            "Éxito",
+            "El cambio fue realizado satisfactoriamente",
+            "success"
+          );
+          setVisible(false);
         } else {
           const { message } = await res.data;
           Alert("error", message);
         }
       } else {
-        Alert("error", "Tienes que completar todos los campos", "error");
+        Alert("Error", "Tienes que completar todos los campos", "error");
       }
     }
   };
@@ -123,13 +128,21 @@ const EditActivities = ({ actId = 0 }) => {
                     />
                   )}
                 </div>
-                <button
-                  type="submit"
-                  className="button button-primary"
-                  onClick={() => handlerSubmit(values)}
-                >
-                  Enviar cambios
-                </button>
+                <div className="buttonsModal">
+                  <button
+                    type="submit"
+                    className="button button-primary"
+                    onClick={() => handlerSubmit(values)}
+                  >
+                    Enviar cambios
+                  </button>
+                  <button
+                    className="button button-secondary"
+                    onClick={() => setVisible(false)}
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </form>
             )}
           </Formik>
