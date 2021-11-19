@@ -1,13 +1,15 @@
+@import "../../../assets/scss/vars";
+
 .container-activities {
   width: 100%;
   text-align: center;
   &__table {
+    align-items: center;
     &--items {
       display: grid;
       grid-template-columns: 40% 20% 20%;
       grid-template-rows: 100%;
       gap: 20px;
-      margin-bottom: 20px;
       border: 1px solid black;
       width: 100%;
       padding: 0.8rem;
@@ -31,6 +33,12 @@
     }
   }
   .create {
-    background-color: #04e0a2;
+    background-color: $color-ligthblue;
+    margin-top: 2rem;
   }
+}
+
+.activities__title {
+  margin-bottom: 0;
+  align-self: center;
 }

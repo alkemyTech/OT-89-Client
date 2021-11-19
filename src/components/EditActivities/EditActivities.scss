@@ -1,8 +1,21 @@
+@import "../../assets/scss/vars";
+
 .modal-button {
-  background-color: greenyellow;
+  background-color: $color-ligthblue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  border: none;
+  align-self: center;
+  border-radius: 4px;
+}
+
+.edit-button {
+  background-color: $color-ligthblue;
   padding: 0.5rem;
   font-size: 1.5rem;
   border: none;
+  align-self: center;
   border-radius: 4px;
 }
 

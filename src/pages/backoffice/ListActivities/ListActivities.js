@@ -32,34 +32,22 @@ export const ListActivities = () => {
     <div className="container-activities">
       <h1>Listado de Actividades</h1>
       {/* Aca metemos un campo para que el administrador pueda crear una nueva actividad */}
+      <EditActivities actId={0} />
       <div className="container-activities__table">
-        {activities.length !== 0 ? (
-          activities?.map((act) => (
-            <div className="container-activities__table--items" key={act.id}>
-              <p>{act.name}</p>
-              <EditActivities actId={act.id} />
-              <button
-                className="button button-secondary"
-                onClick={() =>
-                  console.log("se esta borrando el elemento " + act.id)
-                }
-              >
-                Borrar
-              </button>
-            </div>
-          ))
-        ) : (
-          <div>
-            <h2>{`Por ahora no hay actividades, crea una o vuelve más tarde :)`}</h2>
+        {activities?.map((act) => (
+          <div className="container-activities__table--items" key={act.id}>
+            <p className="activities__title">{act.name}</p>
+            <EditActivities actId={act.id} />
             <button
-              className="container-activities__table--buttons create"
-              // Aca metemos el post
-              onClick={() => console.log("Creando una nueva actividad")}
+              className="button button-secondary"
+              onClick={() =>
+                console.log("se esta borrando el elemento " + act.id)
+              }
             >
-              Crear Actividad
+              Borrar
             </button>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

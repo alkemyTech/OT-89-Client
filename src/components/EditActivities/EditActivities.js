@@ -86,7 +86,7 @@ const EditActivities = ({ actId = 0 }) => {
 
   return (
     <div>
-      <button className="modal-button" onClick={() => setVisible(!visible)}>
+      <button className="edit-button" onClick={() => setVisible(!visible)}>
         {actId !== 0 ? "Editar" : "Crear actividad"}
       </button>
       {visible && (
