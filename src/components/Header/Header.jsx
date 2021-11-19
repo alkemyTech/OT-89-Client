@@ -115,7 +115,7 @@ export const Header = () => {
                         Editar Perfil
                       </Link>
                       <Link
-                        to="/auth/backoffice"
+                        to="/auth/backoffice/activities"
                         onClick={() => setOpen(false)}
                       >
                         BackOffice
