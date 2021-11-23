@@ -11,6 +11,8 @@ import { Contribute } from "../pages/main/Contribute";
 import { Novelty } from "../components/Novelty/Novelty";
 import Profile from "../components/Profile/Profile";
 import ViewActivity from "../components/ViewActivity/ViewActivity";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./transitions.css"
 
 export const MainRouter = () => {
   return (
