@@ -35,7 +35,7 @@ export function Home() {
     // function to get dinamic data for home page
     const getData = async () => {
       try {
-        const res = await apiService.get(`${process.env.API_LINK_DATA}`)        
+        const res = await apiService.get(`${process.env.API_LINK_DATA}`)
         const { loading, title, novelties } = await res.data.data
         setData({
           loading,
@@ -79,7 +79,7 @@ export function Home() {
 
   return (
     <div>
-        { !data.loading  
+        { !data.loading
         ?
         <div>
           <Slider />
@@ -87,7 +87,7 @@ export function Home() {
           <LastNovelties novelties={ novelties } />
         </div>
         :
-          <Spinner /> 
+          <Spinner />
         }
 
     </div>
