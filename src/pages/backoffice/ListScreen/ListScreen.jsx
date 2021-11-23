@@ -162,7 +162,7 @@ const ListScreen = (props) => {
               />
               <br />
             </div>
-          </ModalBody>
+          {/* </ModalBody> */}
           <ModalFooter>
             <button className="btn primary" onClick={() => editar()}>
               Actualizar

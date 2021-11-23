@@ -9,12 +9,13 @@ import {
   removeUserAction,
 } from "../../features/slices/authSlice";
 import getToken from "../../helpers/useGetToken";
+import { useScroll } from "../../hooks/useScroll";
 
 export const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.value);
   const { roleId, image } = user;
-
+  const scroll = useScroll();
   const [isOpen, setOpen] = useState(false);
   const showNavbar = isOpen ? "show-navbar" : "";
   const itemsNav = [
@@ -63,8 +64,10 @@ export const Header = () => {
     });
   }, [location.pathname]);
 
+  const fixedNav = scroll > 200 ? "fixed" : null
+
   return (
-    <header>
+    <header className={fixedNav}>
       <Link className="logo" to="/">
         <img src={logoONG} alt="Logo SOMOS ONG" />
       </Link>

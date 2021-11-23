@@ -1,8 +1,9 @@
 @import "../../assets/scss/vars";
 
 .center__spinner {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: $spacing-lg;
+  height: 100%;
 }
