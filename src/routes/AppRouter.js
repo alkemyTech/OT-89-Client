@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import { NotFound } from "../pages/main/NotFound";
 import { AuthRouter } from "./AuthRouter";
 import { MainRouter } from "./MainRouter";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./transitions.css"
 
 export const AppRouter = () => {
   return (
