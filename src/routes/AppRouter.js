@@ -9,12 +9,19 @@ import "./transitions.css"
 export const AppRouter = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/auth" component={AuthRouter} />
-        <Route path="/" component={MainRouter} />
-        <Route exact path="/404" component={NotFound} />
-        <Redirect to="/404" />
-      </Switch>
+      <Route render={({ location }) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} classNames="fade" timeout={300}>
+            <Switch location={location}>
+              <Route path="/auth" component={AuthRouter} />
+              <Route path="/" component={MainRouter} />
+              <Route exact path="/404" component={NotFound} />
+              <Redirect to="/404" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+      />
     </Router>
   );
 };
