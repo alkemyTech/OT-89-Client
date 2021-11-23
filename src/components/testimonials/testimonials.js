@@ -3,7 +3,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import apiService from "../../../services/server";
 
-export default class Novedad extends React.Component {
+export default class Testimonial extends React.Component {
   state = {
     name: "",
     image: "",
