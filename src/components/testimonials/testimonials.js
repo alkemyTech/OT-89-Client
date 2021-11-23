@@ -29,7 +29,7 @@ export default class Novedad extends React.Component {
   };
 
   handleSubmit = (event) => {
-    const FormNovelities = {
+    const formTestimonials = {
       name: this.state.name,
       image: this.state.image,
       content: this.state.content,
