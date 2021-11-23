@@ -18,17 +18,25 @@ export const MainRouter = () => {
   return (
     <>
       <Header />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/novelties" component={Novelties} />
-        <Route exact path="/novelties/:id" component={Novelty} />
-        <Route exact path="/testimonials" component={Testimonials} />
-        <Route exact path="/contacts" component={Contacts} />
-        <Route exact path="/contribute" component={Contribute} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/activities/:id" component={ViewActivity} />
-      </Switch>
+      {/* Route without specifying the path will render all the time */}
+      <Route render={({ location }) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} classNames="fade" timeout={300}>
+            <Switch location={location}>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/novelties" component={Novelties} />
+              <Route exact path="/novelties/:id" component={Novelty} />
+              <Route exact path="/testimonials" component={Testimonials} />
+              <Route exact path="/contacts" component={Contacts} />
+              <Route exact path="/contribute" component={Contribute} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/activities/:id" component={ViewActivity} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+      />
       <Footer />
     </>
   );
