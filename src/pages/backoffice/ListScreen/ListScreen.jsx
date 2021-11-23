@@ -5,7 +5,7 @@ import { Confirm } from "../../../components/Alert/Alert";
 import { deleteNovelty } from "../../../features/slices/noveltySlice";
 import apiService from "../../../services/server";
 import "./ListScreen.scss";
-import Novedad from "../novedades/newNovelities";
+import Novedad from "../novedades/NoveltyModal.object";
 
 const ListScreen = () => {
   const [data, setData] = useState(sampleNovelties);

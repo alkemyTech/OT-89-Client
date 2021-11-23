@@ -1,0 +1,48 @@
+@import "../../../assets/scss/vars";
+td {
+  font-size: 2rem;
+}
+th {
+  font-size: 3rem;
+}
+tr {
+  font-size: 3rem;
+}
+.danger {
+  background-color: rgb(248, 16, 63);
+}
+.btn {
+  display: inline !important;
+}
+.novelties {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-sm;
+
+  // @media (min-width: $breakpoint-lg) {
+  //   flex-direction: row;
+  //   justify-content: space-evenly;
+  // }
+
+  h1 {
+    margin: 0;
+  }
+}
+section {
+  display: inline-grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+
+  gap: $spacing-sm;
+  font-size: $font-size-small;
+
+  @media (min-width: $breakpoint-lg) {
+    gap: $spacing-lg;
+    font-size: $font-size-medium;
+  }
+}

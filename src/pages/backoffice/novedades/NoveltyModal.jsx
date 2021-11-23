@@ -1,40 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import apiService from "../../../services/server";
+import "../../../components/utils/buttons/Button.scss";
+import "./novelties.scss";
 
-export default class Novedad extends React.Component {
-  state = {
-    name: "",
-    image: "",
-    content: "",
-    categoryId: "",
-    id: this.props.id || null,
+const NoveltyModal = ({ isVisible, setIsVisible, toEdit, setRefresh }) => {
+  const [novelty, setNovelty] = useState({
+    name: toEdit?.name || "",
+    image: toEdit?.image || "",
+    content: toEdit?.content || "",
+    categoryId: toEdit?.categoryId || "",
+    id: toEdit?.id || null,
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setNovelty({ ...novelty, [name]: value });
   };
 
-  handleChange = (event) => {
-    const target = event.target;
-    const { name, value } = target;
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleCkeditorState = (event, editor) => {
+  const handleCkeditorState = (event, editor) => {
     const data = editor.getData();
-    this.setState({
-      content: data,
-    });
-    console.log(data);
+    setNovelty({ ...novelty, content: data });
+    console.log(novelty);
   };
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     const FormNovelities = {
-      name: this.state.name,
-      image: this.state.image,
-      content: this.state.content,
-      categoryId: this.state.categoryId,
+      name: novelty.name,
+      image: novelty.image,
+      content: novelty.content,
+      categoryId: novelty.categoryId,
     };
 
     console.log("novedades", FormNovelities);
@@ -42,16 +39,22 @@ export default class Novedad extends React.Component {
       .post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
       .then((res) => {
         console.log(res);
+        setRefresh((current) => !current);
       })
       .catch((error) => {
         console.log(error); /* Se debe importar el alert y pasar el error */
       });
   };
 
-  render() {
-    return (
-      <>
-        {this.state.id ? undefined : (
+  return (
+    <>
+      <Modal isOpen={isVisible} backdrop={true}>
+        <ModalHeader>
+          <h3>
+            {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
+          </h3>
+        </ModalHeader>
+        <ModalBody>
           <div className="container">
             <div className="row">
               <div className=" col-lg-12 col-md-12 col-xs-12">
@@ -62,8 +65,8 @@ export default class Novedad extends React.Component {
                       <input
                         type="text"
                         className="form-control"
-                        value={this.state.name}
-                        onChange={this.handleChange}
+                        value={novelty.name}
+                        onChange={handleChange}
                         name="name"
                         id="name"
                         required
@@ -78,8 +81,8 @@ export default class Novedad extends React.Component {
                         className="form-control"
                         name="image"
                         id="image"
-                        value={this.state.image}
-                        onChange={this.handleChange}
+                        value={novelty.image}
+                        onChange={handleChange}
                         required
                       />
                     </label>
@@ -87,10 +90,10 @@ export default class Novedad extends React.Component {
                   <div className="form-group mb-3">
                     <CKEditor
                       editor={ClassicEditor}
-                      data=""
-                      onReady={(editor) => {}}
+                      data={novelty.content}
+                      //   onReady={(editor) => {}}
                       name="content"
-                      onChange={this.handleCkeditorState}
+                      onChange={handleCkeditorState}
                     />
                   </div>
                   <div className="form-group mb-3">
@@ -101,32 +104,36 @@ export default class Novedad extends React.Component {
                         className="form-control"
                         name="categoryId"
                         id="categoryId"
-                        onChange={this.handleChange}
+                        onChange={handleChange}
                         required
                       />
                     </label>
-                  </div>
-                  <div className="form-group my-3">
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                      onClick={this.handleSubmit}
-                    >
-                      Agregar
-                    </button>
-                    <button
-                      className="btn danger btn-danger"
-                      onClick={() => this.props.setModalAdd(false)}
-                    >
-                      Cancelar
-                    </button>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-        )}
-      </>
-    );
-  }
-}
+        </ModalBody>
+        <ModalFooter>
+          <section className="center">
+            <button
+              type="submit"
+              className="button button-primary"
+              onClick={handleSubmit}
+            >
+              Agregar
+            </button>
+            <button
+              className="button button-secondary"
+              onClick={() => setIsVisible(false)}
+            >
+              Cancelar
+            </button>
+          </section>
+        </ModalFooter>
+      </Modal>
+    </>
+  );
+};
+
+export default NoveltyModal;

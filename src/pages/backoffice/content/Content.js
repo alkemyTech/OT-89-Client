@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { EditOrganization } from "../EditOrganization/EditOrganization";
-import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
+//import ListScreen from "../../backoffice/ListScreen/ListScreen.jsx";
 import { ListActivities } from "../ListActivities/ListActivities";
 import { EditHomeData } from "../EditHomeData/EditHomeData";
 import { Switch, Route } from "react-router-dom";
@@ -10,6 +10,7 @@ import { ListUsers } from "../ListUsers/ListUsers";
 import { ListContact } from "../ListContact/ListContact";
 import CategoriesScreen from "../categories/CategoriesScreen";
 import EditActivities from "../../../components/EditActivities/EditActivities";
+import NoveltiesScreen from "../novedades/NoveltiesScreen";
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -52,7 +53,7 @@ export const Content = ({ openAside, isLeft }) => {
         />
         <Route
           path="/auth/backoffice/novelties"
-          component={ListScreen}
+          component={NoveltiesScreen}
           exact
         />
 
