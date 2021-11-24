@@ -3,16 +3,25 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import { NotFound } from "../pages/main/NotFound";
 import { AuthRouter } from "./AuthRouter";
 import { MainRouter } from "./MainRouter";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./transitions.css"
 
 export const AppRouter = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/auth" component={AuthRouter} />
-        <Route path="/" component={MainRouter} />
-        <Route exact path="/404" component={NotFound} />
-        <Redirect to="/404" />
-      </Switch>
+      <Route render={({ location }) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} classNames="fade" timeout={300}>
+            <Switch location={location}>
+              <Route path="/auth" component={AuthRouter} />
+              <Route path="/" component={MainRouter} />
+              <Route exact path="/404" component={NotFound} />
+              <Redirect to="/404" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+      />
     </Router>
   );
 };
