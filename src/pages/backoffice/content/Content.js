@@ -11,6 +11,7 @@ import { ListContact } from "../ListContact/ListContact";
 import CategoriesScreen from "../categories/CategoriesScreen";
 import EditActivities from "../../../components/EditActivities/EditActivities";
 
+
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
 
@@ -22,7 +23,7 @@ export const Content = ({ openAside, isLeft }) => {
         className={left}
         onClick={openAside}
       />
-  
+
 
       <Switch>
         <Route
@@ -53,6 +54,11 @@ export const Content = ({ openAside, isLeft }) => {
         <Route
           path="/auth/backoffice/novelties"
           component={ListScreen}
+          exact
+        />
+          <Route
+          path="/auth/backoffice/testimonials"
+          componente={}
           exact
         />
 

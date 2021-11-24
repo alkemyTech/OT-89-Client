@@ -130,7 +130,8 @@ const ListScreen = (props) => {
           </ModalHeader>
           <ModalBody>
                <Novedad/>
-          </ModalBody> 
+          </ModalBody>
+          <ModalBody>
             <div className="form-group">
               <label>ID</label>
               <input
