@@ -27,9 +27,11 @@ const Slider = React.memo(() => {
       useKeyboardArrows={true}
       renderThumbs={() => false}
       showStatus={false}
+      autoPlay={true}
+      infiniteLoop={true}
     >
       {carouselData.map((item, index) => (
-        <img key={index} src={item.imgUrl} alt={item.text} />
+        <img key={index} src={item.imgUrl} alt={item.text} className="slider-image"/>
       ))}
     </Carousel>
   );
