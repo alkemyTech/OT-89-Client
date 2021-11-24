@@ -2,8 +2,7 @@
 
 .Aside {
   position: absolute;
-  border-top: 2px solid $color-black;
-  border-right: 2px solid $color-black;
+  border-right: .1rem solid rgba(0,0,0,.3);
   background-color: $color-white;
   width: 30rem;
   left: -150%;
