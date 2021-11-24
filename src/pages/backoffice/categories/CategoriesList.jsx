@@ -5,16 +5,19 @@ import "../../../components/utils/buttons/Button.scss";
 import { Spinner } from "../../../components/spinner/Spinner";
 import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
 import { HandleDeleteCategory } from "../../../components/ActionsHandlers/HandleClicks/handleDelete";
+import { useDispatch, useSelector } from "react-redux";
+import { addCategory, deleteCategory } from "../../../features/slices/categoriesSlice";
 
 const CategoriesList = () => {
-  const [categories, setCategories] = useState("loading"); //
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.categories);
   const [warning, setWarning] = useState(
-    "This will show if something went horribly wrong"
+    "No hay categorias en la base de datos"
   );
   const [reload, setReload] = useState(null);
 
   useEffect(() => {
-    (async () => {
+    const hola = async () => {
       const categoriesResponse = await apiService
         .get("/categories")
         .catch((err) => {
@@ -22,48 +25,50 @@ const CategoriesList = () => {
           console.error(err);
           return err;
         });
-      if (categoriesResponse.status === 200) {
-        setCategories(categoriesResponse.data.data);
+      if (categoriesResponse.status === 200 || categoriesResponse.status === 304) {
+        console.log("categ",categoriesResponse.data.data);
+        dispatch(addCategory(categoriesResponse.data.data));
       } else if (categoriesResponse.status === 204) {
-        setCategories(null);
+        dispatch(addCategory(null));
         setWarning("No hay categorias en la base de datos");
       } else {
-        setCategories(null);
+        dispatch(addCategory(null));
         setWarning("Error inesperado");
       }
-    })();
+    };
+    hola()
   }, [reload]);
-
   const handleEdit = (category) => {
     console.log("Modificame a: ", category);
     console.log("Vincular al ticket OT89-460");
   };
 
   const handleDelete = async (id) => {
-    const res = await HandleDeleteCategory(id);
-    if (res === "categoria eliminada") {
-      setReload((current) => !current);
-    }
+    const res = await HandleDeleteCategory(id, dispatch);
   };
 
   return (
     <article className="categories__list">
       {categories === "loading" ? (
         <Spinner size={50} center />
-      ) : categories ? (
+      ) :
+      categories?.length > 0 ? (
         <>
-          {categories.map((category) => (
-            <CategoryItem
+        {
+          categories?.map((category) => {
+            return (
+              <CategoryItem
               category={category}
               key={category.id}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
-            />
-          ))}
-        </>
-      ) : (
-        <WarningDisplay text={warning} />
-      )}
+              />
+              )
+            })}
+            </>
+            ) : (
+              <WarningDisplay text={warning} />
+              )}
     </article>
   );
 };

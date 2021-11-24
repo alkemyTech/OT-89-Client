@@ -5,3 +5,6 @@
 .testimonial-text {
     font-size: calc(1.5rem + (1.5 - 1.5) * ((100vw - 300px) / (1600 - 300)));
 }
+.testimonials {
+    min-height: 90vh;
+}
