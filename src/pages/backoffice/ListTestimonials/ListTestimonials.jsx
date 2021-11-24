@@ -12,7 +12,7 @@ export const ListTestimonials =(props)=>{
    const handleDeleteTestimonial = async (id) => {
     const alertResult = await Confirm("Eliminar testimonios", "Esta intentando eliminar una testimonio, ¿desea continuar?")
     if (alertResult) {
-      setData(data.filter((item) => item.id !== id));
+     /*  setData(data.filter((item) => item.id !== id)); */
       const deleteResult = await apiService.delete("/testimonials", { id })
       console.log(deleteResult)
       if (deleteResult.data.message === "¡Testimonial deleted successfully!") {
@@ -32,7 +32,7 @@ export const ListTestimonials =(props)=>{
    });
     let toEdit = { id: "", name: "", image: "", content: "" }; */
 
-    /* const handleEditTestimonial = (element) => {
+ /*   const handleEditTestimonial = (element) => {
      setSelected(element);
      setModalEdit(true)
    }
@@ -69,9 +69,9 @@ export const ListTestimonials =(props)=>{
            <table className="table">
                <thead>
                    <tr>
-                       <th className="borders">Nombre</th>
-                       <th className="borders">Imagen</th>
-                       <th className="borders">Contenido</th>
+                       <th>Nombre</th>
+                       <th>Imagen</th>
+                       <th>Contenido</th>
                        <th></th>
                        <th></th>
                    </tr>
@@ -80,13 +80,13 @@ export const ListTestimonials =(props)=>{
           {testimonials && testimonials?.map((oneTestimonial) =>
            oneTestimonial ? (
               <tr key={oneTestimonial.id}>
-                <td className="borders">{oneTestimonial.name}</td>
-                <td className="borders">{oneTestimonial.image}</td>
-                <td className="borders">{oneTestimonial.content}</td>
-                <td  >
+                <td>{oneTestimonial.name}</td>
+                <td>{oneTestimonial.image}</td>
+                <td>{oneTestimonial.content}</td>
+                <td>
                 <button
                   className="btn  btn-primary"
-                /*   onClick={() => { handleEditTestimonial(element)}} */
+                 /*  onClick={() => { handleEditTestimonial(element)}} */
                 >
                   editar
                 </button>
@@ -95,7 +95,7 @@ export const ListTestimonials =(props)=>{
                 <td  >
                 <button
                   className=" btn danger btn-danger "
-                  onClick={() => { handleDeleteTestimonial(element.id) }}
+                 /*  onClick={() => { handleDeleteTestimonial(oneTestimonial.id) }} */
                 >
                   eliminar
                 </button>

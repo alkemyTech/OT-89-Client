@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateValue = [];
+const initialStateValue = [
+  {
+    id:1,
+    name:"prueba",
+    image:"",
+    content:"prueba"
+  }
+];
 
 export const testimonialSlice = createSlice({
     name: "testimonials",
