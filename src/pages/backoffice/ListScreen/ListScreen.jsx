@@ -131,7 +131,7 @@ const ListScreen = (props) => {
           <ModalBody>
                <Novedad/>
           </ModalBody>
-          <ModalBody>
+
             <div className="form-group">
               <label>ID</label>
               <input
@@ -163,7 +163,7 @@ const ListScreen = (props) => {
               />
               <br />
             </div>
-          {/* </ModalBody> */}
+
           <ModalFooter>
             <button className="btn primary" onClick={() => editar()}>
               Actualizar

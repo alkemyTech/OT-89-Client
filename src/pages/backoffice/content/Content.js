@@ -10,6 +10,7 @@ import { ListUsers } from "../ListUsers/ListUsers";
 import { ListContact } from "../ListContact/ListContact";
 import CategoriesScreen from "../categories/CategoriesScreen";
 import EditActivities from "../../../components/EditActivities/EditActivities";
+import { ListTestimonials } from "../ListTestimonials/ListTestimonials"
 
 
 export const Content = ({ openAside, isLeft }) => {
@@ -56,11 +57,10 @@ export const Content = ({ openAside, isLeft }) => {
           component={ListScreen}
           exact
         />
-          <Route
+         <Route
           path="/auth/backoffice/testimonials"
-          componente={}
-          exact
-        />
+          component={ListTestimonials}
+          exact/>
 
       </Switch>
     </section>

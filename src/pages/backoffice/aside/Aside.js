@@ -18,7 +18,7 @@ export const Aside = ({ isOpen }) => {
         <Link to="/auth/backoffice/" className="category">
           Actividades
         </Link>
-        <Link to="/auth/backoffice/edit-testomonials" className="category">
+        <Link to="/auth/backoffice/testimonials" className="category">
           Testimonios
         </Link>
         <Link to="/auth/backoffice/edit-organization" className="category">

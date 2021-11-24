@@ -1,40 +1,42 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { testimonialsList } from "../../../features/slices/testimonialsSlice";
+import { deleteTestimonial, testimonialsList } from "../../../features/slices/testimonialsSlice";
 import apiService from "../../../services/server";
 import "./listTestimonials.scss";
+import { Confirm } from "../../../components/Alert/Alert";
 
 
-const ListTestimonials =(props)=>{
+export const ListTestimonials =(props)=>{
 
    const dispatch = useDispatch()
-   /* const handleDeleteTestimonial = async (id) => {
+   const handleDeleteTestimonial = async (id) => {
     const alertResult = await Confirm("Eliminar testimonios", "Esta intentando eliminar una testimonio, ¿desea continuar?")
     if (alertResult) {
       setData(data.filter((item) => item.id !== id));
       const deleteResult = await apiService.delete("/testimonials", { id })
       console.log(deleteResult)
       if (deleteResult.data.message === "¡Testimonial deleted successfully!") {
-        dispatch(deleteNovelty(id))
+        dispatch(deleteTestimonial(id))
       }
     }
-  }*/
+  }
    const testimonials=useSelector((state)=>state.testimonials.value)
 
-  /*  const [modalEdit, setModalEdit] = useState(false);
+/*
+  const [modalEdit, setModalEdit] = useState(false);
    const [selected, setSelected] = useState({
      id: "",
      name: "",
      image: "",
      content: "",
-   }); */
-/*    let toEdit = { id: "", name: "", image: "", content: "" };
- */
-   /* const handleEditTestimonial = (element) => {
+   });
+    let toEdit = { id: "", name: "", image: "", content: "" }; */
+
+    /* const handleEditTestimonial = (element) => {
      setSelected(element);
      setModalEdit(true)
-   } */
-   /* const editar = () => {
+   }
+   const editar = () => {
     var newData = data;
     newData.map((list) => {
       if (list.id === selected.id) {
@@ -43,12 +45,12 @@ const ListTestimonials =(props)=>{
         list = toEdit;
       }
       return toEdit;
-    }); */
-    /*     setData(newData); */
-   /*  setModalEdit(false);
+    });
+         setData(newData);
+     setModalEdit(false);
     console.log(toEdit);
-  };
- */
+  }; */
+
 
    React.useEffect(() => {
      const exec = async () => {
@@ -68,34 +70,36 @@ const ListTestimonials =(props)=>{
                <thead>
                    <tr>
                        <th className="borders">Nombre</th>
-                       <th className="borders">Email</th>
-                       <th className="borders">Teléfono</th>
+                       <th className="borders">Imagen</th>
+                       <th className="borders">Contenido</th>
                        <th></th>
                        <th></th>
                    </tr>
                </thead>
-               <tbody>
+             <tbody>
           {testimonials && testimonials?.map((oneTestimonial) =>
            oneTestimonial ? (
-              <tr key={oneTestimonial.name}>
+              <tr key={oneTestimonial.id}>
                 <td className="borders">{oneTestimonial.name}</td>
                 <td className="borders">{oneTestimonial.image}</td>
                 <td className="borders">{oneTestimonial.content}</td>
-                <td>
+                <td  >
                 <button
-                  className="btn primary"
+                  className="btn  btn-primary"
                 /*   onClick={() => { handleEditTestimonial(element)}} */
                 >
                   editar
                 </button>
                 {"  "}
+                </td>
+                <td  >
                 <button
                   className=" btn danger btn-danger "
-                 /*  onClick={() => { handleDeleteTestimonial(element.id) }} */
+                  onClick={() => { handleDeleteTestimonial(element.id) }}
                 >
                   eliminar
                 </button>
-              </td>
+             </td>
               </tr>
             ) : null
           )}
@@ -106,4 +110,3 @@ const ListTestimonials =(props)=>{
    )
 }
 
-export default ListTestimonials;
