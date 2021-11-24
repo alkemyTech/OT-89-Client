@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Alert, Confirm } from "../../../components/Alert/Alert";
 import { usersList } from "../../../features/slices/usersSlice";
 import apiService from "../../../services/server";
 import "./listUsers.scss";
-import { Button } from "../../../components/utils/buttons/Button";
 
 export const ListUsers = () => {
   const dispatch = useDispatch();
@@ -21,16 +21,20 @@ export const ListUsers = () => {
     exec()
   }, []);
 
-  //FUNCION PARA ELIMINAR USUARIO:
-
-  // const handleDelete = async (idAEliminar) => {
-  //     try{
-  //         await apiService.delete("/users/" + idAEliminar);
-  //     }
-  //     catch(e){
-  //         console.log(e.response.data);
-  //     }
-  // };
+  const handleDelete = async (idAEliminar) => {
+    try {
+      const result = await Confirm("Usuario Eliminado","Se ha eliminado el usuario correctamente");
+      if (result) {
+        const res = await apiService.delete("/users/" + idAEliminar);
+        if (res.status === 200) {
+          dispatch(usersList(users.filter((user) => user.userId !== idAEliminar)));
+          Alert("Usuario Eliminado", "Se ha eliminado el usuario correctamente");
+        }
+      }
+    } catch (e) {
+      console.log(e.response.data.data);
+    }
+  };
 
   return (
     <div>
@@ -52,10 +56,10 @@ export const ListUsers = () => {
                 <td className="borders">{oneUser.lastName}</td>
                 <td className="borders">{oneUser.email}</td>
                 <td>
-                  <Button url="/" className="button button-primary" title="Editar" />
+                  <button url="/" className="button button-primary">Editar</button>
                 </td>
                 <td>
-                  <Button url="/" className="button button-secondary" title="Eliminar" />
+                  <button url="/" className="button button-secondary" onClick={() => { handleDelete(oneUser.userId) }}>Eliminar</button>
                 </td>
               </tr>
             ) : null
