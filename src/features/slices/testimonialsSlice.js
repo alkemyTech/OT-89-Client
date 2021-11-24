@@ -15,6 +15,6 @@ export const testimonialSlice = createSlice({
     }
 });
 
-export const {testimonials,deleteTestimonial} = testimonialSlice.actions;
+export const {testimonialsList,deleteTestimonial} = testimonialSlice.actions;
 
 export default testimonialSlice.reducer;

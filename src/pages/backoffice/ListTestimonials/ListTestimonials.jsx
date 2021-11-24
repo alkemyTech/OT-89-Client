@@ -1,34 +1,59 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { testimonialsList } from "../../../features/slices/testimonalsSclice";
+import { testimonialsList } from "../../../features/slices/testimonialsSlice";
 import apiService from "../../../services/server";
-import "./ListContact.scss";
+import "./listTestimonials.scss";
 
 
-export const ListContact =()=>{
+const ListTestimonials =(props)=>{
 
    const dispatch = useDispatch()
+   /* const handleDeleteTestimonial = async (id) => {
+    const alertResult = await Confirm("Eliminar testimonios", "Esta intentando eliminar una testimonio, ¿desea continuar?")
+    if (alertResult) {
+      setData(data.filter((item) => item.id !== id));
+      const deleteResult = await apiService.delete("/testimonials", { id })
+      console.log(deleteResult)
+      if (deleteResult.data.message === "¡Testimonial deleted successfully!") {
+        dispatch(deleteNovelty(id))
+      }
+    }
+  }*/
    const testimonials=useSelector((state)=>state.testimonials.value)
 
-   const [modalEdit, setModalEdit] = useState(false);
+  /*  const [modalEdit, setModalEdit] = useState(false);
    const [selected, setSelected] = useState({
      id: "",
      name: "",
      image: "",
-     createdAt: "",
-   });
-   let toEdit = { id: "", name: "", image: "", createdAt: "" };
-
-   const handleEditTestimonial = (element) => {
+     content: "",
+   }); */
+/*    let toEdit = { id: "", name: "", image: "", content: "" };
+ */
+   /* const handleEditTestimonial = (element) => {
      setSelected(element);
      setModalEdit(true)
-   }
-
+   } */
+   /* const editar = () => {
+    var newData = data;
+    newData.map((list) => {
+      if (list.id === selected.id) {
+        list.name = selected.name;
+        list.image = selected.image;
+        list = toEdit;
+      }
+      return toEdit;
+    }); */
+    /*     setData(newData); */
+   /*  setModalEdit(false);
+    console.log(toEdit);
+  };
+ */
 
    React.useEffect(() => {
      const exec = async () => {
        try {
-         const response = await apiService.get("/contacts");
+         const response = await apiService.get("/testimonials");
          dispatch(testimonialsList(response.data.data));
        } catch (e) {
          console.log(e.response.data.data);
@@ -38,8 +63,8 @@ export const ListContact =()=>{
    }, []);
 
    return(
-       <div>
-           <table>
+       <div className="container">
+           <table className="table">
                <thead>
                    <tr>
                        <th className="borders">Nombre</th>
@@ -59,14 +84,14 @@ export const ListContact =()=>{
                 <td>
                 <button
                   className="btn primary"
-                  onClick={() => {handleEditTestimonial(element)}}
+                /*   onClick={() => { handleEditTestimonial(element)}} */
                 >
                   editar
                 </button>
                 {"  "}
                 <button
                   className=" btn danger btn-danger "
-                  onClick={() => { HandleDeleteTestimonial(element.id) }}
+                 /*  onClick={() => { handleDeleteTestimonial(element.id) }} */
                 >
                   eliminar
                 </button>
@@ -80,3 +105,5 @@ export const ListContact =()=>{
        </div>
    )
 }
+
+export default ListTestimonials;

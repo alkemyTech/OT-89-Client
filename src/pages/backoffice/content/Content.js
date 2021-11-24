@@ -8,9 +8,9 @@ import { EditHomeData } from "../EditHomeData/EditHomeData";
 import { Switch, Route } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
 import { ListContact } from "../ListContact/ListContact";
-import { ListTestimonials } from "../ListTestimonials/ListTestimonials"
 import CategoriesScreen from "../categories/CategoriesScreen";
 import EditActivities from "../../../components/EditActivities/EditActivities";
+
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -58,6 +58,7 @@ export const Content = ({ openAside, isLeft }) => {
         />
           <Route
           path="/auth/backoffice/testimonials"
+          componente={}
           exact
         />
 
