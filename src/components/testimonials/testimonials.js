@@ -14,7 +14,7 @@ export default class Testimonial extends React.Component {
   handleChange = (event) => {
     const target = event.target;
     const { name, value } = target;
-
+    console.log(event.target.file[0])
     this.setState({
       [name]: value,
     });

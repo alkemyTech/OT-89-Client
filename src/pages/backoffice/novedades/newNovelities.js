@@ -38,7 +38,7 @@ handleCkeditorState = (event, editor) => {
      content: values.editor,
      categoryId: values.categoryId
    };
- 
+
   console.log("novedades", FormNovelities)
   apiService.post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
     .then((res) => {
@@ -47,13 +47,13 @@ handleCkeditorState = (event, editor) => {
     .catch((error) => {
       console.log(error); /* Se debe importar el alert y pasar el error */
     });
-}; 
+};
 
-    render(){ 
-        return(            
-<div className="container">  
+    render(){
+        return(
+<div className="container">
   <div className="row">
-    <div className=" col-lg-12 col-md-12 col-xs-12">     
+    <div className=" col-lg-12 col-md-12 col-xs-12">
         <form className="mt-3">
           <div className="form-group mb-3">
             <label htmlFor="title">
@@ -66,7 +66,7 @@ handleCkeditorState = (event, editor) => {
                 name="name"
                 id="name"
                 required
-              />             
+              />
             </label>
           </div>
           <div className="form-group mb-3">
@@ -79,21 +79,21 @@ handleCkeditorState = (event, editor) => {
                 id="image"
                 value={this.state.image}
                 onChange={this.handleChange}
-                required />              
+                required />
             </label>
           </div>
-          <div className="form-group mb-3">           
+          <div className="form-group mb-3">
           <CKEditor
            editor={ ClassicEditor }
                     data=""
                     onReady={ editor => {
-                        
+
                     } }
-                    name="content"                 
+                    name="content"
                     onChange={this.handleCkeditorState}
-                    
-                />            
-          </div> 
+
+                />
+          </div>
           <div className="form-group mb-3">
             <label htmlFor="category">
               categoria:
@@ -101,21 +101,21 @@ handleCkeditorState = (event, editor) => {
                 type="text"
                 className="form-control"
                 name="categoryId"
-                id="categoryId"                
+                id="categoryId"
                 onChange={this.handleChange}
-                required                
-              />             
+                required
+              />
             </label>
-          </div>        
+          </div>
           <div className="form-group my-3">
             <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >
               Agregar
             </button>
-          </div>          
-        </form>      
+          </div>
+        </form>
     </div>
   </div>
-</div>      
+</div>
         )
     }
 }
