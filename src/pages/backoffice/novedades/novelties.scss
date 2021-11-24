@@ -34,7 +34,23 @@ tr {
 }
 section {
   display: inline-grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  justify-items: center;
+
+  gap: $spacing-sm;
+  font-size: $font-size-small;
+
+  @media (min-width: $breakpoint-lg) {
+    gap: $spacing-lg;
+    font-size: $font-size-medium;
+  }
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  width: 95%;
   align-items: center;
   justify-items: center;
 
