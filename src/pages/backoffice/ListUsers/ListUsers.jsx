@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Confirm } from "../../../components/Alert/Alert";
+import EditProfile from "../../../components/EditProfile/EditProfile";
+import ModalViewer from "../../../components/ModalViewer/modalViewer";
 import { usersList } from "../../../features/slices/usersSlice";
 import apiService from "../../../services/server";
 import "./listUsers.scss";
@@ -23,7 +25,7 @@ export const ListUsers = () => {
 
   const handleDelete = async (idAEliminar) => {
     try {
-      const result = await Confirm("Usuario Eliminado","Se ha eliminado el usuario correctamente");
+      const result = await Confirm("Usuario Eliminado", "Se ha eliminado el usuario correctamente");
       if (result) {
         const res = await apiService.delete("/users/" + idAEliminar);
         if (res.status === 200) {
@@ -56,7 +58,9 @@ export const ListUsers = () => {
                 <td className="borders">{oneUser.lastName}</td>
                 <td className="borders">{oneUser.email}</td>
                 <td>
-                  <button url="/" className="button button-primary">Editar</button>
+                  <ModalViewer buttonName="Editar">
+                    <EditProfile userId={oneUser.userId}></EditProfile>
+                  </ModalViewer>
                 </td>
                 <td>
                   <button url="/" className="button button-secondary" onClick={() => { handleDelete(oneUser.userId) }}>Eliminar</button>

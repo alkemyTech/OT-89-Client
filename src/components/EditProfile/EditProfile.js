@@ -171,7 +171,6 @@ const EditProfile = ({ userId = 0, setVisible }) => {
                         </div>
                         <div className='buttons'>
                             <button className='button button-primary' type='submit'>Enviar</button>
-                            <button className="button button-primary" onClick={() => setVisible(visible => !visible)}>Volver</button>
                         </div>
                         {/* {submitedForm && <small className="success">Formulario enviado con exito!</small>} */}
                     </Form>
