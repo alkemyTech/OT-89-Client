@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import apiService from "../../../services/server";
-import "../../../components/utils/buttons/Button.scss";
-import "./novelties.scss";
+//import { useDispatch } from "react-redux";
 
-const NoveltyModal = ({ isVisible, setIsVisible, toEdit, setRefresh }) => {
+import { Alert, Confirm } from "../../../components/Alert/Alert";
+//import { deleteNovelty } from "../../../features/slices/noveltySlice";
+import apiService from "../../../services/server";
+
+//import "./novelties.scss";
+
+const NoveltyModal = ({
+  isVisible,
+  setIsVisible,
+  toModify,
+  setRefresh,
+  categories,
+}) => {
   const [novelty, setNovelty] = useState({
-    name: toEdit?.name || "",
-    image: toEdit?.image || "",
-    content: toEdit?.content || "",
-    categoryId: toEdit?.categoryId || "",
-    id: toEdit?.id || null,
+    name: "",
+    image: "",
+    content: "",
+    categoryId: "",
+    id: null,
   });
+
+  //const dispatch = useDispatch();
+
+  useEffect(() => {
+    setNovelty({
+      name: toModify?.name || "",
+      image: toModify?.image || "",
+      content: toModify?.content || "",
+      categoryId: toModify?.categoryId || "",
+      id: toModify?.id || null,
+    });
+  }, [toModify]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,29 +43,62 @@ const NoveltyModal = ({ isVisible, setIsVisible, toEdit, setRefresh }) => {
   };
 
   const handleCkeditorState = (event, editor) => {
-    const data = editor.getData();
-    setNovelty({ ...novelty, content: data });
-    console.log(novelty);
+    const value = editor.getData();
+    setNovelty({ ...novelty, content: value });
   };
 
-  const handleSubmit = (event) => {
-    const FormNovelities = {
-      name: novelty.name,
-      image: novelty.image,
-      content: novelty.content,
-      categoryId: novelty.categoryId,
-    };
+  const handleSubmit = async (event) => {
+    const confirmation = await Confirm(
+      "Agregar novedad",
+      "Esta intentando crear una novedad, ¿desea continuar?"
+    );
+    if (confirmation) {
+      await apiService
+        .post("/news", novelty) /* Cambiar ruta segun corresponda*/
+        .then((res) => {
+          console.log(res);
+          if (res.status === 201) {
+            setRefresh((current) => !current);
+          }
+        })
+        .catch((error) => {
+          Alert("Error", "Hubo un error inesperado", "warning");
+          console.log(error); /* Se debe importar el alert y pasar el error */
+        });
+    }
+  };
 
-    console.log("novedades", FormNovelities);
-    apiService
-      .post("/news", FormNovelities) /* Cambiar ruta segun corresponda*/
-      .then((res) => {
-        console.log(res);
-        setRefresh((current) => !current);
-      })
-      .catch((error) => {
-        console.log(error); /* Se debe importar el alert y pasar el error */
+  const handleDelete = async (id) => {
+    const confirmation = await Confirm(
+      "Eliminar novedad",
+      "Esta intentando eliminar una novedad, ¿desea continuar?"
+    );
+    if (confirmation) {
+      await apiService
+        .delete(`/news/${id}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setIsVisible(false);
+            setRefresh((current) => !current);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const handleEdit = async (news) => {
+    const confirmation = await Confirm(
+      "Editar novedad",
+      "Esta intentando editar una novedad, ¿desea continuar?"
+    );
+    if (confirmation) {
+      await apiService.put(`/news/${news.id}`, news).then((res) => {
+        if (res.status === 200) {
+          setIsVisible(false);
+          setRefresh((current) => !current);
+        }
       });
+    }
   };
 
   return (
@@ -75,13 +130,17 @@ const NoveltyModal = ({ isVisible, setIsVisible, toEdit, setRefresh }) => {
                   </div>
                   <div className="form-group mb-3">
                     <label htmlFor="image">
-                      Imagen:
+                      Imagen:{" "}
+                      {novelty.id && (
+                        <a href={novelty.image} target="_blank">
+                          Ver original
+                        </a>
+                      )}
                       <input
                         type="file"
                         className="form-control"
                         name="image"
                         id="image"
-                        value={novelty.image}
                         onChange={handleChange}
                         required
                       />
@@ -115,14 +174,31 @@ const NoveltyModal = ({ isVisible, setIsVisible, toEdit, setRefresh }) => {
           </div>
         </ModalBody>
         <ModalFooter>
-          <section className="center">
-            <button
-              type="submit"
-              className="button button-primary"
-              onClick={handleSubmit}
-            >
-              Agregar
-            </button>
+          <section className="buttons">
+            {novelty.id ? (
+              <>
+                <button
+                  className="button button-outline"
+                  onClick={() => handleEdit(novelty)}
+                >
+                  Editar
+                </button>
+                <button
+                  className="button button-secondary-outline "
+                  onClick={() => handleDelete(novelty.id)}
+                >
+                  Eliminar
+                </button>
+              </>
+            ) : (
+              <button
+                type="submit"
+                className="button button-primary"
+                onClick={handleSubmit}
+              >
+                Agregar
+              </button>
+            )}
             <button
               className="button button-secondary"
               onClick={() => setIsVisible(false)}
