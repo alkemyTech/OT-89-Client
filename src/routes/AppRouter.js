@@ -10,8 +10,8 @@ export const AppRouter = () => {
       <Switch>
         <Route path="/auth" component={AuthRouter} />
         <Route path="/" component={MainRouter} />
-        <Route exact path="/404" component={NotFound} />
-        <Redirect to="/404" />
+        <Route exact path="*" component={NotFound} />
+        <Redirect to="/404"/>
       </Switch>
     </Router>
   );
