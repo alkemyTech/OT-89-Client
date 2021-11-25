@@ -27,7 +27,7 @@
     padding: $spacing-lg 0;
   }
 
-  .testimonials__item {
+  .testimonial__item {
     width: 100%;
     display: inline-grid;
     grid-template-columns: 3fr 1fr 1fr;
@@ -49,13 +49,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-
       font-size: $font-size-medium;
 
       @media (min-width: $breakpoint-lg) {
         font-size: $font-size-large;
       }
-      .__content * {
+      .__content {
         margin: 0;
         color: $color-black-light;
         overflow: hidden;
