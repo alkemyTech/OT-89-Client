@@ -22,9 +22,11 @@ export const noveltySlice = createSlice({
       state.novelties[index] = action.payload;
     },
     selectNovelty: (state, action) => {
-      state.selected = state.novelties.filter(
-        (novel) => novel.id === action.payload
-      )[0];
+      if (action.payload)
+        state.selected = state.novelties.filter(
+          (novel) => novel.id === action.payload
+        )[0];
+      else state.selected = null;
     },
     addNovelty: (state, action) => {
       state.novelties.unshift(action.payload);

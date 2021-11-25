@@ -10,7 +10,6 @@ import {
   addNovelty,
   deleteNovelty,
   editNovelty,
-  selectNovelty,
 } from "../../../features/slices/noveltySlice";
 import { loadCategories } from "../../../features/slices/categoriesSlice";
 
@@ -25,13 +24,11 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
   useEffect(() => {
     if (toModify) {
       setNovelty({
-        name: toModify.name || "",
-        image:
-          toModify.image ||
-          "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
-        content: toModify.content || "",
-        categoryId: toModify.categoryId || "",
-        id: toModify.id || null,
+        name: toModify.name,
+        image: toModify.image,
+        content: toModify.content,
+        categoryId: toModify.categoryId,
+        id: toModify.id,
       });
     } else {
       setNovelty(blankNovelty);
@@ -46,9 +43,16 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           .then((res) => {
             if (res.status === 200) {
               dispatch(loadCategories(res.data.data));
-            } else console.log("No hay categorias disponibles"); //TODO: display this
+            } else if (res.status === 204) {
+              Alert(
+                "Error",
+                "No hay categorias disponibles en la base de datos",
+                "success"
+              );
+            }
           })
           .catch((err) => {
+            Alert("Error", "Hubo un error al cargar las categorias", "warning");
             console.log(err);
           });
       })();
@@ -72,7 +76,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
     );
     if (confirmation) {
       await apiService
-        .post("/news", novelty) /* Cambiar ruta segun corresponda*/
+        .post("/news", novelty)
         .then((res) => {
           if (res.status === 201) {
             dispatch(addNovelty(res.data.data));
@@ -84,7 +88,6 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           Alert("Error", "Hubo un error inesperado", "warning");
           console.log(error); /* Se debe importar el alert y pasar el error */
         });
-      //setNovelty(blankNovelty);
     }
   };
 
@@ -102,7 +105,10 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
             setIsVisible(false);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          Alert("Error", "Hubo un error inesperado", "warning");
+          console.log(err);
+        });
     }
   };
 
@@ -112,12 +118,18 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
       "Esta intentando editar una novedad, ¿desea continuar?"
     );
     if (confirmation) {
-      await apiService.put(`/news/${news.id}`, news).then((res) => {
-        if (res.status === 200) {
-          dispatch(editNovelty(news));
-          setIsVisible(false);
-        }
-      });
+      await apiService
+        .put(`/news/${news.id}`, news)
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(editNovelty(news));
+            setIsVisible(false);
+          }
+        })
+        .catch((err) => {
+          Alert("Error", "Hubo un error inesperado", "warning");
+          console.log(err);
+        });
     }
   };
 

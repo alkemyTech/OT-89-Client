@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadNovelties } from "../../../features/slices/noveltySlice";
 
 const NoveltiesList = ({ handleModify }) => {
-  //const [novelties, setNovelties] = useState([])
   const dispatch = useDispatch();
   const novelties = useSelector((state) => state.novelties.novelties);
   const [warning, setWarning] = useState(null);
@@ -18,7 +17,6 @@ const NoveltiesList = ({ handleModify }) => {
         .then((res) => {
           if (res.status === 200) {
             dispatch(loadNovelties(res.data.data));
-            //setNovelties(res.data.data);
           } else {
             setWarning("No hay novedades que mostrar");
           }
