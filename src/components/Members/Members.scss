@@ -6,7 +6,9 @@
 }
 
 .membersContainer {
-  padding: 1.2rem;
+  padding: 1.6rem 1.2rem;
+  border-bottom: 2px solid $color-black;
+  border-top: 2px solid $color-black;
 
   display: flex;
   align-items: center;
