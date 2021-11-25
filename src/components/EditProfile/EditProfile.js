@@ -45,22 +45,30 @@ const EditProfile = ({ userId = 0, setVisible }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            if (actualUser === 1) {
+            if (actualUser === 1 && userId === 0) {
                 const { data } = await apiService.put(`/users/${values.userId}`, values)
                 await localStorage.setItem("token", data.token)
                 if (data.message === "Profile updated") {
                     await Alert("Exito!", "Usuario actualizado!", 3000)
-                        history.push('/')
+                    history.push('/')
                 } else {
                     Alert("Error!", "Hubo un error al editar los datos.", "success", 3000)
                 }
                 // dispatch(login(data))
+            } else if (actualUser === 1 && userId !== 0) {
+                const { data } = await apiService.put(`/users/${userId}`, values)
+                if (data.message === "Profile updated") {
+                    await Alert("Exito!", "Usuario actualizado!", "success", 3000)
+                    history.replace('/backoffice/users');
+                } else {
+                    Alert("Error!", "Hubo un error al editar los datos.", "error")
+                }
             } else {
                 const { data } = await apiService.put(`/users/${values.userId}`, values)
                 await localStorage.setItem("token", data.token)
                 if (data.message === "Profile updated") {
                     await Alert("Exito!", "Usuario actualizado!", "success", 3000)
-                        history.push('/')
+                    history.push('/')
                 } else {
                     Alert("Error!", "Hubo un error al editar los datos.", "error")
                 }
@@ -171,7 +179,7 @@ const EditProfile = ({ userId = 0, setVisible }) => {
                         </div>
                         <div className='buttons'>
                             <button className='button button-primary' type='submit'>Enviar</button>
-                            <button className="button button-primary" onClick={() => setVisible(visible => !visible)}>Volver</button>
+                            {userId === 0 && <button className="button button-primary" onClick={() => setVisible(visible => !visible)}>Volver</button>}
                         </div>
                         {/* {submitedForm && <small className="success">Formulario enviado con exito!</small>} */}
                     </Form>

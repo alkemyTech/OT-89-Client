@@ -21,8 +21,6 @@ export const Content = ({ openAside, isLeft }) => {
         className={left}
         onClick={openAside}
       />
-  
-
       <Switch>
         <Route
           path="/backoffice/"
