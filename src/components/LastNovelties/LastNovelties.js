@@ -14,7 +14,7 @@ export const LastNovelties = React.memo(props => {
                     novelties.map((noveltie, index) => (
                         <div className="noveltie-conteiner-item" key={index} >
                             <img src={noveltie.img_url} alt={noveltie.alt_text} />
-                            <h4>{noveltie.title}</h4>
+                            <h3>{noveltie.title}</h3>
                         </div>
                     ))
                 }

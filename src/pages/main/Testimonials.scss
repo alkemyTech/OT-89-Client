@@ -1,10 +1,12 @@
-.testimonial {
-    padding: 2vh;
-    border-bottom: 1px solid #949494;
-}
-.testimonial-text {
-    font-size: calc(1.5rem + (1.5 - 1.5) * ((100vw - 300px) / (1600 - 300)));
-}
-.testimonials {
-    min-height: 90vh;
+section {
+    h1 {
+        margin: 0;
+        padding: 3rem;
+    }
+    .box-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+        gap: 3rem;
+        padding: 3rem;
+    }
 }

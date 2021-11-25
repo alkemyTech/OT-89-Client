@@ -3,9 +3,8 @@ import apiService from "../../services/server";
 import { Link } from "react-router-dom";
 
 // Icons
-import iconFacebook from "../../assets/icons/facebook.svg";
-import iconInstagram from "../../assets/icons/instagram.svg";
-import iconLinkedin from "../../assets/icons/linkedin.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faLinkedin} from "@fortawesome/free-brands-svg-icons";
 
 import "./Footer.scss";
 
@@ -75,20 +74,20 @@ export const Footer = () => {
       </div>
       <div className="social-media">
         <a href={data.facebook}>
-          <img className="icon" src={iconFacebook} alt="Icono de Facebook" />
+            <FontAwesomeIcon icon={faFacebook} className="icon"/>
         </a>
 
         <a href={data.instagram}>
-          <img className="icon" src={iconInstagram} alt="Icono de Instagram" />
+            <FontAwesomeIcon icon={faInstagram} className="icon"/>
         </a>
 
         <a href={data.linkedin}>
           {/* ARREGLAR ICONO DE LINKEDIN */}
-          <img className="icon" src={iconLinkedin} alt="Icono de Twitter" />
+            <FontAwesomeIcon icon={faLinkedin} className="icon"/>
         </a>
       </div>
       <p className="terms-and-condition">
-        2021 by Alkemy. All Rights Reserved.
+        2021 by mHm All Rights Reserved.
       </p>
     </footer>
   );
