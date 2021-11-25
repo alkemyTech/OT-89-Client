@@ -114,18 +114,22 @@ export const Header = () => {
                 (roleId === 1 ? (
                   <div className="menu-container">
                     <ul>
-                      <Link to="/profile" onClick={() => setOpen(false)}>
-                        Editar Perfil
-                      </Link>
-                      <Link
-                        to="/auth/backoffice/"
+                      <Button 
+                        url="/profile" 
+                        onClick={() => setOpen(false)} title="Editar Perfil"
+                        className="button"
+                      />
+                        
+                      <Button
+                        url="/backoffice/"
                         onClick={() => setOpen(false)}
-                      >
-                        BackOffice
-                      </Link>
+                        className="button"
+                        title="Backoffice"
+                      />
                       <Button
                         url="/"
                         onClick={handleLogout}
+                        className="button"
                         title="Cerrar sesión"
                       />
                     </ul>
