@@ -87,7 +87,6 @@ const EditActivities = ({ actId = 0 }) => {
 
   return (
     <div>
-    <ModalViewer/>
       <button className="edit-button" onClick={() => setVisible(!visible)}>
         {actId !== 0 ? "Editar" : "Crear actividad"}
       </button>
