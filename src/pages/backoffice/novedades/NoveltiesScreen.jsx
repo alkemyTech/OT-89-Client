@@ -5,30 +5,18 @@ import NoveltiesList from "./NoveltiesList";
 import NoveltyModal from "./NoveltyModal";
 //import "../../../components/utils/buttons/Button.scss";
 import "./novelties.scss";
+import { useDispatch } from "react-redux";
+import { selectNovelty } from "../../../features/slices/noveltySlice";
 
 const NoveltiesScreen = () => {
   const [showModal, setShowModal] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [toModify, setToModify] = useState();
-  const [refresh, setRefresh] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      await apiService
-        .get("/categories")
-        .then((res) => {
-          console.log(res);
-          if (res.status === 200) setCategories(res.data.data);
-          else console.log("No hay categorias disponibles");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })();
-  }, [refresh]);
+  const dispatch = useDispatch();
+
+
 
   const handleModify = (novelty) => {
-    setToModify(novelty);
+    dispatch(selectNovelty(novelty.id));
     setShowModal(true);
   };
 
@@ -39,20 +27,17 @@ const NoveltiesScreen = () => {
         <button
           className="button primary"
           onClick={() => {
-            setToModify(null);
+            dispatch(selectNovelty(null));
             setShowModal(true);
           }}
         >
           Agregar Novedades
         </button>
       </div>
-      <NoveltiesList handleModify={handleModify} refresh={refresh} categories={categories} />
+      <NoveltiesList handleModify={handleModify} />
       <NoveltyModal
         isVisible={showModal}
         setIsVisible={setShowModal}
-        toModify={toModify}
-        setRefresh={setRefresh}
-        categories={categories}
       />
     </>
   );

@@ -2,40 +2,54 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-//import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Alert, Confirm } from "../../../components/Alert/Alert";
-//import { deleteNovelty } from "../../../features/slices/noveltySlice";
 import apiService from "../../../services/server";
+import {
+  addNovelty,
+  deleteNovelty,
+  editNovelty,
+  selectNovelty,
+} from "../../../features/slices/noveltySlice";
+import { loadCategories } from "../../../features/slices/categoriesSlice";
 
 //import "./novelties.scss";
 
-const NoveltyModal = ({
-  isVisible,
-  setIsVisible,
-  toModify,
-  setRefresh,
-  categories,
-}) => {
-  const [novelty, setNovelty] = useState({
-    name: "",
-    image: "",
-    content: "",
-    categoryId: "",
-    id: null,
-  });
-
-  //const dispatch = useDispatch();
+const NoveltyModal = ({ isVisible, setIsVisible }) => {
+  const [novelty, setNovelty] = useState(blankNovelty);
+  const dispatch = useDispatch();
+  const toModify = useSelector((state) => state.novelties.selected);
+  const categories = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
     setNovelty({
       name: toModify?.name || "",
-      image: toModify?.image || "",
+      image:
+        toModify?.image ||
+        "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
       content: toModify?.content || "",
       categoryId: toModify?.categoryId || "",
       id: toModify?.id || null,
     });
   }, [toModify]);
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      (async () => {
+        await apiService
+          .get("/categories")
+          .then((res) => {
+            if (res.status === 200) {
+              dispatch(loadCategories(res.data.data));
+            } else console.log("No hay categorias disponibles"); //TODO: display this
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })();
+    }
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -56,15 +70,18 @@ const NoveltyModal = ({
       await apiService
         .post("/news", novelty) /* Cambiar ruta segun corresponda*/
         .then((res) => {
-          console.log(res);
+         
           if (res.status === 201) {
-            setRefresh((current) => !current);
+            dispatch(addNovelty(res.data.data));
+            setNovelty(blankNovelty);
+            setIsVisible(false);
           }
         })
         .catch((error) => {
           Alert("Error", "Hubo un error inesperado", "warning");
           console.log(error); /* Se debe importar el alert y pasar el error */
         });
+      //setNovelty(blankNovelty);
     }
   };
 
@@ -78,8 +95,8 @@ const NoveltyModal = ({
         .delete(`/news/${id}`)
         .then((res) => {
           if (res.status === 200) {
+            dispatch(deleteNovelty(id));
             setIsVisible(false);
-            setRefresh((current) => !current);
           }
         })
         .catch((err) => console.log(err));
@@ -94,8 +111,8 @@ const NoveltyModal = ({
     if (confirmation) {
       await apiService.put(`/news/${news.id}`, news).then((res) => {
         if (res.status === 200) {
+          dispatch(editNovelty(news));
           setIsVisible(false);
-          setRefresh((current) => !current);
         }
       });
     }
@@ -213,3 +230,11 @@ const NoveltyModal = ({
 };
 
 export default NoveltyModal;
+
+const blankNovelty = {
+  name: "",
+  image: "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
+  content: "",
+  categoryId: "",
+  id: null,
+};
