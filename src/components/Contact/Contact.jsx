@@ -13,6 +13,12 @@ const Contact = () => {
       .post("/contacts", values)
       .then((res) => {
         console.log(res.data);
+        Alert(
+          "sucess",
+          "Su mensaje ha sido resivido correctamente, en la brevedad nos pondremos en contacto",
+          "success",
+          6000
+        );
         //Falta mostrar el mensaje al user
       })
       .catch((error) => {
