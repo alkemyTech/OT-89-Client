@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
 import { Home } from "../pages/main/Home";
-import { About } from "../pages/main/About";
+import  { About }  from "../pages/main/About";
 import { Novelties } from "../pages/main/Novelties";
 import { Testimonials } from "../pages/main/Testimonials";
 import { Contacts } from "../pages/main/Contacts";

@@ -24,7 +24,6 @@ export const Header = () => {
     { title: "Novedades", route: "novelties" },
     { title: "Testimonios", route: "testimonials" },
     { title: "contacto", route: "contacts" },
-    { title: "Contribuye", route: "contribute" },
   ];
 
   const token = useCallback(getToken());
