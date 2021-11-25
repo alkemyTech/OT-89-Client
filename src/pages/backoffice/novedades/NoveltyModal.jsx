@@ -23,15 +23,19 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
   const categories = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
-    setNovelty({
-      name: toModify?.name || "",
-      image:
-        toModify?.image ||
-        "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
-      content: toModify?.content || "",
-      categoryId: toModify?.categoryId || "",
-      id: toModify?.id || null,
-    });
+    if (toModify) {
+      setNovelty({
+        name: toModify.name || "",
+        image:
+          toModify.image ||
+          "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
+        content: toModify.content || "",
+        categoryId: toModify.categoryId || "",
+        id: toModify.id || null,
+      });
+    } else {
+      setNovelty(blankNovelty);
+    }
   }, [toModify]);
 
   useEffect(() => {
@@ -70,7 +74,6 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
       await apiService
         .post("/news", novelty) /* Cambiar ruta segun corresponda*/
         .then((res) => {
-         
           if (res.status === 201) {
             dispatch(addNovelty(res.data.data));
             setNovelty(blankNovelty);
@@ -233,7 +236,8 @@ export default NoveltyModal;
 
 const blankNovelty = {
   name: "",
-  image: "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
+  image:
+    "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
   content: "",
   categoryId: "",
   id: null,
