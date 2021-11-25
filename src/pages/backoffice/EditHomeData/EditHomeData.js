@@ -5,26 +5,26 @@ import * as Yup from "yup";
 import "./EditHomeData.scss";
 
 export const EditHomeData = () => {
-  const [description, setDescription] = useState({
-    title: "",
-    slider: [
-      {
-        text: "",
-        file: "",
-        imgUrl: "",
-      },
-      {
-        text: "",
-        file: "",
-        imgUrl: "",
-      },
-      {
-        text: "",
-        file: "",
-        imgUrl: "",
-      },
-    ],
-  });
+  // const [description, setDescription] = useState({
+  //   title: "",
+  //   slider: [
+  //     {
+  //       text: "",
+  //       file: "",
+  //       imgUrl: "",
+  //     },
+  //     {
+  //       text: "",
+  //       file: "",
+  //       imgUrl: "",
+  //     },
+  //     {
+  //       text: "",
+  //       file: "",
+  //       imgUrl: "",
+  //     },
+  //   ],
+  // });
 
   // Validator
 
@@ -43,130 +43,92 @@ export const EditHomeData = () => {
 
   // Peticion de datos actuales
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await apiService.get("/info-home"); /////////////////////////////////////////////////////////// Revisar endpoint
-        if (res.status === 200) {
-          const { data } = await res.data;
-          setDescription(data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const res = await apiService.get("/info-home"); /////////////////////////////////////////////////////////// Revisar endpoint
+  //       if (res.status === 200) {
+  //         const { data } = await res.data;
+  //         setDescription(data);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    getData();
-  }, []);
+  //   getData();
+  // }, []);
+
+  const initialValues = {
+    image: {},
+    text: "",
+  };
 
   // Funcion handleSubmit
+  const handleSubmitSlides = async (e, values) => {
+    e.preventDefault();
+    console.log(values.image);
 
-  const handleSubmit = (values) => {
-    console.log(values);
+    const formData = new FormData();
+    formData.append("image", values.image);
+    // formData.append("imageUrl", values.image.imageUrl);
+    // formData.append("order", values.image.order);
+    // formData.append("text", values.image.text);
+
+    console.log(formData);
+    const config = {
+      headers: { "Content-Type": "multipart/form-data" },
+    };
+
+    try {
+      await apiService.post(`/aws/upload`, formData, config);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
     <div>
       <h1>Editar home de página de inicio</h1>
       <Formik
-        initialValues={description}
         validationSchema={EditSchema}
-        onSubmit={(values) => handleSubmit(values)}
+        onSubmit={handleSubmitSlides}
+        initialValues={initialValues}
       >
-        {({ values, handleChange, handleSubmit }) => (
-          <Form className="container-main">
-            <div className="container-main__title">
-              <label className="container-main__text" htmlFor={`title`}>
-                Texto principal
-              </label>
-              <Field
-                className="input"
-                component="textarea"
-                name="title"
-                placeholder="Texto de la pagina principal. Debe de tener como minimo 20 caracteres"
-                value={values.title}
-                onChange={(e) => handleChange(e)}
+        {({ setFieldValue, values }) => (
+          <form onSubmit={(e) => handleSubmitSlides(e, values)}>
+            <input
+              type="file"
+              className="form-control mt-3 text-center"
+              name="image"
+              values={values.image}
+              onChange={(event) => {
+                setFieldValue("image", event.currentTarget.files[0]);
+              }}
+            />
+
+            <div className="form-group mb-3 text-center">
+              <input
+                type="text"
+                className="form-control border-0 border-bottom shadow-none my-2"
+                name="text"
+                value={values.text}
+                onChange={(event) => {
+                  setFieldValue("text", event.currentTarget.value);
+                }}
               />
               <ErrorMessage
-                name={"title"}
+                name="text"
+                className="invalid-feedback ml-2 d-block"
                 component="div"
-                className="field-error"
-              >
-                {(error) => <div className="alert alert-danger">{error}</div>}
-              </ErrorMessage>
+              />
             </div>
-            <div className="slider-main">
-              <FieldArray name="sliders">
-                {() => (
-                  <div>
-                    {values.slider.length > 0 &&
-                      values.slider.map((slider, index) => (
-                        <div className="container-main__container" key={index}>
-                          <div className="container-main__container_box">
-                            <label
-                              className="container-main__text"
-                              htmlFor={`slider.${index}.text`}
-                            >
-                              Título
-                            </label>
-                            <Field
-                              className="container-main__text"
-                              name={`slider.${index}.text`}
-                              placeholder={`Slider ${index + 1}`}
-                              type="text"
-                            />
-                            <ErrorMessage
-                              name={`slider.${index}.file`}
-                              component="div"
-                              className="field-error"
-                            >
-                              {(error) => (
-                                <div className="alert alert-danger">
-                                  {error}
-                                </div>
-                              )}
-                            </ErrorMessage>
-                          </div>
-                          <div>
-                            <label
-                              className="container-main__text"
-                              htmlFor={`slider.${index}.file`}
-                            >
-                              Archivo
-                            </label>
-                            <Field
-                              className="file-input"
-                              name={`slider.${index}.file`}
-                              type="file"
-                            />
-                            <ErrorMessage
-                              name={`text`}
-                              component="div"
-                              className="field-error"
-                            >
-                              {(error) => (
-                                <div className="alert alert-danger">
-                                  {error}
-                                </div>
-                              )}
-                            </ErrorMessage>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </FieldArray>
-              <div className="container-button">
-                <button
-                  type="submit"
-                  className="button button-primary"
-                  onClick={() => handleSubmit}
-                >
-                  Guardar cambios
-                </button>
-              </div>
+            <div className="d-flex justify-content-center">
+              <button className="btn HomeEditForm__btn my-3" type="submit">
+                Actualizar
+              </button>
             </div>
-          </Form>
+          </form>
         )}
       </Formik>
     </div>
