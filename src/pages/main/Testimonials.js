@@ -3,7 +3,6 @@ import { Testimonial } from "../../components/Testimonial/Testimonial";
 import "./Testimonials.scss";
 
 export const Testimonials = () => {
-  
   return (
     <section>
       <h1>Testimonios</h1>
