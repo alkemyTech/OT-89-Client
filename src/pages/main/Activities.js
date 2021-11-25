@@ -8,7 +8,7 @@ export const Activities = () => {
   useEffect(() => {
     // Petocion a la base de datos con axios
     const getData = async () => {
-      const res = await apiService.get("/entries");
+      const res = await apiService.get("/activities");
       if (res.status !== 204) {
         const data = await res.data.data;
         setData(data);
