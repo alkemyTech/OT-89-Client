@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Modal, ModalBody, ModalFooter } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,6 +60,10 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNovelty({ ...novelty, [name]: value });
+  };
+
+  const handleCategory = (e) => {
+    setNovelty({ ...novelty, categoryId: e.target.value });
   };
 
   const handleCkeditorState = (event, editor) => {
@@ -134,63 +138,59 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
   return (
     <>
       <Modal isOpen={isVisible} backdrop={true}>
-        <ModalHeader>
-          <h3>
-            {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
-          </h3>
-        </ModalHeader>
         <ModalBody>
-          <div className="">
-            <form
-              className="auth__content"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="input-box">
-                <label htmlFor="name">Titulo</label>
-                <input
-                  type="text"
-                  className="input"
-                  value={novelty.name}
-                  onChange={handleChange}
-                  name="name"
-                  id="name"
-                  required
-                />
-              </div>
-              <div className="input-box">
-                <label htmlFor="image">Imagen</label>
-                <input
-                  type="file"
-                  className="input"
-                  name="image"
-                  id="image"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="input-box">
-                <label>Contenido</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={novelty.content}
-                  name="content"
-                  onChange={handleCkeditorState}
-                />
-              </div>
-              <div className="input-box">
-                <label htmlFor="categoryId">Categoria</label>
-                <input
-                  type="text"
-                  className="input"
-                  name="categoryId"
-                  id="categoryId"
-                  value={novelty.categoryId}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </form>
-          </div>
+          <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
+            <h3>
+              {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
+            </h3>
+            <hr />
+            <div className="input-box">
+              <label htmlFor="name">Titulo</label>
+              <input
+                type="text"
+                className="input"
+                value={novelty.name}
+                onChange={handleChange}
+                name="name"
+                id="name"
+                required
+              />
+            </div>
+            <div className="input-box">
+              <label htmlFor="image">Imagen</label>
+              <input
+                type="file"
+                className="input"
+                name="image"
+                id="image"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <label>Contenido</label>
+              <CKEditor
+                editor={ClassicEditor}
+                data={novelty.content}
+                name="content"
+                onChange={handleCkeditorState}
+              />
+            </div>
+            <div className="input-box">
+              <label className="">Categoria </label>
+              <select className="input" onChange={handleCategory}>
+                <option value="0" hidden>
+                  {categories.length === 0 && "No hay categorias disponibles"}
+                </option>
+                {categories &&
+                  categories.map((categ) => (
+                    <option key={categ.id} value={categ.id}>
+                      {categ.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </form>
         </ModalBody>
         <ModalFooter>
           <div className="buttons">
