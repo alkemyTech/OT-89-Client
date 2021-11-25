@@ -78,7 +78,7 @@ export function Home() {
   }, [])
 
   return (
-    <div>
+    <section>
         { !data.loading  
         ?
         <div>
@@ -90,6 +90,6 @@ export function Home() {
           <Spinner /> 
         }
 
-    </div>
+    </section>
   )
 }
