@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
 import apiService from "../../services/server";
+import "./Novelties.scss";
 
 export const Novelties = () => {
   const [data, setData] = useState([]);
