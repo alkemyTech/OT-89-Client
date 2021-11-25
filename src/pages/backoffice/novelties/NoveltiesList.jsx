@@ -56,8 +56,10 @@ const NoveltyItem = ({ novelty, handleModify }) => {
       <section className="novelty__item">
         <div className="__description">
           <span>{name}</span>
-          <div className="__content"
-          dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            className="__content"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
         <a href={image} target="_blank">
           Imagen

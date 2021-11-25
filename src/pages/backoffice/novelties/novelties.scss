@@ -9,11 +9,6 @@
   align-items: center;
   gap: $spacing-sm;
 
-  // @media (min-width: $breakpoint-lg) {
-  //   flex-direction: row;
-  //   justify-content: space-evenly;
-  // }
-
   h1 {
     margin: 0;
   }
@@ -39,7 +34,6 @@
     align-items: center;
     justify-items: center;
     box-shadow: 0 2px $color-grey-light;
-  //  box-shadow: 0 30px 0 -25px $color-grey-light;
 
     gap: $spacing-sm;
     font-size: $font-size-small;

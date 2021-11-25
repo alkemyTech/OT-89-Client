@@ -142,68 +142,57 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           </h3>
         </ModalHeader>
         <ModalBody>
-          <div className="container">
-            <div className="row">
-              <div className=" col-lg-12 col-md-12 col-xs-12">
-                <form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-                  <div className="form-group mb-3">
-                    <label htmlFor="title">
-                      Titulo:
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={novelty.name}
-                        onChange={handleChange}
-                        name="name"
-                        id="name"
-                        required
-                      />
-                    </label>
-                  </div>
-                  <div className="form-group mb-3">
-                    <label htmlFor="image">
-                      Imagen:{" "}
-                      {novelty.id && (
-                        <a href={novelty.image} target="_blank">
-                          Ver original
-                        </a>
-                      )}
-                      <input
-                        type="file"
-                        className="form-control"
-                        name="image"
-                        id="image"
-                        onChange={handleChange}
-                        required
-                      />
-                    </label>
-                  </div>
-                  <div className="form-group mb-3">
-                    <CKEditor
-                      editor={ClassicEditor}
-                      data={novelty.content}
-                      //   onReady={(editor) => {}}
-                      name="content"
-                      onChange={handleCkeditorState}
-                    />
-                  </div>
-                  <div className="form-group mb-3">
-                    <label htmlFor="category">
-                      categoria:
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="categoryId"
-                        id="categoryId"
-                        onChange={handleChange}
-                        required
-                      />
-                    </label>
-                  </div>
-                </form>
-              </div>
+          <form className="mt-3" onSubmit={(e) => e.preventDefault()}>
+            <div className="form-group mb-3">
+              <label htmlFor="title">
+                Titulo:
+                <input
+                  type="text"
+                  className="form-control"
+                  value={novelty.name}
+                  onChange={handleChange}
+                  name="name"
+                  id="name"
+                  required
+                />
+              </label>
             </div>
-          </div>
+            <div className="form-group mb-3">
+              <label htmlFor="image">
+                Imagen:
+                <input
+                  type="file"
+                  className="form-control"
+                  name="image"
+                  id="image"
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group mb-3">
+              <CKEditor
+                editor={ClassicEditor}
+                data={novelty.content}
+                //   onReady={(editor) => {}}
+                name="content"
+                onChange={handleCkeditorState}
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="category">
+                categoria:
+                <input
+                  type="text"
+                  className="form-control"
+                  name="categoryId"
+                  id="categoryId"
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+          </form>
         </ModalBody>
         <ModalFooter>
           <section className="buttons">
