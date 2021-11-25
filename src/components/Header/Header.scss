@@ -4,16 +4,17 @@
 header {
   position: relative;
   width: 100%;
-  height: 6.2rem;
-  padding: $spacing-md;
+  padding: .5rem 3%;
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-
+  z-index: 1000;
+  background-color: #fff;
+  transition: all .5s linear;
+  border-bottom: .1rem solid rgba(0,0,0,.3);
   .logo {
-    margin-top: $spacing-xs;
     img {
-      width: 11rem;
+      width: 10rem;
     }
   }
   .hamburger-react {
@@ -47,7 +48,7 @@ header {
     margin-top: 10%;
     & > * {
       margin-bottom: $spacing-xs;
-      color: $color-ligthblue;
+      color: $color-black;
       font-weight: 500;
       text-decoration: none;
       text-transform: capitalize;
@@ -78,6 +79,21 @@ header {
   flex-direction: column;
   align-items: center;
   margin-top: $spacing-xxl;
+  gap: 1.5rem;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  animation: traslate .3s ease;
+}
+@keyframes traslate {
+  0% {
+      top: -20%
+  }
+  100% {
+      top: 0;
+  }
 }
 
 .user-image {
@@ -125,7 +141,7 @@ header {
   header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     .hamburger-react {
       display: none;
     }

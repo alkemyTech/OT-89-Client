@@ -27,7 +27,7 @@ export const Content = ({ openAside, isLeft }) => {
 
       <Switch>
         <Route
-          path="/auth/backoffice/activities"
+          path="/auth/backoffice/"
           component={ListActivities}
           exact
         />
