@@ -142,57 +142,57 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           </h3>
         </ModalHeader>
         <ModalBody>
-          <form className="mt-3" onSubmit={(e) => e.preventDefault()}>
-            <div className="form-group mb-3">
-              <label htmlFor="title">
-                Titulo:
+          <div className="">
+            <form
+              className="auth__content"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <div className="input-box">
+                <label htmlFor="name">Titulo</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="input"
                   value={novelty.name}
                   onChange={handleChange}
                   name="name"
                   id="name"
                   required
                 />
-              </label>
-            </div>
-            <div className="form-group mb-3">
-              <label htmlFor="image">
-                Imagen:
+              </div>
+              <div className="input-box">
+                <label htmlFor="image">Imagen</label>
                 <input
                   type="file"
-                  className="form-control"
+                  className="input"
                   name="image"
                   id="image"
                   onChange={handleChange}
                   required
                 />
-              </label>
-            </div>
-            <div className="form-group mb-3">
-              <CKEditor
-                editor={ClassicEditor}
-                data={novelty.content}
-                //   onReady={(editor) => {}}
-                name="content"
-                onChange={handleCkeditorState}
-              />
-            </div>
-            <div className="form-group mb-3">
-              <label htmlFor="category">
-                categoria:
+              </div>
+              <div className="input-box">
+                <label>Contenido</label>
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={novelty.content}
+                  name="content"
+                  onChange={handleCkeditorState}
+                />
+              </div>
+              <div className="input-box">
+                <label htmlFor="categoryId">Categoria</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="input"
                   name="categoryId"
                   id="categoryId"
+                  value={novelty.categoryId}
                   onChange={handleChange}
                   required
                 />
-              </label>
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
         </ModalBody>
         <ModalFooter>
           <div className="buttons">
