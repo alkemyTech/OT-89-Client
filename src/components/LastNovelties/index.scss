@@ -20,9 +20,6 @@ h3 {
 }
 
 .noveltie-conteiner {
-        cursor: pointer;
-    }
-    padding: 1rem 5%;
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
@@ -30,16 +27,7 @@ h3 {
         flex: 1 1 20rem;
         border-radius: .3rem;
         box-shadow: 0 .2rem .1rem rgba(0,0,0,.5);
-        position: relative;
-        overflow: hidden;
-        height: 239px;
-      background-color: #fff;
-        &:hover {
-            .text-content {
-                top: 0;
-            }
-        }
-        
+        background-color: #fff;
         img {
             height: 20rem;
             width: 100%;
@@ -47,28 +35,6 @@ h3 {
             object-fit: cover;
             margin-bottom: 1rem;
         }
-//        .text-content {
-//            height: 100%;
-//            width: 100%;
-//            position: absolute;
-//            top: -40%;
-//            left: 0;
-//            // background: #222;
-//            display: flex;
-//            flex-direction: column;
-//            align-items: center;
-//            justify-content: center;
-//            transition: all .2s linear;
-//            h4 {
-//                //text shadow: 0 0 5px #fff;
-//                text-shadow: 0 0 5px #000;
-//                font-size: 2rem;
-//                margin-bottom: 2rem;
-//                text-align: center;
-//                padding: 0 5rem;
-//                font-weight: bold;
-//                color: #d3d3d3;
-//            }
         h4 {
             font-size: 2rem;
             margin-bottom: 2rem;
