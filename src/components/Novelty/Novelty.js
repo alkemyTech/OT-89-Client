@@ -12,6 +12,8 @@ export const Novelty = ({ id }) => {
     image: "",
   });
 
+  console.log("Este id es del novelty" + id);
+
   useEffect(() => {
     const getData = async () => {
       try {
