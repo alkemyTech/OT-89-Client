@@ -4,12 +4,11 @@ import { Confirm } from "../../Alert/Alert"
 import { deleteCategory } from "../../../features/slices/categoriesSlice"
 import { deleteNovelty } from "../../../features/slices/noveltySlice"
 
-export const HandleDeleteCategory = async (id) => {
-    const dispatch = useDispatch()
+export const HandleDeleteCategory = async (id, dispatch) => {
     const alertResult = await Confirm("Eliminar categoria", "Esta intentando eliminar una categoria, ¿desea continuar?")
     if (alertResult) {
-        const deleteResult = await apiService.delete("/categories", { id })
-        if (deleteResult.data.message === "categoria eliminada") {
+        const deleteResult = await apiService.delete("/categories/" +id)
+        if (deleteResult.status === 200) {
             dispatch(deleteCategory(id))
         }
         return deleteResult.data.message

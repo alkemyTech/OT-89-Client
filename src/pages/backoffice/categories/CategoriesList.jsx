@@ -1,96 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
-import "./Categories.scss";
-import "../../../components/utils/buttons/Button.scss";
-import { Spinner } from "../../../components/spinner/Spinner";
-import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
-import { HandleDeleteCategory } from "../../../components/ActionsHandlers/HandleClicks/handleDelete";
+//import { EditCategories } from "../../../components/EditCategories/EditCategories";
 
-const CategoriesList = () => {
-  const [categories, setCategories] = useState("loading"); //
-  const [warning, setWarning] = useState(
-    "This will show if something went horribly wrong"
-  );
-  const [reload, setReload] = useState(null);
+import "./Categories.scss";
+
+export const CategoriesList = () => {
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const categoriesResponse = await apiService
-        .get("/categories")
-        .catch((err) => {
-          //It triggers when server is offline or user is unauthorized
-          console.error(err);
-          return err;
-        });
-      if (categoriesResponse.status === 200) {
-        setCategories(categoriesResponse.data.data);
-      } else if (categoriesResponse.status === 204) {
-        setCategories(null);
-        setWarning("No hay categorias en la base de datos");
-      } else {
-        setCategories(null);
-        setWarning("Error inesperado");
+    const getData = async () => {
+      try {
+        const res = await apiService.get("/activities");
+        const { data } = await res.data;
+        if (data.length !== 0) {
+          setCategories(data.reverse());
+        } else {
+          return;
+        }
+      } catch (err) {
+        console.error(err.message);
       }
-    })();
-  }, [reload]);
+    };
 
-  const handleEdit = (category) => {
-    console.log("Modificame a: ", category);
-    console.log("Vincular al ticket OT89-460");
-  };
+    getData();
+  }, []);
 
-  const handleDelete = async (id) => {
-    const res = await HandleDeleteCategory(id);
-    if (res === "categoria eliminada") {
-      setReload((current) => !current);
-    }
-  };
-
+  console.log(categories);
   return (
-    <article className="categories__list">
-      {categories === "loading" ? (
-        <Spinner size={50} center />
-      ) : categories ? (
-        <>
-          {categories.map((category) => (
-            <CategoryItem
-              category={category}
-              key={category.id}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          ))}
-        </>
-      ) : (
-        <WarningDisplay text={warning} />
-      )}
-    </article>
+    <div className="container-activities">
+      <h1>Listado de Categorias</h1>
+      {/* Aca metemos un campo para que el administrador pueda crear una nueva actividad */}
+      {/* <EditCategories actId={0} /> */}
+      <div className="container-activities__table">
+        {categories?.map((category) => (
+          <div className="container-activities__table--items" key={category.id}>
+            <p className="activities__title">{category.name}</p>
+            {/* <EditCategories actId={category.id} /> */}
+            <button
+              className="button button-secondary"
+              onClick={() =>
+                console.log("se esta borrando el elemento " + category.id)
+              }
+            >
+              Borrar
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
-
-export default CategoriesList;
-
-//poco seguro sobre este memo
-const CategoryItem = React.memo(({ category, handleEdit, handleDelete }) => {
-  const { name, id } = category;
-  //console.log("Hola, soy CategoryItem key: ", id, " y me renderice");
-  return (
-    <>
-      <section>
-        <span>{name}</span>
-        <button
-          className="button button-outline"
-          onClick={() => handleEdit(category)}
-        >
-          Editar
-        </button>
-        <button
-          className="button button-secondary-outline "
-          onClick={() => handleDelete(id)}
-        >
-          Eliminar
-        </button>
-      </section>
-    </>
-  );
-});
