@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
+import { Alert, Confirm } from "../../../components/Alert/Alert";
 //import { EditCategories } from "../../../components/EditCategories/EditCategories";
 
 import "./Categories.scss";
 
 export const CategoriesList = () => {
   const [categories, setCategories] = useState([]);
+
+  const deleteCategory = async (id) => {
+    const confirm = await Confirm("Eliminar Categoria", "Estas seguro de eliminar esta categoria?");
+    if (confirm) {
+      const response = await apiService.delete(`/categories/${id}`);
+      if (response.status === 200) {
+        setCategories(categories.filter((category) => category.id !== id));
+      } else {
+        Alert("Error", "Hubo un error al eliminar la categoria", "warning");
+      }
+    } else {
+      Alert("Cancelado", "No se elimino la categoria", "warning");
+    }
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -39,7 +54,7 @@ export const CategoriesList = () => {
             <button
               className="button button-secondary"
               onClick={() =>
-                console.log("se esta borrando el elemento " + category.id)
+                deleteCategory(category.id)
               }
             >
               Borrar
