@@ -16,7 +16,7 @@ const TestimonialList = ({ handleModify }) => {
         .get("/testimonials")
         .then((res) => {
           if (res.status === 200) {
-            dispatch(loadTestimonials(res.data.data));
+            dispatch(loadTestimonials(res.data));
           } else {
             setWarning("No hay testimonios que mostrar");
           }
@@ -32,10 +32,10 @@ const TestimonialList = ({ handleModify }) => {
     <article className="testimonials__list">
       {warning ? (
         <WarningDisplay text={warning} />
-      ) : testimonials.length === 0 ? (
+      ) : testimonials?.length === 0 ? (
         <Spinner size={50} center />
       ) : (
-        testimonials.map((testimonial) => (
+        testimonials?.map((testimonial) => (
           <TestimonialItem
             testimonial={testimonial}
             handleModify={handleModify}
