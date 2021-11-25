@@ -11,7 +11,7 @@ header {
   z-index: 1000;
   background-color: #fff;
   transition: all .5s linear;
-  border-bottom: .1rem solid rgba(0,0,0,.3);
+  box-shadow: $shadow;
   .logo {
     img {
       width: 10rem;
@@ -55,7 +55,7 @@ header {
       cursor: pointer;
       transition: all 0.2s linear;
       &:hover {
-        color: $color-ligthblue;
+        color: #6479ff;
       }
       &.active {
         background-color: rgba($color-ligthblue, 0.1);
@@ -97,7 +97,7 @@ header {
 }
 
 .user-image {
-  width: 40px;
+  width: 4rem;
   border-radius: 50%;
   cursor: pointer;
   margin-top: -1rem;
@@ -108,9 +108,10 @@ header {
   width: 25rem;
   height: 12rem;
   top: 10rem;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+  left: -.5rem;
+  transform: translate(-40%, -50%);
+  box-shadow: $shadow;
+  border-radius: .3rem;
   ul {
     text-align: center;
     display: flex;
@@ -119,21 +120,6 @@ header {
     justify-content: center;
     padding: 0;
     transition: all 0.4s linear;
-
-    // items list
-    & > * {
-      font-family: $font-primary;
-      color: $color-ligthblue;
-      font-weight: 500;
-      text-decoration: none;
-      text-transform: capitalize;
-      cursor: pointer;
-      margin-bottom: $spacing-xs;
-
-      &:hover {
-        color: $color-ligthblue;
-      }
-    }
   }
 }
 
@@ -183,14 +169,17 @@ header {
 
   .menu-container {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 25rem;
     height: 12rem;
     top: 10rem;
-    left: 0rem;
+    left: -8rem;
     background-color: $color-white;
     transform: translate(-50%, -50%);
     transition: all 0.4s linear;
-
     ul {
       text-align: center;
       display: flex;
@@ -198,22 +187,6 @@ header {
       align-items: center;
       justify-content: center;
       padding: 0;
-
-      // items list
-      & > * {
-        font-family: $font-primary;
-        color: $color-ligthblue;
-        font-weight: 500;
-        text-decoration: none;
-        text-transform: capitalize;
-        cursor: pointer;
-        margin-bottom: $spacing-xs;
-        transition: all 0.4s linear;
-
-        &:hover {
-          color: $color-ligthblue;
-        }
-      }
     }
   }
 }

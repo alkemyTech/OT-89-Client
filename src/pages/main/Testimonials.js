@@ -16,6 +16,7 @@ export const Testimonials = () => {
     }
   ]
   return (
+    <section>
     <div className="container">
       <div className="row">
         <div className="col-12">
@@ -35,6 +36,7 @@ export const Testimonials = () => {
         </div>
       </div>
     </div>
+</section>
   );
 };
 

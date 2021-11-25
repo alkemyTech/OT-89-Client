@@ -26,32 +26,32 @@ export const Content = ({ openAside, isLeft }) => {
 
       <Switch>
         <Route
-          path="/auth/backoffice/"
+          path="/backoffice/"
           component={ListActivities}
           exact
         />
 
         <Route
-          path="/auth/backoffice/edit-organization"
+          path="/backoffice/edit-organization"
           component={EditOrganization}
           exact
         />
-        <Route path="/auth/backoffice/users" component={ListUsers} exact />
+        <Route path="/backoffice/users" component={ListUsers} exact />
         <Route
-          path="/auth/backoffice/info-home"
+          path="/backoffice/info-home"
           component={EditHomeData}
           exact
         />
          <Route
-          path="/auth/backoffice/contacts"
+          path="/backoffice/contacts"
           component={ListContact}/>
         <Route
-          path="/auth/backoffice/categories"
+          path="/backoffice/categories"
           component={CategoriesScreen}
           exact
         />
         <Route
-          path="/auth/backoffice/novelties"
+          path="/backoffice/novelties"
           component={ListScreen}
           exact
         />

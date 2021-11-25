@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import apiService from "../../services/server";
 import { Alert } from "../../components/Alert/Alert";
+import './Auth.scss';
 
 export const Login = () => {
   const history = useHistory();
@@ -51,62 +52,59 @@ export const Login = () => {
   };
 
   return (
-    <div className="container text-center p-3">
-      <img src={logo} alt="Somos Mas Logo" />
-      <div className="row">
-        <div className="mx-auto col-lg-12 col-md-12 col-xs-12">
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            <Form className="mt-3 col-12">
-              <div className="form-group mb-3">
-                <label htmlFor="email">
-                  Email:
-                  <Field
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    required
-                  />
-                  <ErrorMessage name="email">
-                    {(error) => (
-                      <div className="alert alert-danger">{error}</div>
-                    )}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <div className="form-group mb-3">
-                <label htmlFor="password">
-                  Contraseña:
-                  <Field
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    id="password"
-                    required
-                  />
-                  <ErrorMessage name="password">
-                    {(error) => (
-                      <div className="alert alert-danger">{error}</div>
-                    )}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <a href="/">¿Olvidáste tu contraseña?</a>
-              <div className="form-group my-3">
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
-              </div>
-              <span>
-                ¿Aún no tienes una cuenta? <Link to="/auth/register">Register</Link>
-              </span>
-            </Form>
-          </Formik>
-        </div>
+    <div className="Auth">
+      <div className="auth__content">
+        <Link to="/">
+          <img src={logo} alt="Somos Mas Logo" />
+        </Link>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <div className="input-box">
+              <label htmlFor="email">Email</label>
+              <Field
+                type="email"
+                className="input"
+                name="email"
+                id="email"
+                required
+              />
+              <ErrorMessage name="email">
+                {(error) => <div className="alert">{error}</div>}
+              </ErrorMessage>
+            </div>
+            <div className="input-box">
+              <label htmlFor="password">Contraseña</label>
+              <Field
+                type="password"
+                className="input"
+                name="password"
+                id="password"
+                required
+              />
+              <ErrorMessage name="password">
+                {(error) => <div className="alert">{error}</div>}
+              </ErrorMessage>
+            </div>
+            <Link to="/" className="button">
+              ¿Olvidáste tu contraseña?
+            </Link>
+            <div className="input-box">
+              <button type="submit" className="button button-primary">
+                Login
+              </button>
+            </div>
+            <span>
+              ¿Aún no tienes una cuenta?{" "}
+              <Link to="/auth/register" className="button">
+                Register
+              </Link>
+            </span>
+          </Form>
+        </Formik>
       </div>
     </div>
   );

@@ -15,28 +15,28 @@ export const Aside = ({ isOpen }) => {
         <span>Role</span> {/* Aca se debe renderizar el rol del usuario*/}
       </div>
       <ul className="list-aside">
-        <Link to="/auth/backoffice/" className="category">
+        <Link to="/backoffice/" className="category">
           Actividades
         </Link>
-        <Link to="/auth/backoffice/edit-testomonials" className="category">
+        <Link to="/backoffice/edit-testomonials" className="category">
           Testimonios
         </Link>
-        <Link to="/auth/backoffice/edit-organization" className="category">
+        <Link to="/backoffice/edit-organization" className="category">
           Organización
         </Link>
-        <Link to="/auth/backoffice/users" className="category">
+        <Link to="/backoffice/users" className="category">
           Usuarios
         </Link>
-        <Link to="/auth/backoffice/contacts" className="category">
+        <Link to="/backoffice/contacts" className="category">
           Contactos
         </Link>
-        <Link to="/auth/backoffice/info-home" className="category">
+        <Link to="/backoffice/info-home" className="category">
           Información Home
         </Link>
-        <Link to="/auth/backoffice/categories" className="category">
+        <Link to="/backoffice/categories" className="category">
           Categorias
         </Link>
-        <Link to="/auth/backoffice/novelties" className="category">
+        <Link to="/backoffice/novelties" className="category">
           Novedades
         </Link>
       </ul>

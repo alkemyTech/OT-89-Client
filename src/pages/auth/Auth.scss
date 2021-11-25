@@ -1,0 +1,43 @@
+@import "../../assets/scss/vars";
+
+.Auth {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .auth__content {
+    text-align: center;
+    img {
+      margin-bottom: 1rem;
+    }
+    .input-box {
+      position: relative;
+      margin: .2rem;
+      display: flex;
+      flex-direction: column;
+      label {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .input {
+        border-radius: 0.5rem;
+        outline: none;
+        padding: 0.3rem .7rem;
+        font-size: 1.8rem;
+      }
+      .alert {
+        background-color: $color-red;
+        border-radius: 0 0 0.5rem 0.5rem;
+        padding: 0.5rem;
+        margin-top: -0.5rem;
+        font-size: 1.3rem;
+        color: $color-white;
+      }
+    }
+    span {
+      font-size: 1.3rem;
+    }
+  }
+}
