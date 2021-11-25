@@ -105,7 +105,7 @@ const ListScreen = (props) => {
               <td>
                 <button
                   className="btn primary"
-                  onClick={() => {handleEdit(element)}}
+                  onClick={() => { handleEdit(element) }}
                 >
                   editar
                 </button>
@@ -129,8 +129,9 @@ const ListScreen = (props) => {
             </div>
           </ModalHeader>
           <ModalBody>
-               <Novedad/>
-          </ModalBody> 
+            <Novedad />
+          </ModalBody>
+          <ModalBody>
             <div className="form-group">
               <label>ID</label>
               <input
@@ -162,6 +163,7 @@ const ListScreen = (props) => {
               />
               <br />
             </div>
+          </ModalBody>
           <ModalFooter>
             <button className="btn primary" onClick={() => editar()}>
               Actualizar
@@ -175,7 +177,7 @@ const ListScreen = (props) => {
           </ModalFooter>
         </Modal>
       </div>
-    </div>
+    </div >
   );
 };
 
