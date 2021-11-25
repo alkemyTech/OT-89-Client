@@ -3,6 +3,7 @@ import Slider from "../../components/Slider/Slider";
 import { LastNovelties } from '../../components/LastNovelties/LastNovelties'
 import { Spinner } from "../../components/spinner/Spinner";
 import apiService from "../../services/server"; 
+import { Testimonial } from "../../components/Testimonial/Testimonial";
 
 export function Home() {
   const [ data, setData ] = useState({
@@ -85,6 +86,11 @@ export function Home() {
           <Slider />
           <h1>{ title }</h1>
           <LastNovelties novelties={ novelties } />
+          <div className="box-container">
+            <Testimonial />
+            <Testimonial />
+            <Testimonial />
+          </div>
         </div>
         :
           <Spinner />

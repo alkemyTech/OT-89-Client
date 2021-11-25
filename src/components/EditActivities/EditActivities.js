@@ -6,6 +6,7 @@ import { Alert } from "../Alert/Alert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./EditActivities.scss";
+import ModalViewer from "../ModalViewer/modalViewer";
 
 const EditActivities = ({ actId = 0 }) => {
   const [visible, setVisible] = useState(false);
