@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import apiService from "../../../services/server";
 import * as Yup from "yup";
+import { Alert } from "../../../components/Alert/Alert";
 import "./EditHomeData.scss";
 
 export const EditHomeData = () => {
@@ -81,9 +82,14 @@ export const EditHomeData = () => {
     };
 
     try {
-      await apiService.post(`/aws/upload`, formData, config);
+      const response = await apiService.post(`/aws/upload`, formData, config);
+
+      if (response.status === 200) {
+        Alert("Éxito", "Imagen subida correctamente", "success");
+      }
     } catch (err) {
       console.error(err.message);
+      Alert("Error", "No se pudo actualizar la imagen", "error");
     }
   };
 
