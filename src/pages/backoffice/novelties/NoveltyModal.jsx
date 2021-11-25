@@ -13,8 +13,6 @@ import {
 } from "../../../features/slices/noveltySlice";
 import { loadCategories } from "../../../features/slices/categoriesSlice";
 
-//import "./novelties.scss";
-
 const NoveltyModal = ({ isVisible, setIsVisible }) => {
   const [novelty, setNovelty] = useState(blankNovelty);
   const dispatch = useDispatch();

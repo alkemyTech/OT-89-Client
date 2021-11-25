@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
+import { selectNovelty } from "../../../features/slices/noveltySlice";
 import NoveltiesList from "./NoveltiesList";
 import NoveltyModal from "./NoveltyModal";
 import "./novelties.scss";
-import { useDispatch } from "react-redux";
-import { selectNovelty } from "../../../features/slices/noveltySlice";
 
 const NoveltiesScreen = () => {
   const [showModal, setShowModal] = useState(false);
