@@ -53,7 +53,7 @@ const NoveltyItem = ({ novelty, handleModify }) => {
   const { name, image, content, categoryId, id } = novelty;
   return (
     <>
-      <section className="novelty__item">
+      <article className="novelty__item">
         <div className="__description">
           <span>{name}</span>
           <div
@@ -70,7 +70,7 @@ const NoveltyItem = ({ novelty, handleModify }) => {
         >
           Modificar
         </button>
-      </section>
+      </article>
     </>
   );
 };

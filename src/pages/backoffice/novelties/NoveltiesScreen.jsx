@@ -17,11 +17,11 @@ const NoveltiesScreen = () => {
   };
 
   return (
-    <>
+    <section>
       <div className="novelties">
         <h1>Novedades</h1>
         <button
-          className="button primary"
+          className="button button-primary"
           onClick={() => {
             dispatch(selectNovelty(null));
             setShowModal(true);
@@ -32,7 +32,7 @@ const NoveltiesScreen = () => {
       </div>
       <NoveltiesList handleModify={handleModify} />
       <NoveltyModal isVisible={showModal} setIsVisible={setShowModal} />
-    </>
+    </section>
   );
 };
 

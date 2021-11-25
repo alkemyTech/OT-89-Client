@@ -195,7 +195,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           </form>
         </ModalBody>
         <ModalFooter>
-          <section className="buttons">
+          <div className="buttons">
             {novelty.id ? (
               <>
                 <button
@@ -226,7 +226,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
             >
               Cancelar
             </button>
-          </section>
+          </div>
         </ModalFooter>
       </Modal>
     </>
