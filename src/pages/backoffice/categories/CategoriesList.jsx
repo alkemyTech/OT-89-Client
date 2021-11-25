@@ -10,7 +10,7 @@ export const CategoriesList = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await apiService.get("/activities");
+        const res = await apiService.get("/categories");
         const { data } = await res.data;
         if (data.length !== 0) {
           setCategories(data.reverse());

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { Alert, Confirm } from "../../../components/Alert/Alert";
 import apiService from "../../../services/server";
@@ -41,12 +41,6 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           .then((res) => {
             if (res.status === 200) {
               dispatch(loadCategories(res.data.data));
-            } else if (res.status === 204) {
-              Alert(
-                "Error",
-                "No hay categorias disponibles en la base de datos",
-                "success"
-              );
             }
           })
           .catch((err) => {
@@ -104,6 +98,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
         .then((res) => {
           if (res.status === 200) {
             dispatch(deleteNovelty(id));
+            setNovelty(blankNovelty);
             setIsVisible(false);
           }
         })
@@ -125,6 +120,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
         .then((res) => {
           if (res.status === 200) {
             dispatch(editNovelty(news));
+            setNovelty(blankNovelty);
             setIsVisible(false);
           }
         })
@@ -213,14 +209,21 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
               <button
                 type="submit"
                 className="button button-primary"
-                onClick={handleSubmit}
+                onClick={(e) => {
+                  handleSubmit(e)
+                  setNovelty(blankNovelty);
+                }}
               >
                 Agregar
               </button>
             )}
             <button
               className="button button-secondary"
-              onClick={() => setIsVisible(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setNovelty(blankNovelty);
+                setIsVisible(false)
+              }}
             >
               Cancelar
             </button>

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import apiService from "../../../services/server";
 import { Spinner } from "../../../components/spinner/Spinner";
 import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector,shallowEqual } from "react-redux";
 import { loadNovelties } from "../../../features/slices/noveltySlice";
 
 const NoveltiesList = ({ handleModify }) => {
   const dispatch = useDispatch();
-  const novelties = useSelector((state) => state.novelties.novelties);
+  const novelties = useSelector((state) => state.novelties.novelties, shallowEqual);
   const [warning, setWarning] = useState(null);
 
   useEffect(() => {
@@ -27,6 +27,13 @@ const NoveltiesList = ({ handleModify }) => {
         });
     })();
   }, []);
+  useEffect(() => {
+    if (novelties.length !== 0) {
+      setWarning(null);
+    } else if (novelties.length === 0) {
+      setWarning("No hay novedades que mostrar");
+    }
+  }, [novelties]);
 
   return (
     <article className="novelties__list">
