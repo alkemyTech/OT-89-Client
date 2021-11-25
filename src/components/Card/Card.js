@@ -4,20 +4,22 @@ import "./card.scss";
 import { Button } from "../utils/buttons/Button";
 
 const Card = (props) => {
-  const { id, title, image, altText, pathName } = props;
+  const { id, title, image, altText, content } = props;
+  console.log(image);
 
   return (
     <div className="box">
       <div className="image">
-        <img src={image} altText={altText} />
+        <img src={image} alt={altText} />
       </div>
       <div className="content">
         <h2>{title}</h2>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
         <Button
           className="button"
           title="Ver más"
           url={{
-            pathname: `/${pathName}/${id}`,
+            pathname: `/novelties/${id}`,
             id: id,
           }}
         />
