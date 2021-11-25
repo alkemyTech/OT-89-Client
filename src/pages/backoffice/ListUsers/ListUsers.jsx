@@ -8,6 +8,9 @@ import apiService from "../../../services/server";
 import "./listUsers.scss";
 
 export const ListUsers = () => {
+  const [visible, setVisible] = React.useState(false);
+  const [userEditId, setUserEditId] = React.useState({});
+
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.value);
 

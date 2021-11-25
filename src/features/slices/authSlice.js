@@ -23,7 +23,7 @@ export const getUserAction = () => async dispatch => {
   try {
     const res = await apiService.get("/auth/me", {
       headers: {
-        Authorization: getToken()  
+        Authorization: getToken()
       }
     })
     dispatch(login(res.data.data))

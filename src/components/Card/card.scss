@@ -13,8 +13,7 @@
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 1.5rem;
     .box {
-      border-radius: 0.5rem;
-      box-shadow: 0 0px 3px rgba($color: #000000, $alpha: 0.8);
+      box-shadow: $shadow;
       .image {
         height: 25rem;
         width: 100%;

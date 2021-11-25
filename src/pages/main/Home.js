@@ -35,7 +35,7 @@ export function Home() {
     // function to get dinamic data for home page
     const getData = async () => {
       try {
-        const res = await apiService.get(`${process.env.API_LINK_DATA}`)        
+        const res = await apiService.get(`${process.env.API_LINK_DATA}`)
         const { loading, title, novelties } = await res.data.data
         setData({
           loading,
@@ -50,22 +50,22 @@ export function Home() {
           novelties: [
             {
               title: "Hola mundo",
-              img_url: "https://picsum.photos/id/237/300",
+              img_url: "https://picsum.photos/200/200",
               alt_text: "Hola mundo"
             },
             {
               title: "Meme",
-              img_url: "https://picsum.photos/id/237/300",
+              img_url: "https://picsum.photos/200/200",
               alt_text: "Hola mundo"
             },
             {
               title: "Somos Más",
-              img_url: "https://picsum.photos/id/237/300",
+              img_url: "https://picsum.photos/200/200",
               alt_text: "Hola mundo"
             },
             {
               title: "Gente de todos",
-              img_url: "https://picsum.photos/id/238/300",
+              img_url: "https://picsum.photos/200/200",
               alt_text: "Hola mundo"
             }
           ]
@@ -78,7 +78,7 @@ export function Home() {
   }, [])
 
   return (
-    <div>
+    <section>
         { !data.loading  
         ?
         <div>
@@ -87,9 +87,9 @@ export function Home() {
           <LastNovelties novelties={ novelties } />
         </div>
         :
-          <Spinner /> 
+          <Spinner />
         }
 
-    </div>
+    </section>
   )
 }

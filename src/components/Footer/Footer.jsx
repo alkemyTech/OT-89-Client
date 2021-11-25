@@ -54,7 +54,7 @@ export const Footer = () => {
 
   return (
     <footer>
-      <section className="footer-nav">
+      <div className="footer-nav">
         <ul className="footer-list footer-list--left">
           {itemsLeftFooter.map((item, index) => (
             <Link key={index} to={`/${item.route}`}>
@@ -72,7 +72,7 @@ export const Footer = () => {
             </Link>
           ))}
         </ul>
-      </section>
+      </div>
       <div className="social-media">
         <a href={data.facebook}>
           <img className="icon" src={iconFacebook} alt="Icono de Facebook" />
