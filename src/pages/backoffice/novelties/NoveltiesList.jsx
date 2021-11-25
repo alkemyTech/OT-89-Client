@@ -50,7 +50,7 @@ const NoveltiesList = ({ handleModify }) => {
 export default NoveltiesList;
 
 const NoveltyItem = ({ novelty, handleModify }) => {
-  const { name, image, content, categoryId, id } = novelty;
+  const { name, image, content } = novelty;
   return (
     <>
       <article className="novelty__item">
@@ -61,7 +61,7 @@ const NoveltyItem = ({ novelty, handleModify }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <a href={image} target="_blank">
+        <a href={image} target="_blank" rel='noopener noreferrer'>
           Imagen
         </a>
         <button
