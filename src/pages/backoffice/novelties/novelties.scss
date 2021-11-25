@@ -1,21 +1,7 @@
 @import "../../../assets/scss/vars";
-td {
-  font-size: 2rem;
-}
-th {
-  font-size: 3rem;
-}
-tr {
-  font-size: 3rem;
-}
-.danger {
-  background-color: rgb(248, 16, 63);
-}
-.btn {
-  display: inline !important;
-}
+
 .novelties {
-  width: 80%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -32,22 +18,66 @@ tr {
     margin: 0;
   }
 }
-section {
-  display: inline-grid;
-  grid-template-columns: 3fr 1fr;
-  align-items: center;
-  justify-items: center;
+
+.novelties__list {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
 
   gap: $spacing-sm;
-  font-size: $font-size-small;
+  padding: $spacing-sm 0;
 
   @media (min-width: $breakpoint-lg) {
     gap: $spacing-lg;
-    font-size: $font-size-medium;
+    padding: $spacing-lg 0;
+  }
+
+  .novelty__item {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 0 2px $color-grey-light;
+  //  box-shadow: 0 30px 0 -25px $color-grey-light;
+
+    gap: $spacing-sm;
+    font-size: $font-size-small;
+
+    @media (min-width: $breakpoint-lg) {
+      gap: $spacing-lg;
+      font-size: $font-size-medium;
+    }
+
+    .__description {
+      width: 100%;
+      align-self: flex-start;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-size: $font-size-medium;
+
+      @media (min-width: $breakpoint-lg) {
+        font-size: $font-size-large;
+      }
+      .__content * {
+        margin: 0;
+        color: $color-black-light;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        font-size: $font-size-small;
+
+        @media (min-width: $breakpoint-lg) {
+          font-size: $font-size-default;
+        }
+      }
+    }
   }
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: space-evenly;
   width: 95%;

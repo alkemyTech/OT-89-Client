@@ -53,8 +53,15 @@ const NoveltyItem = ({ novelty, handleModify }) => {
   const { name, image, content, categoryId, id } = novelty;
   return (
     <>
-      <section>
-        <span>{name}</span>
+      <section className="novelty__item">
+        <div className="__description">
+          <span>{name}</span>
+          <div className="__content"
+          dangerouslySetInnerHTML={{ __html: content }} />
+        </div>
+        <a href={image} target="_blank">
+          Imagen
+        </a>
         <button
           className="button button-outline"
           onClick={() => handleModify(novelty)}
