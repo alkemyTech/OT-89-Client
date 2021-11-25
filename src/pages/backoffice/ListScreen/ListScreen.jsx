@@ -111,7 +111,6 @@ const ListScreen = (props) => {
                 >
                   editar
                 </button>
-                {"  "}
                 <button
                   className=" btn danger btn-danger "
                   onClick={() => {
