@@ -26,6 +26,19 @@ export const ListActivities = () => {
 
     getData();
   }, []);
+  const handleDelete = async (id) => {
+    //eliminar de la base de datos
+    try {
+      const res = await apiService.delete(`/activities/${id}`);
+      if (res.status === 200) {
+        const newActivities = activities.filter((activity) => activity.id !== id);
+        setActivities(newActivities);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   console.log(activities);
   return (
@@ -40,9 +53,7 @@ export const ListActivities = () => {
             <EditActivities actId={act.id} />
             <button
               className="button button-secondary"
-              onClick={() =>
-                console.log("se esta borrando el elemento " + act.id)
-              }
+              onClick={() => handleDelete(act.id)}
             >
               Borrar
             </button>
