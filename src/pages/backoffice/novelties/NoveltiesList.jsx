@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import apiService from "../../../services/server";
 import { Spinner } from "../../../components/spinner/Spinner";
 import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
-import { useDispatch, useSelector,shallowEqual } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { loadNovelties } from "../../../features/slices/noveltySlice";
 
 const NoveltiesList = ({ handleModify }) => {
   const dispatch = useDispatch();
-  const novelties = useSelector((state) => state.novelties.novelties, shallowEqual);
+  const novelties = useSelector(
+    (state) => state.novelties.novelties,
+    shallowEqual
+  );
   const [warning, setWarning] = useState(null);
 
   useEffect(() => {
@@ -27,11 +30,12 @@ const NoveltiesList = ({ handleModify }) => {
         });
     })();
   }, []);
+
   useEffect(() => {
-    if (novelties.length !== 0) {
-      setWarning(null);
-    } else if (novelties.length === 0) {
-      setWarning("No hay novedades que mostrar");
+    if (warning === undefined && novelties.length === 0) {
+      setWarning("Ya no hay mas novedades");
+    } else if (novelties.length !== 0) {
+      setWarning(undefined);
     }
   }, [novelties]);
 
@@ -68,7 +72,7 @@ const NoveltyItem = ({ novelty, handleModify }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <a href={image} target="_blank" rel='noopener noreferrer'>
+        <a href={image} target="_blank" rel="noopener noreferrer">
           Imagen
         </a>
         <button
