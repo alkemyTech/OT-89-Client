@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
 import { Home } from "../pages/main/Home";
-import  { About }  from "../pages/main/About";
+import { About } from "../pages/main/About";
 import { Novelties } from "../pages/main/Novelties";
 import { Testimonials } from "../pages/main/Testimonials";
 import { Contacts } from "../pages/main/Contacts";
@@ -50,11 +50,11 @@ export const MainRouter = () => {
         <Route exact path="/contacts" component={Contacts} />
         <Route exact path="/contribute" component={Contribute} />
         <Route exact path="/activities" component={Activities} />
-        {user ? <Route exact path="/profile" component={Profile} /> : null}
+        {user && <Route exact path="/profile" component={Profile} />}
         <Route exact path="/activities/:id" component={ViewActivity} />
-        {user && user.roleId === 1 ? (
+        {user && user.roleId === 1 && (
           <Route path="/backoffice" component={BackOffice} />
-        ) : null}
+        )}
         <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
