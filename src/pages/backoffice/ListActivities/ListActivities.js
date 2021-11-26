@@ -16,7 +16,6 @@ export const ListActivities = () => {
     (state) => state.activities.activities,
     shallowEqual
   );
-  //const [activities, setActivities] = useState([]);
   const [actividadAModificar, setActividadAModificar] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
@@ -27,7 +26,6 @@ export const ListActivities = () => {
         const { data } = await res.data;
         if (data.length !== 0) {
           dispatch(loadActivities(res.data.data));
-          //setActivities(data.reverse());
         } else {
           return;
         }
@@ -51,10 +49,6 @@ export const ListActivities = () => {
 
         if (res.status === 200) {
           dispatch(deleteActivity(id));
-          // const newActivities = activities.filter(
-          //   (activity) => activity.id !== id
-          // );
-          // setActivities(newActivities);
           Alert(
             "Actividad Eliminada",
             "Se ha eliminado la actividad correctamente",
