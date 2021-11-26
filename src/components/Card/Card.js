@@ -4,7 +4,7 @@ import "./card.scss";
 import { Button } from "../utils/buttons/Button";
 
 const Card = (props) => {
-  const { id, title, image, altText, content } = props;
+  const { id, title, image, altText, content, pathName } = props;
   console.log(image);
 
   return (
@@ -19,7 +19,7 @@ const Card = (props) => {
           className="button"
           title="Ver más"
           url={{
-            pathname: `/novelties/${id}`,
+            pathname: `/${pathName}/${id}`,
             id: id,
           }}
         />
