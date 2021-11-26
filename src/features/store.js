@@ -3,6 +3,8 @@ import authReducer from "./slices/authSlice";
 import usersReducer from "./slices/usersSlice";
 import categoriesReducer from "./slices/categoriesSlice";
 import contactReducer from "./slices/contactsSlice";
+import noveltyReducer from "./slices/noveltySlice";
+import testimonialReducer from "./slices/testimonialSlice";
 
 export default configureStore({
   reducer: {
@@ -10,5 +12,7 @@ export default configureStore({
     users: usersReducer,
     categories: categoriesReducer,
     contacts: contactReducer,
+    novelties: noveltyReducer,
+    testimonials: testimonialReducer,
   },
 });

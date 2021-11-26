@@ -1,0 +1,24 @@
+@import '../../assets/scss/vars';
+
+.testimonial-box {
+    text-align: center;
+    padding: 3rem;
+    background-color: #fff;
+    border-radius: .5rem;
+    box-shadow: $shadow;
+    img {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    h3 {
+        padding: 1rem 0;
+        font-size: 2rem;
+    }
+    p {
+        font-size: 1.7rem;
+        line-height: 1.8;
+        padding: 2rem 0;
+    }
+}

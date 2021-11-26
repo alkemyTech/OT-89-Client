@@ -15,9 +15,10 @@ import { BackOffice } from "../pages/backoffice/BackOffice";
 import getToken from "../helpers/useGetToken";
 import apiService from "../services/server";
 import { NotFound } from "../pages/main/NotFound";
+import { Activities } from "../pages/main/Activities";
 
 export const MainRouter = () => {
-  const [user, setUser ] = useState()
+  const [user, setUser] = useState();
 
   useEffect(() => {
     if (getToken()) {
@@ -25,17 +26,17 @@ export const MainRouter = () => {
         const getUser = async () => {
           const res = await apiService.get("/auth/me", {
             headers: {
-              Authorization: getToken()  
-            }
-          })
-          setUser(res.data.data)
-        }
-        getUser()
+              Authorization: getToken(),
+            },
+          });
+          setUser(res.data.data);
+        };
+        getUser();
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  }, [])
+  }, []);
 
   return (
     <>
@@ -48,18 +49,14 @@ export const MainRouter = () => {
         <Route exact path="/testimonials" component={Testimonials} />
         <Route exact path="/contacts" component={Contacts} />
         <Route exact path="/contribute" component={Contribute} />
-        {user 
-        ? <Route exact path="/profile" component={Profile} />
-        : null
-        }
+        <Route exact path="/activities" component={Activities} />
+        {user && <Route exact path="/profile" component={Profile} />}
         <Route exact path="/activities/:id" component={ViewActivity} />
-        {user && 
-        user.roleId === 1
-        ? <Route path="/backoffice" component={BackOffice} /> 
-        : null
-        }
+        {user && user.roleId === 1 && (
+          <Route path="/backoffice" component={BackOffice} />
+        )}
         <Route path="*" component={NotFound} />
-      </Switch> 
+      </Switch>
       <Footer />
     </>
   );

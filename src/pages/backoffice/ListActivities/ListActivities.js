@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
-import { fakeActivities } from "./fakeActivities";
 import EditActivities from "../../../components/EditActivities/EditActivities";
-
 import "./ListActivities.scss";
+import { Alert, Confirm } from "../../../components/Alert/Alert";
 
 export const ListActivities = () => {
   const [activities, setActivities] = useState([]);
+  const [actividadAModificar, setActividadAModificar] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,29 +21,73 @@ export const ListActivities = () => {
         }
       } catch (error) {
         console.log(error);
-        setActivities(fakeActivities.reverse());
       }
     };
-
     getData();
   }, []);
 
-  console.log(activities);
+  const handleDelete = async (id) => {
+    try {
+      const result = await Confirm(
+        "ELIMINAR ACTIVIDAD",
+        "¿Desea eliminar esta actividad?"
+      );
+      if(result){
+        const res = await apiService.delete(`/activities/${id}`);
+
+        if (res.status === 200) {
+          const newActivities = activities.filter(
+            (activity) => activity.id !== id
+          );
+          setActivities(newActivities);
+          Alert(
+            "Actividad Eliminada",
+            "Se ha eliminado la actividad correctamente",
+            "success"
+          );
+        }
+      }  
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <div className="container-activities">
-      <h1>Listado de Actividades</h1>
-      {/* Aca metemos un campo para que el administrador pueda crear una nueva actividad */}
-      <EditActivities actId={0} />
+      <div className="activities__header">
+           <h3>Listado de Actividades</h3>
       <div className="container-activities__table">
+        <button
+          className="button button-primary"
+          onClick={() => {
+            setActividadAModificar(0);
+            setShowModal(true);
+          }}
+        >
+          Nuevo
+        </button>
+      </div>
+        <EditActivities
+          actId={actividadAModificar}
+          visible={showModal}
+          setVisible={setShowModal}
+        />
         {activities?.map((act) => (
           <div className="container-activities__table--items" key={act.id}>
             <p className="activities__title">{act.name}</p>
-            <EditActivities actId={act.id} />
+
+            <button
+              className="edit-button"
+              onClick={() => {
+                setShowModal(true);
+                setActividadAModificar(act.id);
+              }}
+            >
+              Editar
+            </button>
             <button
               className="button button-secondary"
-              onClick={() =>
-                console.log("se esta borrando el elemento " + act.id)
-              }
+              onClick={() => handleDelete(act.id)}
             >
               Borrar
             </button>

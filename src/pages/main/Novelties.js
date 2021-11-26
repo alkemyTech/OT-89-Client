@@ -9,7 +9,7 @@ export const Novelties = () => {
   useEffect(() => {
     // Petocion a la base de datos con axios
     const getData = async () => {
-      const res = await apiService.get("/entries");
+      const res = await apiService.get("/news");
       if (res.status !== 204) {
         const data = await res.data.data;
         setData(data);
@@ -26,7 +26,7 @@ export const Novelties = () => {
   }, []);
 
   return (
-    <div className="novelties-page">
+    <section className="novelties-page">
       <div>
         <h1>Últimas novedades</h1>
       </div>
@@ -36,9 +36,11 @@ export const Novelties = () => {
             <Card
               key={obj.id}
               id={obj.id}
-              title={obj.title}
+              title={obj.name}
               image={obj.image}
-              altText={obj.altText}
+              content={obj.content}
+              pathName="novelties"
+              altText={"Imagen de la novedad."}
             />
           ))
         ) : (
@@ -47,6 +49,6 @@ export const Novelties = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };

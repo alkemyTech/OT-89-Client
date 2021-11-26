@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Alert, Confirm } from "../../../components/Alert/Alert";
+import EditProfile from "../../../components/EditProfile/EditProfile";
+import ModalViewer from "../../../components/ModalViewer/modalViewer";
 import { usersList } from "../../../features/slices/usersSlice";
 import apiService from "../../../services/server";
 import "./listUsers.scss";
-import { Button } from "../../../components/utils/buttons/Button";
 
 export const ListUsers = () => {
   const dispatch = useDispatch();
@@ -17,20 +19,33 @@ export const ListUsers = () => {
       } catch (e) {
         console.log(e.response.data.data);
       }
-    }
-    exec()
+    };
+    exec();
   }, []);
 
-  //FUNCION PARA ELIMINAR USUARIO:
-
-  // const handleDelete = async (idAEliminar) => {
-  //     try{
-  //         await apiService.delete("/users/" + idAEliminar);
-  //     }
-  //     catch(e){
-  //         console.log(e.response.data);
-  //     }
-  // };
+  const handleDelete = async (idAEliminar) => {
+    try {
+      const result = await Confirm(
+        "ELIMINAR USUARIO",
+        "¿Desea eliminar este usuario?"
+      );
+      if (result) {
+        const res = await apiService.delete("/users/" + idAEliminar);
+        if (res.status === 200) {
+          dispatch(
+            usersList(users.filter((user) => user.userId !== idAEliminar))
+          );
+          Alert(
+            "Usuario Eliminado",
+            "Se ha eliminado el usuario correctamente",
+            "success"
+          );
+        }
+      }
+    } catch (e) {
+      console.log(e.response.data.data);
+    }
+  };
 
   return (
     <div>
@@ -45,21 +60,32 @@ export const ListUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users && users.map((oneUser) =>
-            oneUser ? (
-              <tr key={oneUser.userId}>
-                <td className="borders">{oneUser.firstName}</td>
-                <td className="borders">{oneUser.lastName}</td>
-                <td className="borders">{oneUser.email}</td>
-                <td>
-                  <Button url="/" className="button button-primary" title="Editar" />
-                </td>
-                <td>
-                  <Button url="/" className="button button-secondary" title="Eliminar" />
-                </td>
-              </tr>
-            ) : null
-          )}
+          {users &&
+            users.map((oneUser) =>
+              oneUser ? (
+                <tr key={oneUser.userId}>
+                  <td className="borders">{oneUser.firstName}</td>
+                  <td className="borders">{oneUser.lastName}</td>
+                  <td className="borders">{oneUser.email}</td>
+                  <td>
+                    <ModalViewer buttonName="Editar">
+                      <EditProfile userId={oneUser.userId}></EditProfile>
+                    </ModalViewer>
+                  </td>
+                  <td>
+                    <button
+                      url="/"
+                      className="button button-secondary"
+                      onClick={() => {
+                        handleDelete(oneUser.userId);
+                      }}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ) : null
+            )}
         </tbody>
       </table>
     </div>

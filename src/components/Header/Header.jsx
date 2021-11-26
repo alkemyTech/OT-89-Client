@@ -14,7 +14,7 @@ import { useScroll } from "../../hooks/useScroll";
 export const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.value);
-  const { roleId, image } = user;
+  const { roleId } = user;
   const scroll = useScroll();
   const [isOpen, setOpen] = useState(false);
   const showNavbar = isOpen ? "show-navbar" : "";
@@ -24,7 +24,6 @@ export const Header = () => {
     { title: "Novedades", route: "novelties" },
     { title: "Testimonios", route: "testimonials" },
     { title: "contacto", route: "contacts" },
-    { title: "Contribuye", route: "contribute" },
   ];
 
   const token = useCallback(getToken());
@@ -64,7 +63,7 @@ export const Header = () => {
     });
   }, [location.pathname]);
 
-  const fixedNav = scroll > 200 ? "fixed" : null
+  const fixedNav = scroll > 200 ? "fixed" : null;
 
   return (
     <header className={fixedNav}>
@@ -110,40 +109,32 @@ export const Header = () => {
                 onClick={handleClickProfile}
               />
 
-              {isProfileOpen &&
-                (roleId === 1 ? (
-                  <div className="menu-container">
-                    <ul>
-                      <Link to="/profile" onClick={() => setOpen(false)}>
-                        Editar Perfil
-                      </Link>
-                      <Link
-                        to="/backoffice/"
+              {isProfileOpen && (
+                <div className="menu-container">
+                  <ul>
+                    <Button
+                      url="/profile"
+                      onClick={() => setOpen(false)}
+                      title="Editar Perfil"
+                      className="button"
+                    />
+                    {roleId === 1 && (
+                      <Button
+                        url="/backoffice/"
                         onClick={() => setOpen(false)}
-                      >
-                        BackOffice
-                      </Link>
-                      <Button
-                        url="/"
-                        onClick={handleLogout}
-                        title="Cerrar sesión"
+                        className="button"
+                        title="Backoffice"
                       />
-                    </ul>
-                  </div>
-                ) : (
-                  <div className="menu-container">
-                    <ul>
-                      <Link to="/profile" onClick={() => setOpen(false)}>
-                        Editar Perfil
-                      </Link>
-                      <Button
-                        url="/"
-                        onClick={handleLogout}
-                        title="Cerrar sesión"
-                      />
-                    </ul>
-                  </div>
-                ))}
+                    )}
+                    <Button
+                      url="/"
+                      onClick={handleLogout}
+                      className="button"
+                      title="Cerrar sesión"
+                    />
+                  </ul>
+                </div>
+              )}
             </>
           )}
         </div>

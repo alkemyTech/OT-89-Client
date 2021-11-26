@@ -4,25 +4,27 @@
   display: block;
   border-radius: $border-radius-sm;
   font-size: $font-size-default;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   line-height: 1.8rem;
   cursor: pointer;
   text-decoration: none;
   border: none;
-
+  color: #6479ff;
   padding: $spacing-xs $spacing-xl;
-
+  &:hover {
+    color: lighten($color: #6479ff, $amount: 10);
+  }
   @media (min-width: $breakpoint-lg) {
     padding: $spacing-xs $spacing-xxl;
   }
 }
 
 .button-primary {
-  background-color: $color-ligthblue;
+  background-color: #6479ff;
   color: $color-white;
   &:hover {
-    background-color: lighten($color: $color-ligthblue, $amount: 5);
+    background-color: lighten($color: #6479ff, $amount: 5);
     color: $color-white;
   }
 }
@@ -37,11 +39,11 @@
 }
 
 .button-outline {
-  border: 1px solid $color-ligthblue;
-  color: $color-ligthblue;
+  border: 1px solid #6479ff;
+  color: #6479ff;
 
   &:hover {
-    background-color: lighten($color: $color-ligthblue, $amount: 5);
+    background-color: lighten($color: #6479ff, $amount: 5);
     color: $color-white;
   }
 }

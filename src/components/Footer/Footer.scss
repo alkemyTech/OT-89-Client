@@ -6,9 +6,10 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  border-top: .1rem solid rgba(0,0,0,.3);
+  box-shadow: $shadow;
   font-size: $font-size-default;
   font-weight: 500;
+  background-color: #fff;
 }
 
 .footer-nav {
@@ -44,7 +45,7 @@ footer {
       transition: all 0.1s;
 
       &:hover {
-        color: $color-ligthblue;
+        color: #6479ff;
       }
     }
 
@@ -78,9 +79,14 @@ footer {
     display: inline-block;
     font-size: $font-size-default;
     padding: 0;
-
+    margin: 1rem;
     .icon {
-      width: 3.2rem;
+      font-size: 3.5rem;
+      cursor: pointer;
+      &:hover {
+        color: #6479ff;
+        transition: all .2s linear;
+      }
     }
   }
 }

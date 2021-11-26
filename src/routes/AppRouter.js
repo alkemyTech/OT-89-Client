@@ -15,8 +15,7 @@ export const AppRouter = () => {
             <Switch location={location}>
               <Route path="/auth" component={AuthRouter} />
               <Route path="/" component={MainRouter} />
-              <Route exact path="/404" component={NotFound} />
-              <Redirect to="/404" />
+              <Route path="*" component={NotFound} />
             </Switch>
           </CSSTransition>
         </TransitionGroup>
