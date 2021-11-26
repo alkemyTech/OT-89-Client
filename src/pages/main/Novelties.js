@@ -38,6 +38,7 @@ export const Novelties = () => {
               title={obj.name}
               image={obj.image}
               content={obj.content}
+              pathName="novelties"
               altText={"Imagen de la novedad."}
             />
           ))
