@@ -28,6 +28,14 @@ const TestimonialList = ({ handleModify }) => {
     })();
   }, []);
 
+  useEffect(() => {
+    if (warning === undefined && testimonials.length === 0) {
+      setWarning("Ya no hay mas novedades");
+    } else if (testimonials.length !== 0) {
+      setWarning(undefined);
+    }
+  }, [testimonials]);
+
   return (
     <article className="testimonials__list">
       {warning ? (
