@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
-import { fakeActivities } from "./fakeActivities";
 import EditActivities from "../../../components/EditActivities/EditActivities";
 
 import "./ListActivities.scss";
@@ -22,7 +21,6 @@ export const ListActivities = () => {
         }
       } catch (error) {
         console.log(error);
-        setActivities(fakeActivities.reverse());
       }
     };
 
@@ -47,18 +45,18 @@ export const ListActivities = () => {
   return (
     <div className="container-activities">
       <div className="activities__header">
-           <h3>Listado de Actividades</h3>
-      <div className="container-activities__table">
-        <button
-          className="button button-primary"
-          onClick={() => {
-            setActividadAModificar(0);
-            setShowModal(true);
-          }}
-        >
-          Nuevo
-        </button>
-      </div>
+        <h3>Listado de Actividades</h3>
+        <div className="container-activities__table">
+          <button
+            className="button button-primary"
+            onClick={() => {
+              setActividadAModificar(0);
+              setShowModal(true);
+            }}
+          >
+            Nuevo
+          </button>
+        </div>
         <EditActivities
           actId={actividadAModificar}
           visible={showModal}
