@@ -6,6 +6,7 @@ import { Alert } from "../Alert/Alert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./EditActivities.scss";
+import uploadImage from "../../helpers/uploadImage";
 
 const EditActivities = ({ actId = 0, visible, setVisible }) => {
   const [data, setData] = useState({
@@ -18,21 +19,16 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
     const dataEdited = editor.getData();
     setData({ ...data, content: dataEdited });
   };
+
   const handleSubmitImg = async (image) => {
-    const formData = new FormData();
-      formData.append("image", image);
-      const config = {
-        headers: { "Content-Type": "multipart/form-data" },
-      };
-      const resImg = await apiService.post(`/aws/upload`, formData, config);
-      if (resImg.status === 200) {
-        const url = resImg.data.data.Location
-        await setData({
-          ...data,
-          image: url
-        });
-      }
+    const url = await uploadImage(image);
+    if (typeof url === "string" || url instanceof String) {
+      setData({
+        ...data,
+        image: url,
+      });
     }
+  };
 
   // Peticion de get en caso de que id !== 0
   useEffect(() => {
@@ -68,7 +64,7 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
           const { data, message } = await res.data;
           setData(data);
           Alert("Éxito", message, "success");
-          setVisible(false)
+          setVisible(false);
         } else {
           const { message } = await res.data;
           Alert("Error", message, "error");
@@ -124,7 +120,9 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
                 </div>
                 <div className="input-box">
                   <label className="label">Imagen de la actividad</label>
-                  {data.image && <img className='fotito' src={data.image} alt="Imagen" />}
+                  {data.image && (
+                    <img className="fotito" src={data.image} alt="Imagen" />
+                  )}
                   <input
                     type="file"
                     className="form-control mt-3 text-center"
