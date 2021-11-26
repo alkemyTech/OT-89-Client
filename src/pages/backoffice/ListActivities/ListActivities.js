@@ -53,7 +53,7 @@ export const ListActivities = () => {
   };
   
   return (
-    <div className="container-activities">
+    <section className="container-activities">
       <div className="activities__header">
            <h3>Listado de Actividades</h3>
       <div className="container-activities__table">
@@ -94,6 +94,6 @@ export const ListActivities = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };

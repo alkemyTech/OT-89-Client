@@ -18,7 +18,7 @@ export function EditOrganization() {
   };
 
   return (
-    <>
+    <section>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -51,6 +51,6 @@ export function EditOrganization() {
           </Form>
         )}
       </Formik>
-    </>
+    </section>
   );
 }

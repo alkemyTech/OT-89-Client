@@ -94,7 +94,7 @@ export const EditHomeData = () => {
   };
 
   return (
-    <div>
+    <section>
       <h1>Editar home de página de inicio</h1>
       <Formik
         validationSchema={EditSchema}
@@ -130,13 +130,13 @@ export const EditHomeData = () => {
               />
             </div>
             <div className="d-flex justify-content-center">
-              <button className="btn HomeEditForm__btn my-3" type="submit">
+              <button className="button button-primary my-3" type="submit">
                 Actualizar
               </button>
             </div>
           </form>
         )}
       </Formik>
-    </div>
+    </section>
   );
 };

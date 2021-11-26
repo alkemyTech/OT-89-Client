@@ -5,9 +5,9 @@ import "../../../components/utils/buttons/Button.scss";
 
 const CategoriesScreen = () => {
   return (
-    <main>
+    <section>
       <CategoriesList />
-    </main>
+    </section>
   );
 };
 

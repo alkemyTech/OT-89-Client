@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
 import { Alert, Confirm } from "../../../components/Alert/Alert";
-//import { EditCategories } from "../../../components/EditCategories/EditCategories";
+import { EditCategories } from "../../../components/EditCategories/EditCategories";
 
 import "./Categories.scss";
 
@@ -43,12 +43,12 @@ export const CategoriesList = () => {
     <div className="container-activities">
       <h1>Listado de Categorias</h1>
       {/* Aca metemos un campo para que el administrador pueda crear una nueva actividad */}
-      {/* <EditCategories actId={0} /> */}
+      <EditCategories actId={0} />
       <div className="container-activities__table">
         {categories?.map((category) => (
           <div className="container-activities__table--items" key={category.id}>
             <p className="activities__title">{category.name}</p>
-            {/* <EditCategories actId={category.id} /> */}
+            <EditCategories actId={category.id} />
             <button
               className="button button-secondary"
               onClick={() =>
