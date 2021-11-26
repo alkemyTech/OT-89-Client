@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { Alert, Confirm } from "../../../components/Alert/Alert";
 import apiService from "../../../services/server";
+import uploadImage from "../../../helpers/uploadImage";
 import {
   addNovelty,
   deleteNovelty,
@@ -16,8 +17,14 @@ import { loadCategories } from "../../../features/slices/categoriesSlice";
 const NoveltyModal = ({ isVisible, setIsVisible }) => {
   const [novelty, setNovelty] = useState(blankNovelty);
   const dispatch = useDispatch();
-  const toModify = useSelector((state) => state.novelties.selected);
-  const categories = useSelector((state) => state.categories.categories);
+  const toModify = useSelector(
+    (state) => state.novelties.selected,
+    shallowEqual
+  );
+  const categories = useSelector(
+    (state) => state.categories.categories,
+    shallowEqual
+  );
 
   useEffect(() => {
     if (toModify) {
@@ -56,6 +63,17 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
     setNovelty({ ...novelty, [name]: value });
   };
 
+  const handleImage = async (event) => {
+    const image = event.currentTarget.files[0];
+    const imageUrl = await uploadImage(image);
+    if (typeof imageUrl === "string" || imageUrl instanceof String) {
+      setNovelty({
+        ...novelty,
+        image: imageUrl,
+      });
+    }
+  };
+
   const handleCategory = (e) => {
     setNovelty({ ...novelty, categoryId: e.target.value });
   };
@@ -82,7 +100,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
         })
         .catch((error) => {
           Alert("Error", "Hubo un error inesperado", "warning");
-          console.log(error); /* Se debe importar el alert y pasar el error */
+          console.log(error);
         });
     }
   };
@@ -154,12 +172,15 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
             </div>
             <div className="input-box">
               <label htmlFor="image">Imagen</label>
+              {novelty.image && (
+                <img className="fotito" src={novelty.image} alt="Imagen" />
+              )}
               <input
                 type="file"
                 className="input"
                 name="image"
                 id="image"
-                onChange={handleChange}
+                onChange={handleImage}
                 required
               />
             </div>
@@ -186,49 +207,48 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
                   ))}
               </select>
             </div>
-          </form>
-        </ModalBody>
-        <ModalFooter>
-          <div className="buttons">
-            {novelty.id ? (
-              <>
+            <hr />
+            <div className="buttons">
+              {novelty.id ? (
+                <>
+                  <button
+                    className="button button-outline"
+                    onClick={() => handleEdit(novelty)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="button button-secondary-outline "
+                    onClick={() => handleDelete(novelty.id)}
+                  >
+                    Eliminar
+                  </button>
+                </>
+              ) : (
                 <button
-                  className="button button-outline"
-                  onClick={() => handleEdit(novelty)}
+                  type="submit"
+                  className="button button-primary"
+                  onClick={(e) => {
+                    handleSubmit(e);
+                    setNovelty(blankNovelty);
+                  }}
                 >
-                  Editar
+                  Agregar
                 </button>
-                <button
-                  className="button button-secondary-outline "
-                  onClick={() => handleDelete(novelty.id)}
-                >
-                  Eliminar
-                </button>
-              </>
-            ) : (
+              )}
               <button
-                type="submit"
-                className="button button-primary"
+                className="button button-secondary"
                 onClick={(e) => {
-                  handleSubmit(e)
+                  e.preventDefault();
                   setNovelty(blankNovelty);
+                  setIsVisible(false);
                 }}
               >
-                Agregar
+                Cancelar
               </button>
-            )}
-            <button
-              className="button button-secondary"
-              onClick={(e) => {
-                e.preventDefault();
-                setNovelty(blankNovelty);
-                setIsVisible(false)
-              }}
-            >
-              Cancelar
-            </button>
-          </div>
-        </ModalFooter>
+            </div>
+          </form>
+        </ModalBody>
       </Modal>
     </>
   );
@@ -238,8 +258,7 @@ export default NoveltyModal;
 
 const blankNovelty = {
   name: "",
-  image:
-    "https://static.wikia.nocookie.net/espokemon/images/d/d3/EP023_Haunter_riendo.png/revision/latest/top-crop/width/360/height/450?cb=20090101174317",
+  image: "",
   content: "",
   categoryId: "",
   id: null,
