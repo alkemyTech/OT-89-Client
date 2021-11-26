@@ -1,82 +1,24 @@
-import React from "react";
-import { Formik, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, ErrorMessage, Form, Field } from "formik";
 import apiService from "../../../services/server";
-import * as Yup from "yup";
 import { Alert } from "../../../components/Alert/Alert";
 import "./EditHomeData.scss";
 
 export const EditHomeData = () => {
-  // const [description, setDescription] = useState({
-  //   title: "",
-  //   slider: [
-  //     {
-  //       text: "",
-  //       file: "",
-  //       imgUrl: "",
-  //     },
-  //     {
-  //       text: "",
-  //       file: "",
-  //       imgUrl: "",
-  //     },
-  //     {
-  //       text: "",
-  //       file: "",
-  //       imgUrl: "",
-  //     },
-  //   ],
-  // });
-
-  // Validator
-
-  const EditSchema = Yup.object({
-    title: Yup.string()
-      .min(20, "Too Short!")
-      .max(100, "Too Long!")
-      .required("Required"),
-    slider: Yup.object({
-      text: Yup.string()
-        .min(2, "Too Short!")
-        .max(100, "Too Long!")
-        .required("Required"),
-    }),
-  });
-
-  // Peticion de datos actuales
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const res = await apiService.get("/info-home"); /////////////////////////////////////////////////////////// Revisar endpoint
-  //       if (res.status === 200) {
-  //         const { data } = await res.data;
-  //         setDescription(data);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   getData();
-  // }, []);
+  const [url, setUrl ] = useState();
 
   const initialValues = {
-    image: {},
-    text: "",
+    image: "",
+    textimageone: "",
   };
 
   // Funcion handleSubmit
   const handleSubmitSlides = async (e, values) => {
     e.preventDefault();
-    console.log(values.image);
 
     const formData = new FormData();
     formData.append("image", values.image);
-    // formData.append("imageUrl", values.image.imageUrl);
-    // formData.append("order", values.image.order);
-    // formData.append("text", values.image.text);
 
-    console.log(formData);
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
     };
@@ -86,6 +28,7 @@ export const EditHomeData = () => {
 
       if (response.status === 200) {
         Alert("Éxito", "Imagen subida correctamente", "success");
+        setUrl(response.data.data.Location)
       }
     } catch (err) {
       console.error(err.message);
@@ -93,11 +36,15 @@ export const EditHomeData = () => {
     }
   };
 
+  const handleSaveChanges = (values) => {
+    values.image = url
+    console.log(values)
+  }
+ 
   return (
     <div>
       <h1>Editar home de página de inicio</h1>
       <Formik
-        validationSchema={EditSchema}
         onSubmit={handleSubmitSlides}
         initialValues={initialValues}
       >
@@ -113,22 +60,6 @@ export const EditHomeData = () => {
               }}
             />
 
-            <div className="form-group mb-3 text-center">
-              <input
-                type="text"
-                className="form-control border-0 border-bottom shadow-none my-2"
-                name="text"
-                value={values.text}
-                onChange={(event) => {
-                  setFieldValue("text", event.currentTarget.value);
-                }}
-              />
-              <ErrorMessage
-                name="text"
-                className="invalid-feedback ml-2 d-block"
-                component="div"
-              />
-            </div>
             <div className="d-flex justify-content-center">
               <button className="btn HomeEditForm__btn my-3" type="submit">
                 Actualizar
@@ -136,6 +67,31 @@ export const EditHomeData = () => {
             </div>
           </form>
         )}
+      </Formik>
+      <Formik
+        onSubmit={handleSaveChanges}
+        initialValues={initialValues}
+      >
+        <Form>
+            <div className="box-input">
+            <label htmlFor="textimageone">Email</label>
+              <Field
+                type="textimageone"
+                className="input"
+                name="textimageone"
+                id="textimageone"
+                required
+              />
+              <ErrorMessage name="textimageone">
+                {(error) => <div className="alert">{error}</div>}
+              </ErrorMessage>
+            </div>
+            <div className="box-input">
+              <button type="submit" className="button button-primary">
+                Guardar cambios
+              </button>
+            </div>
+        </Form>
       </Formik>
     </div>
   );
