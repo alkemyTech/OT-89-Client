@@ -26,8 +26,8 @@ export const ListUsers = () => {
   const handleDelete = async (idAEliminar) => {
     try {
       const result = await Confirm(
-        "Usuario Eliminado",
-        "Se ha eliminado el usuario correctamente"
+        "ELIMINAR USUARIO",
+        "¿Desea eliminar este usuario?"
       );
       if (result) {
         const res = await apiService.delete("/users/" + idAEliminar);
@@ -37,7 +37,8 @@ export const ListUsers = () => {
           );
           Alert(
             "Usuario Eliminado",
-            "Se ha eliminado el usuario correctamente"
+            "Se ha eliminado el usuario correctamente",
+            "success"
           );
         }
       }

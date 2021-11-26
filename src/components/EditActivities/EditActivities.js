@@ -18,6 +18,21 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
     const dataEdited = editor.getData();
     setData({ ...data, content: dataEdited });
   };
+  const handleSubmitImg = async (image) => {
+    const formData = new FormData();
+      formData.append("image", image);
+      const config = {
+        headers: { "Content-Type": "multipart/form-data" },
+      };
+      const resImg = await apiService.post(`/aws/upload`, formData, config);
+      if (resImg.status === 200) {
+        const url = resImg.data.data.Location
+        await setData({
+          ...data,
+          image: url
+        });
+      }
+    }
 
   // Peticion de get en caso de que id !== 0
   useEffect(() => {
@@ -46,12 +61,14 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
     });
     if (actId === 0) {
       // Creacion de actividades
-      if (data.name !== "" || data.content !== "") {
+      if (data.name !== "" || data.content !== "" || data.image !== "") {
+        console.log(data);
         const res = await apiService.post("/activities", data);
         if (res.status === 201) {
           const { data, message } = await res.data;
           setData(data);
           Alert("Éxito", message, "success");
+          setVisible(false)
         } else {
           const { message } = await res.data;
           Alert("Error", message, "error");
@@ -94,7 +111,7 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
             initialValues={data}
             onSubmit={(values) => handlerSubmit(values)}
           >
-            {({ values, handleChange, handleSubmit }) => (
+            {({ values, setFieldValue, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit} className="container-form">
                 <div className="input-box">
                   <Field
@@ -103,6 +120,20 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
                     text="text"
                     value={values.name}
                     onChange={handleChange}
+                  />
+                </div>
+                <div className="input-box">
+                  <label className="label">Imagen de la actividad</label>
+                  {data.image && <img className='fotito' src={data.image} alt="Imagen" />}
+                  <input
+                    type="file"
+                    className="form-control mt-3 text-center"
+                    name="image"
+                    values={values.image}
+                    onChange={(event) => {
+                      setFieldValue("image", event.currentTarget.files[0]);
+                      handleSubmitImg(event.currentTarget.files[0]);
+                    }}
                   />
                 </div>
                 <div className="input-box">

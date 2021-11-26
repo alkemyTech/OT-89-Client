@@ -3,17 +3,20 @@ import "./Contact.scss";
 import { Formik } from "formik";
 import { ContactSchema } from "./ContactValidation";
 import apiService from "../../services/server";
+import { Alert } from "../Alert/Alert";
 
 const Contact = () => {
   const [mesage, setMessage] = useState("");
 
+  const fakeSubmit = () => {
+    Alert("Gracias por contactarnos, pronto nos pondremos en contacto contigo.");
+  };
   const handleSubmit = (values) => {
     // Crear objeto de contacto
     apiService
       .post("/contacts", values)
       .then((res) => {
-        console.log(res.data);
-        alert(
+        Alert(
           "sucess",
           "Su mensaje ha sido resivido correctamente, en la brevedad nos pondremos en contacto",
           "success",
@@ -132,7 +135,7 @@ const Contact = () => {
                 <button
                   className="btn btn-primary "
                   type="submit"
-                  onClick={() => console.log("Hola culiao")}
+                  onClick={() => fakeSubmit()}
                 >
                   Enviar
                 </button>
