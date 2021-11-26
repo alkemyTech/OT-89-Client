@@ -5,6 +5,7 @@ import categoriesReducer from "./slices/categoriesSlice";
 import contactReducer from "./slices/contactsSlice";
 import noveltyReducer from "./slices/noveltySlice";
 import testimonialReducer from "./slices/testimonialSlice";
+import activityReducer from "./slices/activitySlice";
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     contacts: contactReducer,
     novelties: noveltyReducer,
     testimonials: testimonialReducer,
+    activities: activityReducer,
   },
 });

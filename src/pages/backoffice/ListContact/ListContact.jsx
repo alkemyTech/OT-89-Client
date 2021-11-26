@@ -25,7 +25,7 @@ export const ListContact = () => {
   }, []);
 
   return (
-    <div>
+    <section>
       <table>
         <thead>
           <tr>
@@ -49,6 +49,6 @@ export const ListContact = () => {
         </tbody>
 
       </table>
-    </div>
+    </section>
   )
 }

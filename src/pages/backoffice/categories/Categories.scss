@@ -12,11 +12,12 @@
   }
 
   section {
+    
     display: inline-grid;
     grid-template-columns: 3fr 1fr 1fr;
     align-items: center;
     justify-items: center;
-    box-shadow: 0 2px $color-grey-light;
+
 
     gap: $spacing-sm;
     font-size: $font-size-small;
@@ -41,5 +42,15 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  padding: 2rem 0 1rem;
+  padding: 2rem 1rem;
+
+}
+
+.container-activities__table{
+  background-color: rgba(0, 47, 255, 0.13);
+  
+}
+
+.edit-categories{
+  padding-bottom: 10px;
 }

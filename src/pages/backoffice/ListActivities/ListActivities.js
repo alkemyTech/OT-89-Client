@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
-import apiService from "../../../services/server";
-import EditActivities from "../../../components/EditActivities/EditActivities";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
+import apiService from "../../../services/server";
+import {
+  deleteActivity,
+  loadActivities,
+} from "../../../features/slices/activitySlice";
+import EditActivities from "../../../components/EditActivities/EditActivities";
 import "./ListActivities.scss";
+import { Alert, Confirm } from "../../../components/Alert/Alert";
 
 export const ListActivities = () => {
-  const [activities, setActivities] = useState([]);
+  const dispatch = useDispatch();
+  const activities = useSelector(
+    (state) => state.activities.activities,
+    shallowEqual
+  );
   const [actividadAModificar, setActividadAModificar] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
@@ -15,7 +25,7 @@ export const ListActivities = () => {
         const res = await apiService.get("/activities");
         const { data } = await res.data;
         if (data.length !== 0) {
-          setActivities(data.reverse());
+          dispatch(loadActivities(res.data.data));
         } else {
           return;
         }
@@ -23,27 +33,36 @@ export const ListActivities = () => {
         console.log(error);
       }
     };
+    if (activities.length === 0) {
+      getData();
+    }
+  }, [activities]);
 
-    getData();
-  }, []);
   const handleDelete = async (id) => {
-    //eliminar de la base de datos
     try {
-      const res = await apiService.delete(`/activities/${id}`);
-      if (res.status === 200) {
-        const newActivities = activities.filter(
-          (activity) => activity.id !== id
-        );
-        setActivities(newActivities);
+      const result = await Confirm(
+        "ELIMINAR ACTIVIDAD",
+        "¿Desea eliminar esta actividad?"
+      );
+      if (result) {
+        const res = await apiService.delete(`/activities/${id}`);
+
+        if (res.status === 200) {
+          dispatch(deleteActivity(id));
+          Alert(
+            "Actividad Eliminada",
+            "Se ha eliminado la actividad correctamente",
+            "success"
+          );
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(activities);
   return (
-    <div className="container-activities">
+    <section className="container-activities">
       <div className="activities__header">
         <h3>Listado de Actividades</h3>
         <div className="container-activities__table">
@@ -84,6 +103,6 @@ export const ListActivities = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };

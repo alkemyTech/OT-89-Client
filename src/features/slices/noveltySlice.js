@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const noveltySlice = createSlice({
-  name: "categories",
+  name: "novelties",
   initialState: initialState,
   reducers: {
     loadNovelties: (state, action) => {
