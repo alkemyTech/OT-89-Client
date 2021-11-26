@@ -1,5 +1,5 @@
+@import '../../assets/scss/vars';
 section {
-    padding: 0 5rem;
     h1 {
         margin: 0;
         padding: 3rem;
@@ -8,6 +8,12 @@ section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
         gap: 3rem;
-        padding: 3rem;
+        padding: 1rem;
+    }
+    @media (min-width: $breakpoint-md) {
+        padding: 0 5rem;
+        .box-container {
+            padding: 1rem;
+        }
     }
 }
