@@ -12,32 +12,7 @@ export const Footer = () => {
   // GET Logo ONG
   const logoONG = "/images/assets/logo.png";
 
-  //! This function will request the image url from a database
-  // const getLogo = async () => {
-  //   const response = await fetch(DATABASE_URL + "/logo");
-  //   const blob = await response.blob();
-  //   const src = URL.createObjectURL(blob);
-  //   return src;
-  // };
-
-
-  //Function to bring social media urls
-
   const [data, setData] = React.useState({});
-
-  React.useEffect(() => {
-    const getSocialMedia = async () => {
-      try{
-        const response = await apiService.get("/public");
-
-        setData(response.data.data);
-      }
-      catch(e){
-        console.log(e.response.data);
-      }
-    }
-    getSocialMedia();
-  }, [])
 
   const itemsLeftFooter = [
     { title: "Noticias", route: "news" },

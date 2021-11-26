@@ -33,6 +33,7 @@
     label {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
+      font-weight: 600;
     }
     .input {
       border-radius: 0.5rem;
@@ -40,6 +41,8 @@
       padding: 0.3rem 0.7rem;
       font-size: 1.8rem;
       resize: none;
+      border: none;
+      box-shadow: $shadow;
     }
     .alert {
       background-color: $color-red;
