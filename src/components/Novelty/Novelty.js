@@ -3,14 +3,18 @@ import { Button } from "../utils/buttons/Button";
 import "./Novelty.scss";
 import apiService from "../../services/server";
 import { Alert } from "../Alert/Alert";
+import { useParams } from "react-router-dom";
 
-export const Novelty = ({ id }) => {
+export const Novelty = () => {
+  const { id } = useParams();
   const [data, setData] = useState({
     id: 0,
     title: "",
     description: [],
     image: "",
   });
+
+  console.log("Este id es del novelty" + id);
 
   useEffect(() => {
     const getData = async () => {
@@ -37,8 +41,8 @@ export const Novelty = ({ id }) => {
     <div className="Novelty">
       <img className="Novelty__img" src={data.image} alt={data.title} />
       <div className="Novelty__description">
-        <h2>{data.title}</h2>
-        <h3>{data.description}</h3>
+        <h2>{data.name}</h2>
+        <div dangerouslySetInnerHTML={{ __html: data.content }} />
         <div className="buttons">
           <Button
             className="button button-primary"

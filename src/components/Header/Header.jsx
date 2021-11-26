@@ -14,7 +14,7 @@ import { useScroll } from "../../hooks/useScroll";
 export const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.value);
-  const { roleId, image } = user;
+  const { roleId } = user;
   const scroll = useScroll();
   const [isOpen, setOpen] = useState(false);
   const showNavbar = isOpen ? "show-navbar" : "";
@@ -24,7 +24,6 @@ export const Header = () => {
     { title: "Novedades", route: "novelties" },
     { title: "Testimonios", route: "testimonials" },
     { title: "contacto", route: "contacts" },
-    { title: "Contribuye", route: "contribute" },
   ];
 
   const token = useCallback(getToken());
@@ -64,7 +63,7 @@ export const Header = () => {
     });
   }, [location.pathname]);
 
-  const fixedNav = scroll > 200 ? "fixed" : null
+  const fixedNav = scroll > 200 ? "fixed" : null;
 
   return (
     <header className={fixedNav}>
@@ -114,12 +113,13 @@ export const Header = () => {
                 (roleId === 1 ? (
                   <div className="menu-container">
                     <ul>
-                      <Button 
-                        url="/profile" 
-                        onClick={() => setOpen(false)} title="Editar Perfil"
+                      <Button
+                        url="/profile"
+                        onClick={() => setOpen(false)}
+                        title="Editar Perfil"
                         className="button"
                       />
-                        
+
                       <Button
                         url="/backoffice/"
                         onClick={() => setOpen(false)}

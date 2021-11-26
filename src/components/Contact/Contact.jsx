@@ -2,14 +2,30 @@ import React, { useState } from "react";
 import "./Contact.scss";
 import { Formik } from "formik";
 import { ContactSchema } from "./ContactValidation";
+import apiService from "../../services/server";
 
 const Contact = () => {
   const [mesage, setMessage] = useState("");
 
-  const handleOnSubmit = (valuesForm) => {
+  const handleSubmit = (values) => {
+    // Crear objeto de contacto
+    apiService
+      .post("/contacts", values)
+      .then((res) => {
+        console.log(res.data);
+        alert(
+          "sucess",
+          "Su mensaje ha sido resivido correctamente, en la brevedad nos pondremos en contacto",
+          "success",
+          6000
+        );
+        //Falta mostrar el mensaje al user
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     ///for access tu values use valuesForm object: example valuesForm.name
-    console.log(JSON.stringify(valuesForm));
-    setMessage("Su mensaje fue recepcionado a la brevedad se contestara");
+    // setMessage("Su mensaje fue recepcionado a la brevedad se contestara");
   };
 
   return (
@@ -17,12 +33,12 @@ const Contact = () => {
       <Formik
         initialValues={{
           name: "",
-          lastName: "",
+          phone: "",
           email: "",
           message: "",
         }}
         validationSchema={ContactSchema}
-        onSubmit={handleOnSubmit}
+        onSubmit={handleSubmit}
       >
         {({
           values,
@@ -34,47 +50,43 @@ const Contact = () => {
         }) => (
           <div className="container py-4">
             <h2 className="text-center">Contáctate con nosotros</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3 names">
-                <div className="row">
-                  <div className="col">
-                    <label className="form-label" htmlFor="name">
-                      Nombre
-                    </label>
-                    <input
-                      className="form-control"
-                      id="name"
-                      type="text"
-                      name="name"
-                      placeholder="Nombre"
-                      value={values.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    {errors.name && touched.name ? (
-                      <div className="red">{errors.name}</div>
-                    ) : null}
-                  </div>
-                  <div className="col">
-                    <label className="form-label" htmlFor="lastName">
-                      Apellido
-                    </label>
-                    <input
-                      className="form-control"
-                      id="lastName"
-                      type="text"
-                      name="lastName"
-                      placeholder="Apellido"
-                      value={values.lastName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    {errors.lastName && touched.lastName ? (
-                      <div className="red">{errors.lastName}</div>
-                    ) : null}
-                    <div />
-                  </div>
-                </div>
+            <form onSubmit={(values) => handleSubmit(values)}>
+              <div className="col">
+                <label className="form-label" htmlFor="name">
+                  Nombre
+                </label>
+                <input
+                  className="form-control"
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="Nombre completo"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.name && touched.name ? (
+                  <div className="red">{errors.name}</div>
+                ) : null}
+              </div>
+              <div className="col">
+                <label className="form-label" htmlFor="phone">
+                  Celular
+                </label>
+                <input
+                  className="form-control"
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  placeholder="(código de area) Número"
+                  value={values.lastName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.lastName && touched.lastName ? (
+                  <div className="red">{errors.lastName}</div>
+                ) : null}
+                <div />
               </div>
 
               <div className="mb-3">
@@ -117,7 +129,11 @@ const Contact = () => {
               </div>
               {mesage}
               <div className="d-grid">
-                <button className="btn btn-primary btn-lg" type="submit">
+                <button
+                  className="btn btn-primary "
+                  type="submit"
+                  onClick={() => console.log("Hola culiao")}
+                >
                   Enviar
                 </button>
               </div>

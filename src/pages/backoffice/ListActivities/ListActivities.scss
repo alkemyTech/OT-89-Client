@@ -3,6 +3,21 @@
 .container-activities {
   width: 100%;
   text-align: center;
+
+  .activities__header {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
   &__table {
     align-items: center;
     &--items {

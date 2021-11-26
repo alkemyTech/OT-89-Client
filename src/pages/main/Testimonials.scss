@@ -1,0 +1,12 @@
+section {
+    h1 {
+        margin: 0;
+        padding: 3rem;
+    }
+    .box-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+        gap: 3rem;
+        padding: 3rem;
+    }
+}
