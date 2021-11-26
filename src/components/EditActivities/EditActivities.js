@@ -61,9 +61,9 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
         console.log(data);
         const res = await apiService.post("/activities", data);
         if (res.status === 201) {
-          const { data, message } = await res.data;
+          const { data } = await res.data;
           setData(data);
-          Alert("Éxito", message, "success");
+          Alert("Éxito", "Actividad creada con éxito!", "success");
           setVisible(false);
         } else {
           const { message } = await res.data;

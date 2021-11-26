@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../../services/server";
-import { fakeActivities } from "./fakeActivities";
 import EditActivities from "../../../components/EditActivities/EditActivities";
-
 import "./ListActivities.scss";
+import { Alert, Confirm } from "../../../components/Alert/Alert";
 
 export const ListActivities = () => {
   const [activities, setActivities] = useState([]);
@@ -22,28 +21,37 @@ export const ListActivities = () => {
         }
       } catch (error) {
         console.log(error);
-        setActivities(fakeActivities.reverse());
       }
     };
-
     getData();
   }, []);
+
   const handleDelete = async (id) => {
-    //eliminar de la base de datos
     try {
-      const res = await apiService.delete(`/activities/${id}`);
-      if (res.status === 200) {
-        const newActivities = activities.filter(
-          (activity) => activity.id !== id
-        );
-        setActivities(newActivities);
-      }
+      const result = await Confirm(
+        "ELIMINAR ACTIVIDAD",
+        "¿Desea eliminar esta actividad?"
+      );
+      if(result){
+        const res = await apiService.delete(`/activities/${id}`);
+
+        if (res.status === 200) {
+          const newActivities = activities.filter(
+            (activity) => activity.id !== id
+          );
+          setActivities(newActivities);
+          Alert(
+            "Actividad Eliminada",
+            "Se ha eliminado la actividad correctamente",
+            "success"
+          );
+        }
+      }  
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(activities);
+  
   return (
     <div className="container-activities">
       <div className="activities__header">
