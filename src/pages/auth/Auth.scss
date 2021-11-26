@@ -8,8 +8,20 @@
   justify-content: center;
   align-items: center;
 }
+.Contact-content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .auth__content {
   text-align: center;
+  box-shadow: $shadow;
+  padding: 1rem 3rem;
+  margin: 10rem auto;
+  background-color: $color-white;
+  border-radius: .5rem;
   img {
     margin-bottom: 1rem;
   }
@@ -21,12 +33,16 @@
     label {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
+      font-weight: 600;
     }
     .input {
       border-radius: 0.5rem;
       outline: none;
       padding: 0.3rem 0.7rem;
       font-size: 1.8rem;
+      resize: none;
+      border: none;
+      box-shadow: $shadow;
     }
     .alert {
       background-color: $color-red;

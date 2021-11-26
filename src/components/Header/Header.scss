@@ -104,11 +104,11 @@ header {
 }
 
 .menu-container {
-  position: absolute;
+  position: relative;
   width: 25rem;
-  height: 12rem;
-  top: 10rem;
-  left: -.5rem;
+  height: auto;
+  top: 30%;
+  left: 40%;
   transform: translate(-40%, -50%);
   box-shadow: $shadow;
   border-radius: .3rem;
@@ -174,8 +174,9 @@ header {
     align-items: center;
     justify-content: center;
     width: 25rem;
-    height: 12rem;
-    top: 10rem;
+    min-height: 9.375rem;
+    height: auto;
+    top: 9rem;
     left: -8rem;
     background-color: $color-white;
     transform: translate(-50%, -50%);

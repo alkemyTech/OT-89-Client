@@ -109,45 +109,32 @@ export const Header = () => {
                 onClick={handleClickProfile}
               />
 
-              {isProfileOpen &&
-                (roleId === 1 ? (
-                  <div className="menu-container">
-                    <ul>
-                      <Button
-                        url="/profile"
-                        onClick={() => setOpen(false)}
-                        title="Editar Perfil"
-                        className="button"
-                      />
-
+              {isProfileOpen && (
+                <div className="menu-container">
+                  <ul>
+                    <Button
+                      url="/profile"
+                      onClick={() => setOpen(false)}
+                      title="Editar Perfil"
+                      className="button"
+                    />
+                    {roleId === 1 && (
                       <Button
                         url="/backoffice/"
                         onClick={() => setOpen(false)}
                         className="button"
                         title="Backoffice"
                       />
-                      <Button
-                        url="/"
-                        onClick={handleLogout}
-                        className="button"
-                        title="Cerrar sesión"
-                      />
-                    </ul>
-                  </div>
-                ) : (
-                  <div className="menu-container">
-                    <ul>
-                      <Link to="/profile" onClick={() => setOpen(false)}>
-                        Editar Perfil
-                      </Link>
-                      <Button
-                        url="/"
-                        onClick={handleLogout}
-                        title="Cerrar sesión"
-                      />
-                    </ul>
-                  </div>
-                ))}
+                    )}
+                    <Button
+                      url="/"
+                      onClick={handleLogout}
+                      className="button"
+                      title="Cerrar sesión"
+                    />
+                  </ul>
+                </div>
+              )}
             </>
           )}
         </div>

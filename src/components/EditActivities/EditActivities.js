@@ -6,6 +6,7 @@ import { Alert } from "../Alert/Alert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./EditActivities.scss";
+import uploadImage from "../../helpers/uploadImage";
 
 const EditActivities = ({ actId = 0, visible, setVisible }) => {
   const [data, setData] = useState({
@@ -17,6 +18,16 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
   const handlerchange = (event, editor) => {
     const dataEdited = editor.getData();
     setData({ ...data, content: dataEdited });
+  };
+
+  const handleSubmitImg = async (image) => {
+    const url = await uploadImage(image);
+    if (typeof url === "string" || url instanceof String) {
+      setData({
+        ...data,
+        image: url,
+      });
+    }
   };
 
   // Peticion de get en caso de que id !== 0
@@ -46,12 +57,14 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
     });
     if (actId === 0) {
       // Creacion de actividades
-      if (data.name !== "" || data.content !== "") {
+      if (data.name !== "" || data.content !== "" || data.image !== "") {
+        console.log(data);
         const res = await apiService.post("/activities", data);
         if (res.status === 201) {
           const { data, message } = await res.data;
           setData(data);
           Alert("Éxito", message, "success");
+          setVisible(false);
         } else {
           const { message } = await res.data;
           Alert("Error", message, "error");
@@ -94,7 +107,7 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
             initialValues={data}
             onSubmit={(values) => handlerSubmit(values)}
           >
-            {({ values, handleChange, handleSubmit }) => (
+            {({ values, setFieldValue, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit} className="container-form">
                 <div className="input-box">
                   <Field
@@ -103,6 +116,22 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
                     text="text"
                     value={values.name}
                     onChange={handleChange}
+                  />
+                </div>
+                <div className="input-box">
+                  <label className="label">Imagen de la actividad</label>
+                  {data.image && (
+                    <img className="fotito" src={data.image} alt="Imagen" />
+                  )}
+                  <input
+                    type="file"
+                    className="form-control mt-3 text-center"
+                    name="image"
+                    values={values.image}
+                    onChange={(event) => {
+                      setFieldValue("image", event.currentTarget.files[0]);
+                      handleSubmitImg(event.currentTarget.files[0]);
+                    }}
                   />
                 </div>
                 <div className="input-box">

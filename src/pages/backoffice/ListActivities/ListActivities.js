@@ -52,8 +52,8 @@ export const ListActivities = () => {
         <button
           className="button button-primary"
           onClick={() => {
-            setShowModal(true);
             setActividadAModificar(0);
+            setShowModal(true);
           }}
         >
           Nuevo
