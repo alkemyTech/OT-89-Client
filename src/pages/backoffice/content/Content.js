@@ -9,6 +9,7 @@ import { ListUsers } from "../ListUsers/ListUsers";
 import { ListContact } from "../ListContact/ListContact";
 import CategoriesScreen from "../categories/CategoriesScreen";
 import NoveltiesScreen from "../novelties/NoveltiesScreen";
+import TestimonialScreen from "../Testimonials/TestimonialsScreen"
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -21,6 +22,8 @@ export const Content = ({ openAside, isLeft }) => {
         className={left}
         onClick={openAside}
       />
+
+
       <Switch>
         <Route
           path="/backoffice/"
@@ -52,7 +55,11 @@ export const Content = ({ openAside, isLeft }) => {
           component={NoveltiesScreen}
           exact
         />
-
+        <Route
+          path="/backoffice/testimonials"
+          component={TestimonialScreen}
+          exact
+        />
       </Switch>
     </section>
   );

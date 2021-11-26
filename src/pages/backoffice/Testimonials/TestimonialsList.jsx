@@ -2,26 +2,23 @@ import React, { useEffect, useState } from "react";
 import apiService from "../../../services/server";
 import { Spinner } from "../../../components/spinner/Spinner";
 import WarningDisplay from "../../../components/utils/warning/WarningDisplay";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { loadNovelties } from "../../../features/slices/noveltySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loadTestimonials } from "../../../features/slices/testimonialSlice";
 
-const NoveltiesList = ({ handleModify }) => {
+const TestimonialList = ({ handleModify }) => {
   const dispatch = useDispatch();
-  const novelties = useSelector(
-    (state) => state.novelties.novelties,
-    shallowEqual
-  );
+  const testimonials = useSelector((state) => state.testimonials.testimonials);
   const [warning, setWarning] = useState(null);
 
   useEffect(() => {
     (async () => {
       await apiService
-        .get("/news")
+        .get("/testimonials")
         .then((res) => {
           if (res.status === 200) {
-            dispatch(loadNovelties(res.data.data));
+            dispatch(loadTestimonials(res.data));
           } else {
-            setWarning("No hay novedades que mostrar");
+            setWarning("No hay testimonios que mostrar");
           }
         })
         .catch((err) => {
@@ -31,26 +28,18 @@ const NoveltiesList = ({ handleModify }) => {
     })();
   }, []);
 
-  useEffect(() => {
-    if (warning === undefined && novelties.length === 0) {
-      setWarning("Ya no hay mas novedades");
-    } else if (novelties.length !== 0) {
-      setWarning(undefined);
-    }
-  }, [novelties]);
-
   return (
-    <article className="novelties__list">
+    <article className="testimonials__list">
       {warning ? (
         <WarningDisplay text={warning} />
-      ) : novelties.length === 0 ? (
+      ) : testimonials?.length === 0 ? (
         <Spinner size={50} center />
       ) : (
-        novelties.map((novelty) => (
-          <NoveltyItem
-            novelty={novelty}
+        testimonials?.map((testimonial) => (
+          <TestimonialItem
+            testimonial={testimonial}
             handleModify={handleModify}
-            key={novelty.id}
+            key={testimonial.id}
           />
         ))
       )}
@@ -58,13 +47,13 @@ const NoveltiesList = ({ handleModify }) => {
   );
 };
 
-export default NoveltiesList;
+export default TestimonialList;
 
-const NoveltyItem = ({ novelty, handleModify }) => {
-  const { name, image, content } = novelty;
+const TestimonialItem = ({ testimonial, handleModify }) => {
+  const { name, image, content } = testimonial;
   return (
     <>
-      <article className="novelty__item">
+      <article className="testimonial__item">
         <div className="__description">
           <span>{name}</span>
           <div
@@ -72,12 +61,12 @@ const NoveltyItem = ({ novelty, handleModify }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <a href={image} target="_blank" rel="noopener noreferrer">
+        <a href={image} target="_blank" rel='noopener noreferrer'>
           Imagen
         </a>
         <button
           className="button button-outline"
-          onClick={() => handleModify(novelty)}
+          onClick={() => handleModify(testimonial)}
         >
           Modificar
         </button>

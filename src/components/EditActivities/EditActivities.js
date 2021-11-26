@@ -6,19 +6,16 @@ import { Alert } from "../Alert/Alert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./EditActivities.scss";
-import ModalViewer from "../ModalViewer/modalViewer";
 
-const EditActivities = ({ actId = 0 }) => {
-  const [visible, setVisible] = useState(false);
-
+const EditActivities = ({ actId = 0, visible, setVisible }) => {
   const [data, setData] = useState({
     name: "",
     content: "",
+    image: "", //TODO: server pide una imagen
   });
 
-  const handlerchange = (editor) => {
+  const handlerchange = (event, editor) => {
     const dataEdited = editor.getData();
-    console.log(data);
     setData({ ...data, content: dataEdited });
   };
 
@@ -86,10 +83,7 @@ const EditActivities = ({ actId = 0 }) => {
   };
 
   return (
-    <div>
-      <button className="edit-button" onClick={() => setVisible(!visible)}>
-        {actId !== 0 ? "Editar" : "Crear actividad"}
-      </button>
+    <>
       {visible && (
         <div className="modal-activity">
           <div
@@ -113,21 +107,12 @@ const EditActivities = ({ actId = 0 }) => {
                 </div>
                 <div className="input-box">
                   <label htmlFor="content">Descripcion de la actividad</label>
-                  {actId !== 0 ? (
-                    <CKEditor
-                      name="content"
-                      editor={ClassicEditor}
-                      data={values.content}
-                      onChange={handlerchange}
-                    />
-                  ) : (
-                    <CKEditor
-                      name="content"
-                      editor={ClassicEditor}
-                      data={values.content}
-                      onChange={handlerchange}
-                    />
-                  )}
+                  <CKEditor
+                    name="content"
+                    editor={ClassicEditor}
+                    data={values.content}
+                    onChange={handlerchange}
+                  />
                 </div>
                 <div className="buttonsModal">
                   <button
@@ -149,7 +134,7 @@ const EditActivities = ({ actId = 0 }) => {
           </Formik>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

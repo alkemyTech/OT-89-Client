@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "../utils/buttons/Button";
-import "./Novelty.scss";
+import "./Testimonials.scss";
 import apiService from "../../services/server";
 import { Alert } from "../Alert/Alert";
-import { useParams } from "react-router";
 
-export const Novelty = () => {
-  const {id} = useParams();
+export const Testimonial = ({ id }) => {
   const [data, setData] = useState({
     id: 0,
     title: "",
@@ -14,12 +12,10 @@ export const Novelty = () => {
     image: "",
   });
 
-  console.log("Este id es del novelty" + id);
-
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await apiService.get(`/news/${id}`);
+        const response = await apiService.get(`/testimonials/${id}`);
 
         if (!response) {
           Alert(
@@ -38,16 +34,16 @@ export const Novelty = () => {
   }, []);
 
   return (
-    <div className="Novelty">
-      <img className="Novelty__img" src={data.image} alt={data.title} />
-      <div className="Novelty__description">
-        <h2>{data.name}</h2>
-        <div dangerouslySetInnerHTML={{ __html: data.content }} />
+    <div className="Testimonial">
+      <img className="Testimonial__img" src={data.image} alt={data.title} />
+      <div className="Testimonial__description">
+        <h2>{data.title}</h2>
+        <h3>{data.description}</h3>
         <div className="buttons">
           <Button
             className="button button-primary"
-            title="Volver a novedades"
-            url="/novelties"
+            title="Volver a testimonios"
+            url="/testimonials"
           />
         </div>
       </div>
