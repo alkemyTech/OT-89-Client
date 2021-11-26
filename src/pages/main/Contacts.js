@@ -82,7 +82,7 @@ export const Contacts = () => {
                     onBlur={handleBlur}
                   />
                   {errors.lastName && touched.lastName ? (
-                    <div className="red">{errors.lastName}</div>
+                    <div className="alert">{errors.lastName}</div>
                   ) : null}
                   <div />
                 </div>
@@ -122,7 +122,7 @@ export const Contacts = () => {
                     onBlur={handleBlur}
                   />
                   {errors.message && touched.message ? (
-                    <div className="red">{errors.message}</div>
+                    <div className="alert">{errors.message}</div>
                   ) : null}
                 </div>
                 {mesage}
