@@ -36,11 +36,9 @@ export const CategoriesList = () => {
         console.error(err.message);
       }
     };
-
     getData();
   }, []);
 
-  console.log(categories);
   return (
     <div className="container-activities">
       <h1>Listado de Categorias</h1>

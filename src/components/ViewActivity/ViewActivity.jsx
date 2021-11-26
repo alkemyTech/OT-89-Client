@@ -58,7 +58,7 @@ const Activity = () => {
         <div className="buttons">
           <Button
             className="button button-primary"
-            title="Volver a actividades bro"
+            title="Volver a actividades"
             url="/activities"
           />
         </div>
