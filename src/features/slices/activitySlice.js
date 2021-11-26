@@ -13,13 +13,18 @@ export const activitySlice = createSlice({
       state.activities = action.payload;
     },
     deleteActivity: (state, action) => {
-      state.activities = state.activities.filter((a) => a.id !== action.payload);
+      state.activities = state.activities.filter(
+        (a) => a.id !== action.payload
+      );
     },
     editActivity: (state, action) => {
       const index = state.activities
         .map((novel) => novel.id)
         .indexOf(action.payload.id);
-      state.activities[index] = action.payload;
+      state.activities[index] = {
+        ...state.activities[index],
+        ...action.payload,
+      };
     },
     selectActivity: (state, action) => {
       if (action.payload)

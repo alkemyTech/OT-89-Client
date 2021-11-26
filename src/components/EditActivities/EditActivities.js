@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import apiService from "../../services/server";
 import { Field, Formik } from "formik";
-import { Alert } from "../Alert/Alert";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "./EditActivities.scss";
+import { useDispatch } from "react-redux";
+
+import apiService from "../../services/server";
 import uploadImage from "../../helpers/uploadImage";
+import { Alert } from "../Alert/Alert";
+import "./EditActivities.scss";
+import { addActivity, editActivity } from "../../features/slices/activitySlice";
 
 const EditActivities = ({ actId = 0, visible, setVisible }) => {
-  const [data, setData] = useState({
-    name: "",
-    content: "",
-    image: "", //TODO: server pide una imagen
-  });
+  const dispatch = useDispatch();
+  const [data, setData] = useState(blankActivity);
 
   const handlerchange = (event, editor) => {
     const dataEdited = editor.getData();
@@ -56,13 +56,14 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
       name: values.name,
     });
     if (actId === 0) {
-      // Creacion de actividades
+      // CREAR NUEVA actividad
       if (data.name !== "" || data.content !== "" || data.image !== "") {
         console.log(data);
         const res = await apiService.post("/activities", data);
         if (res.status === 201) {
           const { data } = await res.data;
-          setData(data);
+          dispatch(addActivity(data));
+          setData(blankActivity);
           Alert("Éxito", "Actividad creada con éxito!", "success");
           setVisible(false);
         } else {
@@ -72,26 +73,25 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
       } else {
         Alert("Error", "Tienes que completar todos los campos", "error");
       }
-    } else {
-      if (data.name !== "" || data.content !== "") {
-        //actualizacion de actividades
-        const res = await apiService.put(`/activities/${actId}`, data);
-        if (res.status === 200) {
-          const { data } = await res.data;
-          setData(data);
-          Alert(
-            "Éxito",
-            "El cambio fue realizado satisfactoriamente",
-            "success"
-          );
-          setVisible(false);
-        } else {
-          const { message } = await res.data;
-          Alert("error", message);
-        }
+    } else if (data.name !== "" || data.content !== "" || data.image !== "") {
+      //ACTUALIZAR actividad
+      const res = await apiService.put(`/activities/${actId}`, data);
+      console.log(res);
+      if (res.status === 200) {
+        console.log("Entre al status 200");
+        const { data } = await res.data;
+        data.id = actId;
+        console.log(data);
+        dispatch(editActivity(data));
+        setData(blankActivity);
+        Alert("Éxito", "El cambio fue realizado satisfactoriamente", "success");
+        setVisible(false);
       } else {
-        Alert("Error", "Tienes que completar todos los campos", "error");
+        const { message } = await res.data;
+        Alert("error", message);
       }
+    } else {
+      Alert("Error", "Tienes que completar todos los campos", "error");
     }
   };
 
@@ -172,3 +172,9 @@ EditActivities.propTypes = {
 };
 
 export default EditActivities;
+
+const blankActivity = {
+  name: "",
+  content: "",
+  image: "",
+};
