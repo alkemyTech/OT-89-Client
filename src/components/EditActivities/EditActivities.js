@@ -58,7 +58,6 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
     if (actId === 0) {
       // CREAR NUEVA actividad
       if (data.name !== "" || data.content !== "" || data.image !== "") {
-        console.log(data);
         const res = await apiService.post("/activities", data);
         if (res.status === 201) {
           const { data } = await res.data;
@@ -76,12 +75,9 @@ const EditActivities = ({ actId = 0, visible, setVisible }) => {
     } else if (data.name !== "" || data.content !== "" || data.image !== "") {
       //ACTUALIZAR actividad
       const res = await apiService.put(`/activities/${actId}`, data);
-      console.log(res);
       if (res.status === 200) {
-        console.log("Entre al status 200");
         const { data } = await res.data;
         data.id = actId;
-        console.log(data);
         dispatch(editActivity(data));
         setData(blankActivity);
         Alert("Éxito", "El cambio fue realizado satisfactoriamente", "success");
