@@ -14,9 +14,9 @@ const Card = (props) => {
       </div>
       <div className="content">
         <h2>{title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} className="text"/>
         <Button
-          className="button"
+          className="button button-primary"
           title="Ver más"
           url={{
             pathname: `/${pathName}/${id}`,

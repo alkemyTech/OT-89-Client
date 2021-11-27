@@ -1,21 +1,19 @@
 @import "../../../assets/scss/vars";
 
 .novelties {
-  width: 95%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-content: center;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: $spacing-sm;
-
+  margin-bottom: 2rem;
   h1 {
     margin: 0;
+    padding: 0;
   }
 }
 
 .novelties__list {
-  width: 95%;
   display: flex;
   flex-direction: column;
 

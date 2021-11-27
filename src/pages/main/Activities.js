@@ -25,7 +25,7 @@ export const Activities = () => {
   }, []);
 
   return (
-    <div className="novelties-page">
+    <section className="novelties-page">
       <div>
         <h1>Actividades</h1>
       </div>
@@ -49,6 +49,6 @@ export const Activities = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };

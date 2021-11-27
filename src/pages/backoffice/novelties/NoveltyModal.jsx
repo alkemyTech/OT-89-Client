@@ -103,7 +103,6 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           console.log(error);
         });
     }
-  };
 
   const handleDelete = async (id) => {
     const confirmation = await Confirm(

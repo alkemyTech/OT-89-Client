@@ -2,9 +2,10 @@
     display: flex;
 }
 .novelties-page__no-items{
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+    gap: 3rem;
+    padding: 1rem;
 }
 .novelties-page__items{
 

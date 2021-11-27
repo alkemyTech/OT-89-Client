@@ -19,7 +19,7 @@ const NoveltiesScreen = () => {
   return (
     <section>
       <div className="novelties">
-        <h1>Novedades</h1>
+      <h1>Novedades</h1>
         <button
           className="button button-primary"
           onClick={() => {

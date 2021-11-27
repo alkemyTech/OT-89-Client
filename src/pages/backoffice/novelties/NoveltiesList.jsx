@@ -72,7 +72,7 @@ const NoveltyItem = ({ novelty, handleModify }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <a href={image} target="_blank" rel="noopener noreferrer">
+        <a href={image} target="_blank" rel="noopener noreferrer" className="button">
           Imagen
         </a>
         <button

@@ -38,11 +38,11 @@ export const Novelty = () => {
   }, []);
 
   return (
-    <div className="Novelty">
+    <section className="Novelty">
       <img className="Novelty__img" src={data.image} alt={data.title} />
       <div className="Novelty__description">
         <h2>{data.name}</h2>
-        <div dangerouslySetInnerHTML={{ __html: data.content }} />
+        <div dangerouslySetInnerHTML={{ __html: data.content }} className="text"/>
         <div className="buttons">
           <Button
             className="button button-primary"
@@ -51,6 +51,6 @@ export const Novelty = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
