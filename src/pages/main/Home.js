@@ -4,6 +4,7 @@ import { LastNovelties } from '../../components/LastNovelties/LastNovelties'
 import { Spinner } from "../../components/spinner/Spinner";
 import apiService from "../../services/server"; 
 import { Testimonial } from "../../components/Testimonial/Testimonial";
+import './Testimonials.scss';
 
 export function Home() {
   const [ data, setData ] = useState({
