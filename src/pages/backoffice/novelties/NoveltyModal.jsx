@@ -84,20 +84,25 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
   };
 
   const handleSubmit = async (event) => {
-    await apiService
-      .post("/news", novelty)
-      .then((res) => {
-        if (res.status === 201) {
-          dispatch(addNovelty(res.data.data));
-          setNovelty(blankNovelty);
-          setIsVisible(false);
-        }
-      })
-      .catch((error) => {
-        Alert("Error", "Hubo un error inesperado", "warning");
-        console.log(error);
-      });
-  };
+    const confirmation = await Confirm(
+      "Agregar novedad",
+      "Esta intentando crear una novedad, ¿desea continuar?"
+    );
+    if (confirmation) {
+      await apiService
+        .post("/news", novelty)
+        .then((res) => {
+          if (res.status === 201) {
+            dispatch(addNovelty(res.data.data));
+            setNovelty(blankNovelty);
+            setIsVisible(false);
+          }
+        })
+        .catch((error) => {
+          Alert("Error", "Hubo un error inesperado", "warning");
+          console.log(error);
+        });
+    }
 
   const handleDelete = async (id) => {
     const confirmation = await Confirm(
