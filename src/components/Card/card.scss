@@ -37,11 +37,13 @@
           font-size: 2.5rem;
           text-align: center;
         }
-        p {
+        .text {
           font-size: 1.5rem;
           color: $color-black;
           padding: 0.5rem 0;
           line-height: 1.7;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
