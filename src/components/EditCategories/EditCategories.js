@@ -15,7 +15,7 @@ export const EditCategories = ({ actId = 0 }) => {
     description: "",
   });
 
-  const handlerchange = (editor) => {
+  const handlerchange = (event,editor) => {
     const dataEdited = editor.getData();
     console.log(data);
     setData({ ...data, description: dataEdited });
