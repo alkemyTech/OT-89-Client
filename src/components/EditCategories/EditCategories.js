@@ -7,7 +7,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./EditCategories.scss";
 
-export const EditCategories = ({ actId = 0 }) => {
+export const EditCategories = ({ actId = 0, setCategories, categories }) => {
   const [visible, setVisible] = useState(false);
 
   const [data, setData] = useState({
@@ -24,7 +24,7 @@ export const EditCategories = ({ actId = 0 }) => {
   // Peticion de get en caso de que id !== 0
   useEffect(() => {
     const getData = async () => {
-      const res = await apiService.get(`/activities/${actId}`);
+      const res = await apiService.get(`/categories/${actId}`);
       const { data } = await res.data;
       if (data.length === 0) {
         setData(data);
@@ -49,11 +49,14 @@ export const EditCategories = ({ actId = 0 }) => {
     if (actId === 0) {
       // Creacion de actividades
       if (data.name !== "" || data.description !== "") {
-        const res = await apiService.post("/activities", data);
+        const res = await apiService.post("/categories", data);
         if (res.status === 201) {
-          const { data, message } = await res.data;
+          const { data} = await res;
           setData(data);
-          Alert("Éxito", message, "success");
+          Alert("Éxito", "Categoría creada", "success");
+          console.log(data);
+          setCategories([...categories, data]);
+          setVisible(false);
         } else {
           const { message } = await res.data;
           Alert("Error", message, "error");
@@ -64,7 +67,7 @@ export const EditCategories = ({ actId = 0 }) => {
     } else {
       if (data.name !== "" || data.description !== "") {
         //actualizacion de actividades
-        const res = await apiService.put(`/activities/${actId}`, data);
+        const res = await apiService.put(`/categories/${actId}`, data);
         if (res.status === 200) {
           const { data } = await res.data;
           setData(data);
@@ -87,7 +90,7 @@ export const EditCategories = ({ actId = 0 }) => {
   return (
     <div className="edit-categories">
       <button className="edit-button" onClick={() => setVisible(!visible)}>
-        {actId !== 0 ? "Editar" : "Crear actividad"}
+        {actId !== 0 ? "Editar" : "Nueva categoria"}
       </button>
       {visible && (
         <div className="modal-activity">
@@ -103,7 +106,7 @@ export const EditCategories = ({ actId = 0 }) => {
               <form onSubmit={handleSubmit} className="container-form">
                 <div className="input-box">
                   <Field
-                    placeholder="Nombre de la actividad"
+                    placeholder="Nombre"
                     name="name"
                     text="text"
                     value={values.name}

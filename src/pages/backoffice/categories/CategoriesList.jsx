@@ -43,7 +43,7 @@ export const CategoriesList = () => {
     <div className="container-activities">
       <h1>Listado de Categorias</h1>
       {/* Aca metemos un campo para que el administrador pueda crear una nueva actividad */}
-      <EditCategories actId={0} />
+      <EditCategories actId={0} setCategories={setCategories} categories={categories} />
       <div className="container-activities__table">
         {categories?.map((category) => (
           <div className="container-activities__table--items" key={category.id}>
