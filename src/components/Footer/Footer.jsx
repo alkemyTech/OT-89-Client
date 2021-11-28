@@ -1,18 +1,19 @@
 import React from "react";
-import apiService from "../../services/server";
 import { Link } from "react-router-dom";
 
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faLinkedin} from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 
 import "./Footer.scss";
 
 export const Footer = () => {
   // GET Logo ONG
   const logoONG = "/images/assets/logo.png";
-
-  const [data, setData] = React.useState({});
 
   const itemsLeftFooter = [
     { title: "Noticias", route: "news" },
@@ -48,22 +49,20 @@ export const Footer = () => {
         </ul>
       </div>
       <div className="social-media">
-        <a href={data.facebook}>
-            <FontAwesomeIcon icon={faFacebook} className="icon"/>
+        <a href="www.faceboook.com">
+          <FontAwesomeIcon icon={faFacebook} className="icon" />
         </a>
 
-        <a href={data.instagram}>
-            <FontAwesomeIcon icon={faInstagram} className="icon"/>
+        <a href="www.instagram.com">
+          <FontAwesomeIcon icon={faInstagram} className="icon" />
         </a>
 
-        <a href={data.linkedin}>
+        <a href="www.linkedin.com">
           {/* ARREGLAR ICONO DE LINKEDIN */}
-            <FontAwesomeIcon icon={faLinkedin} className="icon"/>
+          <FontAwesomeIcon icon={faLinkedin} className="icon" />
         </a>
       </div>
-      <p className="terms-and-condition">
-        2021 by mHm All Rights Reserved.
-      </p>
+      <p className="terms-and-condition">2021 by mHm All Rights Reserved.</p>
     </footer>
   );
 };
