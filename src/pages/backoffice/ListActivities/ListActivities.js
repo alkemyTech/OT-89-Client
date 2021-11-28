@@ -73,7 +73,7 @@ export const ListActivities = () => {
               setShowModal(true);
             }}
           >
-            Nuevo
+            Nueva Actividad
           </button>
         </div>
         <EditActivities

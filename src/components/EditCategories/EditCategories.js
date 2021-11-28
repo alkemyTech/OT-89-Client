@@ -51,11 +51,11 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
       if (data.name !== "" || data.description !== "") {
         const res = await apiService.post("/categories", data);
         if (res.status === 201) {
-          const { data} = await res;
+          const { data } = await res;
           setData(data);
           Alert("Éxito", "Categoría creada", "success");
           console.log(data);
-          setCategories([...categories, data]);
+          setCategories([...categories,data].reverse());
           setVisible(false);
         } else {
           const { message } = await res.data;
@@ -68,6 +68,7 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
       if (data.name !== "" || data.description !== "") {
         //actualizacion de actividades
         const res = await apiService.put(`/categories/${actId}`, data);
+        console.log(res.data.data);
         if (res.status === 200) {
           const { data } = await res.data;
           setData(data);
@@ -76,6 +77,7 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
             "El cambio fue realizado satisfactoriamente",
             "success"
           );
+          setCategories(categories.map((category) => (category.id === actId ? res.data.data : category)));
           setVisible(false);
         } else {
           const { message } = await res.data;

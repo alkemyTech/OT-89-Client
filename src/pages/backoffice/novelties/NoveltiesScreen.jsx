@@ -16,8 +16,7 @@ const NoveltiesScreen = () => {
     setShowModal(true);
   };
 
-  return (
-    <section>
+  return <section>
       <div className="novelties">
       <h1>Novedades</h1>
         <button
@@ -33,7 +32,6 @@ const NoveltiesScreen = () => {
       <NoveltiesList handleModify={handleModify} />
       <NoveltyModal isVisible={showModal} setIsVisible={setShowModal} />
     </section>
-  );
 };
 
 export default NoveltiesScreen;

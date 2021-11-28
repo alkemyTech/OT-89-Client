@@ -103,156 +103,154 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           console.log(error);
         });
     }
+  }
 
-    const handleDelete = async (id) => {
-      const confirmation = await Confirm(
-        "Eliminar novedad",
-        "Esta intentando eliminar una novedad, ¿desea continuar?"
-      );
-      if (confirmation) {
-        await apiService
-          .delete(`/news/${id}`)
-          .then((res) => {
-            if (res.status === 200) {
-              dispatch(deleteNovelty(id));
-              setNovelty(blankNovelty);
-              setIsVisible(false);
-            }
-          })
-          .catch((err) => {
-            Alert("Error", "Hubo un error inesperado", "warning");
-            console.log(err);
-          });
-      }
-    };
-
-    const handleEdit = async (news) => {
-      const confirmation = await Confirm(
-        "Editar novedad",
-        "Esta intentando editar una novedad, ¿desea continuar?"
-      );
-      if (confirmation) {
-        await apiService
-          .put(`/news/${news.id}`, news)
-          .then((res) => {
-            if (res.status === 200) {
-              dispatch(editNovelty(news));
-              setNovelty(blankNovelty);
-              setIsVisible(false);
-            }
-          })
-          .catch((err) => {
-            Alert("Error", "Hubo un error inesperado", "warning");
-            console.log(err);
-          });
-      }
-    };
-
-    return (
-      <>
-        <Modal isOpen={isVisible} backdrop={true}>
-          <ModalBody>
-            <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
-              <h3>
-                {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
-              </h3>
-              <hr />
-              <div className="input-box">
-                <label htmlFor="name">Titulo</label>
-                <input
-                  type="text"
-                  className="input"
-                  value={novelty.name}
-                  onChange={handleChange}
-                  name="name"
-                  id="name"
-                  required
-                />
-              </div>
-              <div className="input-box">
-                <label htmlFor="image">Imagen</label>
-                {novelty.image && (
-                  <img className="fotito" src={novelty.image} alt="Imagen" />
-                )}
-                <input
-                  type="file"
-                  className="input"
-                  name="image"
-                  id="image"
-                  onChange={handleImage}
-                  required
-                />
-              </div>
-              <div className="input-box">
-                <label>Contenido</label>
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={novelty.content}
-                  name="content"
-                  onChange={handleCkeditorState}
-                />
-              </div>
-              <div className="input-box">
-                <label className="">Categoria </label>
-                <select className="input" onChange={handleCategory}>
-                  <option value="0" hidden>
-                    {categories.length === 0 && "No hay categorias disponibles"}
-                  </option>
-                  {categories &&
-                    categories.map((categ) => (
-                      <option key={categ.id} value={categ.id}>
-                        {categ.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <hr />
-              <div className="buttons">
-                {novelty.id ? (
-                  <>
-                    <button
-                      className="button button-outline"
-                      onClick={() => handleEdit(novelty)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="button button-secondary-outline "
-                      onClick={() => handleDelete(novelty.id)}
-                    >
-                      Eliminar
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    type="submit"
-                    className="button button-primary"
-                    onClick={(e) => {
-                      handleSubmit(e);
-                      setNovelty(blankNovelty);
-                    }}
-                  >
-                    Agregar
-                  </button>
-                )}
-                <button
-                  className="button button-secondary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setNovelty(blankNovelty);
-                    setIsVisible(false);
-                  }}
-                >
-                  Cancelar
-                </button>
-              </div>
-            </form>
-          </ModalBody>
-        </Modal>
-      </>
+  const handleDelete = async (id) => {
+    const confirmation = await Confirm(
+      "Eliminar novedad",
+      "Esta intentando eliminar una novedad, ¿desea continuar?"
     );
+    if (confirmation) {
+      await apiService
+        .delete(`/news/${id}`)
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(deleteNovelty(id));
+            setNovelty(blankNovelty);
+            setIsVisible(false);
+          }
+        })
+        .catch((err) => {
+          Alert("Error", "Hubo un error inesperado", "warning");
+          console.log(err);
+        });
+    }
   };
-}
+
+  const handleEdit = async (news) => {
+    const confirmation = await Confirm(
+      "Editar novedad",
+      "Esta intentando editar una novedad, ¿desea continuar?"
+    );
+    if (confirmation) {
+      await apiService
+        .put(`/news/${news.id}`, news)
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(editNovelty(news));
+            setNovelty(blankNovelty);
+            setIsVisible(false);
+          }
+        })
+        .catch((err) => {
+          Alert("Error", "Hubo un error inesperado", "warning");
+          console.log(err);
+        });
+    }
+  };
+
+  return (
+    <Modal isOpen={isVisible} backdrop={true}>
+      <ModalBody>
+        <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
+          <h3>
+            {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
+          </h3>
+          <hr />
+          <div className="input-box">
+            <label htmlFor="name">Titulo</label>
+            <input
+              type="text"
+              className="input"
+              value={novelty.name}
+              onChange={handleChange}
+              name="name"
+              id="name"
+              required
+            />
+          </div>
+          <div className="input-box">
+            <label htmlFor="image">Imagen</label>
+            {novelty.image && (
+              <img className="fotito" src={novelty.image} alt="Imagen" />
+            )}
+            <input
+              type="file"
+              className="input"
+              name="image"
+              id="image"
+              onChange={handleImage}
+              required
+            />
+          </div>
+          <div className="input-box">
+            <label>Contenido</label>
+            <CKEditor
+              editor={ClassicEditor}
+              data={novelty.content}
+              name="content"
+              onChange={handleCkeditorState}
+            />
+          </div>
+          <div className="input-box">
+            <label className="">Categoria </label>
+            <select className="input" onChange={handleCategory}>
+              <option value="0" hidden>
+                {categories.length === 0 && "No hay categorias disponibles"}
+              </option>
+              {categories &&
+                categories.map((categ) => (
+                  <option key={categ.id} value={categ.id}>
+                    {categ.name}
+                  </option>
+                ))}
+            </select>
+          </div>
+          <hr />
+          <div className="buttons">
+            {novelty.id ? (
+              <>
+                <button
+                  className="button button-outline"
+                  onClick={() => handleEdit(novelty)}
+                >
+                  Editar
+                </button>
+                <button
+                  className="button button-secondary-outline "
+                  onClick={() => handleDelete(novelty.id)}
+                >
+                  Eliminar
+                </button>
+              </>
+            ) : (
+              <button
+                type="submit"
+                className="button button-primary"
+                onClick={(e) => {
+                  handleSubmit(e);
+                  setNovelty(blankNovelty);
+                }}
+              >
+                Agregar
+              </button>
+            )}
+            <button
+              className="button button-secondary"
+              onClick={(e) => {
+                e.preventDefault();
+                setNovelty(blankNovelty);
+                setIsVisible(false);
+              }}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </ModalBody>
+    </Modal>
+  );
+};
 export default NoveltyModal;
 
 const blankNovelty = {

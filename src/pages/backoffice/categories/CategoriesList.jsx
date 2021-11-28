@@ -48,7 +48,7 @@ export const CategoriesList = () => {
         {categories?.map((category) => (
           <div className="container-activities__table--items" key={category.id}>
             <p className="activities__title">{category.name}</p>
-            <EditCategories actId={category.id} />
+            <EditCategories actId={category.id} setCategories={setCategories} categories={categories} />
             <button
               className="button button-secondary"
               onClick={() =>

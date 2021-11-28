@@ -27,7 +27,7 @@ const TestimonialsScreen = () => {
             setShowModal(true);
           }}
         >
-          Agregar Testimonios
+          Nuevo Testimonio
         </button>
       </div>
       <TestimonialsList handleModify={handleModify} />

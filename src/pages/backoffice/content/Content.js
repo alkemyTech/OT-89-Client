@@ -51,3 +51,4 @@ export const Content = ({ openAside, isLeft }) => {
     </section>
   );
 };
+export default Content;
