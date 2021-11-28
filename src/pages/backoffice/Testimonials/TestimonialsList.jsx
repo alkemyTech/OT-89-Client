@@ -69,7 +69,7 @@ const TestimonialItem = ({ testimonial, handleModify }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <a href={image} target="_blank" rel='noopener noreferrer'>
+        <a href={image} target="_blank" rel="noopener noreferrer">
           Imagen
         </a>
         <button

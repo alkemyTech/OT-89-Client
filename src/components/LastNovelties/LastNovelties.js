@@ -4,18 +4,24 @@ import "./index.scss";
 import { Button } from "../utils/buttons/Button";
 
 export const LastNovelties = React.memo((props) => {
-  const { novelties } = props;
+  const { data } = props;
 
   return (
     <div className="wrapper">
       <h3>Últimas Novedades</h3>
       <div className="noveltie-conteiner">
-        {novelties.map((noveltie, index) => (
-          <div className="noveltie-conteiner-item" key={index}>
-            <img src={noveltie.img_url} alt={noveltie.alt_text} />
-            <h3>{noveltie.title}</h3>
-          </div>
-        ))}
+        {data.map((dato) => {
+          if (dato === undefined) {
+            return;
+          } else {
+            return (
+              <div className="noveltie-conteiner-item" key={dato.id}>
+                <img src={dato.image} alt={dato.name} />
+                <h3>{dato.name}</h3>
+              </div>
+            );
+          }
+        })}
       </div>
       <div className="novelties-links">
         <Button className="button" title="Testimonios" url="/testimonials" />
@@ -31,5 +37,5 @@ export const LastNovelties = React.memo((props) => {
 });
 
 LastNovelties.propTypes = {
-  novelties: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };

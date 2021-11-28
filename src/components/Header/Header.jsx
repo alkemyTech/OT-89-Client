@@ -56,11 +56,11 @@ export const Header = () => {
   const location = useLocation();
   useEffect(() => {
     const itemsHeader = Array.from(document.querySelectorAll(".navbar-list a"));
-    itemsHeader.map((item) => {
+    itemsHeader.map((item) =>
       item.pathname === location.pathname
         ? item.classList.add("active")
-        : item.classList.remove("active");
-    });
+        : item.classList.remove("active")
+    );
   }, [location.pathname]);
 
   const fixedNav = scroll > 200 ? "fixed" : null;
