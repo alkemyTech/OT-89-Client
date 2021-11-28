@@ -1,102 +1,47 @@
 import React, { useState, useEffect } from "react";
 import Slider from "../../components/Slider/Slider";
-import { LastNovelties } from '../../components/LastNovelties/LastNovelties'
+import { LastNovelties } from "../../components/LastNovelties/LastNovelties";
 import { Spinner } from "../../components/spinner/Spinner";
-import apiService from "../../services/server"; 
+import apiService from "../../services/server";
 import { Testimonial } from "../../components/Testimonial/Testimonial";
-import './Testimonials.scss';
+import "./Testimonials.scss";
 
 export function Home() {
-  const [ data, setData ] = useState({
-    loading: true,
-    title: "Cargando...",
-    novelties: [
-      {
-        title: "cargando...",
-        img_url: "url"
-      },
-      {
-        title: "cargando...",
-        img_url: "url"
-      },
-      {
-        title: "cargando...",
-        img_url: "url"
-      },
-      {
-        title: "cargado...",
-        img_url: "url"
-      }
-    ]
-  })
-
-  const { title, novelties } = data
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-
     // function to get dinamic data for home page
     const getData = async () => {
       try {
-        const res = await apiService.get(`${process.env.API_LINK_DATA}`)
-        const { loading, title, novelties } = await res.data.data
-        setData({
-          loading,
-          title,
-          novelties
-        })
+        const res = await apiService.get("/activities");
+        const { data } = await res.data;
+        const ultimaData = data.reverse();
+        // Se puede mejorar pero por ahora sirve :)
+        setData([ultimaData[0], ultimaData[1], ultimaData[2], ultimaData[3]]);
       } catch (error) {
-        console.log(error)
-        setData({
-          loading: false,
-          title: "Título de bienvenida",
-          novelties: [
-            {
-              title: "Hola mundo",
-              img_url: "https://picsum.photos/200/200",
-              alt_text: "Hola mundo"
-            },
-            {
-              title: "Meme",
-              img_url: "https://picsum.photos/200/200",
-              alt_text: "Hola mundo"
-            },
-            {
-              title: "Somos Más",
-              img_url: "https://picsum.photos/200/200",
-              alt_text: "Hola mundo"
-            },
-            {
-              title: "Gente de todos",
-              img_url: "https://picsum.photos/200/200",
-              alt_text: "Hola mundo"
-            }
-          ]
-        })
+        console.log(error);
       }
-    }
+    };
 
-    getData()
-
-  }, [])
+    getData();
+  }, []);
 
   return (
     <section>
-        { !data.loading  
-        ?
+      {data.length !== 0 ? (
         <div>
           <Slider />
-          <h1>{ title }</h1>
-          <LastNovelties novelties={ novelties } />
+          <h1>Titulo de la pagina</h1>
+          <LastNovelties data={data} />
           <div className="box-container">
             <Testimonial />
             <Testimonial />
             <Testimonial />
           </div>
         </div>
-        :
-          <Spinner />
-        }
-
+      ) : (
+        <Spinner />
+      )}
     </section>
-  )
+  );
 }
