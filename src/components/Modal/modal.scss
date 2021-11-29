@@ -8,6 +8,7 @@
     left: 0;
     border-radius: 20px;
     z-index: 3;
+    min-height: 100vh;
 
     .background-modal {
       background-color: $blurred-background;

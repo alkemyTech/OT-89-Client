@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import {
   editTestimonials,
 } from "../../../features/slices/testimonialSlice";
 import uploadImage from "../../../helpers/uploadImage";
+import Modal from "../../../components/Modal/modal";
 
 const TestimonialModal = ({ isVisible, setIsVisible }) => {
   const [testimonial, setTestimonial] = useState(blankTestimonial);
@@ -118,83 +118,84 @@ const TestimonialModal = ({ isVisible, setIsVisible }) => {
 
   return (
     <>
-      <Modal isOpen={isVisible} backdrop={true}>
-        <ModalBody>
-          <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
-            <h3>
-              {testimonial.id
-                ? "Editar una novedad"
-                : "Agregar un nuevo Testimonio"}
-            </h3>
-            <div className="input-box">
-              <label htmlFor="name">Titulo</label>
-              <input
-                type="text"
-                className="input"
-                value={testimonial.name}
-                onChange={handleChange}
-                name="name"
-                id="name"
-                required
-              />
-            </div>
-            <div className="input-box">
-              <label htmlFor="image">Imagen</label>
-              {testimonial.image && (
-                <img className="fotito" src={testimonial.image} alt="Imagen" />
-              )}
-              <input
-                type="file"
-                className="input"
-                name="image"
-                id="image"
-                onChange={handleImage}
-                required
-              />
-            </div>
-            <div className="input-box">
-              <label>Contenido</label>
-              <CKEditor
-                editor={ClassicEditor}
-                data={testimonial.content}
-                name="content"
-                onChange={handleCkeditorState}
-              />
-            </div>
-            <div className="buttons">
-              {testimonial.id ? (
-                <>
-                  <button
-                    className="button button-outline"
-                    onClick={() => handleEdit(testimonial)}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="button button-secondary-outline "
-                    onClick={() => handleDelete(testimonial.id)}
-                  >
-                    Eliminar
-                  </button>
-                </>
-              ) : (
+      <Modal
+        visible={isVisible}
+        onClose={() => setIsVisible((visibility) => !visibility)}
+      >
+        <form className="auth__content content-modal" onSubmit={(e) => e.preventDefault()}>
+          <h3>
+            {testimonial.id
+              ? "Editar una novedad"
+              : "Agregar un nuevo Testimonio"}
+          </h3>
+          <div className="input-box">
+            <label htmlFor="name">Titulo</label>
+            <input
+              type="text"
+              className="input"
+              value={testimonial.name}
+              onChange={handleChange}
+              name="name"
+              id="name"
+              required
+            />
+          </div>
+          <div className="input-box">
+            <label htmlFor="image">Imagen</label>
+            {testimonial.image && (
+              <img className="fotito" src={testimonial.image} alt="Imagen" />
+            )}
+            <input
+              type="file"
+              className="input"
+              name="image"
+              id="image"
+              onChange={handleImage}
+              required
+            />
+          </div>
+          <div className="input-box">
+            <label>Contenido</label>
+            <CKEditor
+              editor={ClassicEditor}
+              data={testimonial.content}
+              name="content"
+              onChange={handleCkeditorState}
+            />
+          </div>
+          <div className="buttons">
+            {testimonial.id ? (
+              <>
                 <button
-                  type="submit"
-                  className="button button-primary"
-                  onClick={handleSubmit}
+                  className="button button-outline"
+                  onClick={() => handleEdit(testimonial)}
                 >
-                  Agregar
+                  Editar
                 </button>
-              )}
+                <button
+                  className="button button-secondary-outline "
+                  onClick={() => handleDelete(testimonial.id)}
+                >
+                  Eliminar
+                </button>
+              </>
+            ) : (
               <button
-                className="button button-secondary"
-                onClick={() => setIsVisible(false)}
+                type="submit"
+                className="button button-primary"
+                onClick={handleSubmit}
               >
-                Cancelar
+                Agregar
               </button>
-            </div>
-          </form>
-        </ModalBody>
+            )}
+            <button
+              className="button button-secondary"
+              onClick={() => setIsVisible(false)}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
       </Modal>
     </>
   );
