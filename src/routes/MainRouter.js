@@ -18,23 +18,23 @@ import { NotFound } from "../pages/main/NotFound";
 import { Activities } from "../pages/main/Activities";
 
 export const MainRouter = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({ roleId: 1 });
+  //Fingiendo ser admin no flashea la screen de error en cada click.
+  //De todas formas, el useEffect enseguida valida si realmente es admin.
 
   useEffect(() => {
-    if (getToken()) {
-      try {
-        const getUser = async () => {
-          const res = await apiService.get("/auth/me", {
-            headers: {
-              Authorization: getToken(),
-            },
-          });
-          setUser(res.data.data);
-        };
-        getUser();
-      } catch (error) {
-        console.log(error);
-      }
+    // if (getToken())
+    try {
+      (async () => {
+        const res = await apiService.get("/auth/me", {
+          headers: {
+            Authorization: getToken(),
+          },
+        });
+        setUser(res.data.data);
+      })();
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
