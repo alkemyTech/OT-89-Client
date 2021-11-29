@@ -103,7 +103,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
           console.log(error);
         });
     }
-  }
+  };
 
   const handleDelete = async (id) => {
     const confirmation = await Confirm(
@@ -200,7 +200,11 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
               </option>
               {categories &&
                 categories.map((categ) => (
-                  <option key={categ.id} value={categ.id}>
+                  <option
+                    key={categ.id}
+                    value={categ.id}
+                    selected={novelty.categoryId == categ.id ? true : false} //eslint-disable-line
+                  >
                     {categ.name}
                   </option>
                 ))}

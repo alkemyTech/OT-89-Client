@@ -4,9 +4,12 @@
   width: 100%;
   display: flex;
   align-content: center;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+
   h1 {
     margin: 0;
     padding: 0;
@@ -76,10 +79,10 @@
   align-items: center;
   justify-items: center;
   padding-top: $spacing-sm;
-  
+
   gap: $spacing-sm;
   font-size: $font-size-small;
-  
+
   @media (min-width: $breakpoint-lg) {
     padding-top: $spacing-lg;
     gap: $spacing-lg;
