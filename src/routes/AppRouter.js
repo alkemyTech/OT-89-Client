@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import { NotFound } from "../pages/main/NotFound";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthRouter } from "./AuthRouter";
 import { MainRouter } from "./MainRouter";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -15,7 +14,6 @@ export const AppRouter = () => {
             <Switch location={location}>
               <Route path="/auth" component={AuthRouter} />
               <Route path="/" component={MainRouter} />
-              <Route path="*" component={NotFound} />
             </Switch>
           </CSSTransition>
         </TransitionGroup>

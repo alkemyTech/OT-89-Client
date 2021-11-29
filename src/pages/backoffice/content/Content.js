@@ -4,13 +4,12 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { EditOrganization } from "../EditOrganization/EditOrganization";
 import { ListActivities } from "../ListActivities/ListActivities";
 import { EditHomeData } from "../EditHomeData/EditHomeData";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { ListUsers } from "../ListUsers/ListUsers";
 import { ListContact } from "../ListContact/ListContact";
 import CategoriesScreen from "../categories/CategoriesScreen";
 import NoveltiesScreen from "../novelties/NoveltiesScreen";
 import TestimonialScreen from "../Testimonials/TestimonialsScreen";
-import { NotFound } from "../../main/NotFound";
 
 export const Content = ({ openAside, isLeft }) => {
   const left = isLeft ? "icon isleft" : "icon isright";
@@ -46,7 +45,7 @@ export const Content = ({ openAside, isLeft }) => {
           component={TestimonialScreen}
           exact
         />
-        <Route path="*" component={NotFound} />
+        <Redirect to="/404" />
       </Switch>
     </section>
   );

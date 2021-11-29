@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
 import { Home } from "../pages/main/Home";
@@ -55,7 +55,8 @@ export const MainRouter = () => {
         {user && user.roleId === 1 && (
           <Route path="/backoffice" component={BackOffice} />
         )}
-        <Route path="*" component={NotFound} />
+        <Route path="/404" component={NotFound} />
+        <Redirect to="/404" />
       </Switch>
       <Footer />
     </>
