@@ -26,7 +26,7 @@ const NoveltiesScreen = () => {
             setShowModal(true);
           }}
         >
-          Agregar Novedades
+          Nueva Novedad
         </button>
       </div>
       <NoveltiesList handleModify={handleModify} />

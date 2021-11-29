@@ -48,7 +48,7 @@ export function Home() {
         console.log(error)
         setData({
           loading: false,
-          title: "Título de bienvenida",
+          title: "Te damos la bienvenida a Somos Más",
           novelties: [
             {
               title: "Hola mundo",
@@ -81,7 +81,7 @@ export function Home() {
 
   return (
     <section>
-        { !data.loading  
+        { !data.loading
         ?
         <div>
           <Slider />

@@ -26,7 +26,7 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
     const getData = async () => {
       const res = await apiService.get(`/categories/${actId}`);
       const { data } = await res.data;
-      if (data.length === 0) {
+      if (res.status === 200 || res.status === 304) {
         setData(data);
       } else {
         const { message } = await res.data;
@@ -38,7 +38,7 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
     } else {
       return;
     }
-  }, []);
+  }, [visible]);
 
   //Peticiones a la base de datos
   const handlerSubmit = async (values) => {
@@ -55,7 +55,7 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
           setData(data);
           Alert("Éxito", "Categoría creada", "success");
           console.log(data);
-          setCategories([...categories,data].reverse());
+          setCategories([...categories, data].reverse());
           setVisible(false);
         } else {
           const { message } = await res.data;

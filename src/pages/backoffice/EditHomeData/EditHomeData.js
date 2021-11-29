@@ -6,28 +6,6 @@ import { Alert } from "../../../components/Alert/Alert";
 import "./EditHomeData.scss";
 
 export const EditHomeData = () => {
-  // const [description, setDescription] = useState({
-  //   title: "",
-  //   slider: [
-  //     {
-  //       text: "",
-  //       file: "",
-  //       imgUrl: "",
-  //     },
-  //     {
-  //       text: "",
-  //       file: "",
-  //       imgUrl: "",
-  //     },
-  //     {
-  //       text: "",
-  //       file: "",
-  //       imgUrl: "",
-  //     },
-  //   ],
-  // });
-
-  // Validator
 
   const EditSchema = Yup.object({
     title: Yup.string()

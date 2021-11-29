@@ -13,4 +13,4 @@ const Modal = ({ children, visible, onClose }) => {
     }
 }
 
-export default Modal
+export default Modal;
