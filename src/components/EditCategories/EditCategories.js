@@ -17,7 +17,6 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
 
   const handlerchange = (event, editor) => {
     const dataEdited = editor.getData();
-    console.log(data);
     setData({ ...data, description: dataEdited });
   };
 
@@ -27,18 +26,20 @@ export const EditCategories = ({ actId = 0, setCategories, categories }) => {
       const res = await apiService.get(`/categories/${actId}`);
       const { data } = await res.data;
       if (res.status === 200 || res.status === 304) {
-        setData(data);
+        await setData(data);
       } else {
         const { message } = await res.data;
         Alert("error", message, "error", 3000);
       }
     };
-    if (actId !== 0 && visible === true) {
+    if (actId !== 0) {
+      console.log(data);
       getData();
+      console.log(data);
     } else {
       return;
     }
-  }, [visible]);
+  }, [actId,visible]);
 
   //Peticiones a la base de datos
   const handlerSubmit = async (values) => {
