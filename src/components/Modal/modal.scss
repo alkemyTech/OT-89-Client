@@ -24,8 +24,10 @@
       max-width: 95vw;
       min-width: 60vw;
       overflow-y: scroll;
+      overflow-x: hidden;
       max-height: 80vh;
       width: fit-content;
+      padding: $spacing-lg 0;
     }
   }
 }
