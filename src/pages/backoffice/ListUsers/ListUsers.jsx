@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Confirm } from "../../../components/Alert/Alert";
 import EditProfile from "../../../components/EditProfile/EditProfile";
@@ -6,10 +6,13 @@ import ModalViewer from "../../../components/ModalViewer/modalViewer";
 import { usersList } from "../../../features/slices/usersSlice";
 import apiService from "../../../services/server";
 import "./listUsers.scss";
+import Modal from "../../../components/Modal/modal";
 
 export const ListUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.value);
+  const [editUser, setEditUser] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   React.useEffect(() => {
     const exec = async () => {
@@ -23,6 +26,11 @@ export const ListUsers = () => {
     exec();
   }, []);
 
+  const handleEdit = (id) => {
+    setIsVisible(true);
+    setEditUser(id);
+  };
+  
   const handleDelete = async (idAEliminar) => {
     try {
       const result = await Confirm(
@@ -49,6 +57,12 @@ export const ListUsers = () => {
 
   return (
     <div>
+      <Modal
+        visible={isVisible}
+        onClose={() => setIsVisible((visibility) => !visibility)}
+      >
+        <EditProfile userId={editUser} setVisible={setIsVisible}></EditProfile>
+      </Modal>
       <table>
         <thead>
           <tr>
@@ -68,9 +82,12 @@ export const ListUsers = () => {
                   <td className="borders">{oneUser.lastName}</td>
                   <td className="borders">{oneUser.email}</td>
                   <td>
-                    <ModalViewer buttonName="Editar">
-                      <EditProfile userId={oneUser.userId}></EditProfile>
-                    </ModalViewer>
+                    <button
+                      className="button button-outline"
+                      onClick={() => handleEdit(oneUser.userId)}
+                    >
+                      Editar
+                    </button>
                   </td>
                   <td>
                     <button

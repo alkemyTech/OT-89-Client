@@ -2,7 +2,7 @@ import React from "react";
 import "./modal.scss";
 
 const Modal = ({ children, visible, onClose }) => {
-  //remember to set className .content-modal to the children container!
+  //remember to set className .content-modal & .auth__content to the children container!
   if (visible) {
     return (
       <div className="modal-component modal-activity ">

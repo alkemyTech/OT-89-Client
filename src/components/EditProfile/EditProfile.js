@@ -125,10 +125,11 @@ const EditProfile = ({ userId = 0, setVisible }) => {
           // setTimeout(() => changeSubmitedForm(false), 5000);
           resetForm();
         }}
+        
       >
         {({ errors }) => (
-          <Form className="form" onSubmit={handleSubmit}>
-            <div className="data-box">
+         <div className=" auth__content content-modal">
+            <div className="data-box ">
               <label className="label" htmlFor="firstName">
                 Nombre
               </label>
@@ -205,7 +206,7 @@ const EditProfile = ({ userId = 0, setVisible }) => {
               />
             </div>
             <div className="buttons">
-              <button className="button button-primary" type="submit">
+              <button className="button button-primary" type="submit" onClick={handleSubmit}>
                 Enviar
               </button>
               {userId === 0 && (
@@ -218,7 +219,7 @@ const EditProfile = ({ userId = 0, setVisible }) => {
               )}
             </div>
             {/* {submitedForm && <small className="success">Formulario enviado con exito!</small>} */}
-          </Form>
+       </div>
         )}
       </Formik>
     </div>
