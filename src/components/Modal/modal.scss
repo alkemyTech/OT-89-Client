@@ -1,9 +1,30 @@
-.background-modal {
-    display: flex;
+@import "../../assets/scss/vars";
+
+.modal-component {
+  &.modal-activity {
     position: fixed;
-    top: 0;
+    width: 100%;
+    top: 2vh;
     left: 0;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 1900;
+    border-radius: 20px;
+    z-index: 3;
+
+    .background-modal {
+      background-color: $blurred-background;
+      position: fixed;
+      z-index: 2;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .content-modal {
+      position: relative;
+      z-index: 4;
+      max-width: 95vw;
+      min-width: 60vw;
+      overflow-y: scroll;
+      max-height: 80vh;
+      width: fit-content;
+    }
+  }
 }

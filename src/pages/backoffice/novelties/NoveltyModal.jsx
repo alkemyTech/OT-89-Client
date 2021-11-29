@@ -140,7 +140,10 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
       visible={isVisible}
       onClose={() => setIsVisible((visibility) => !visibility)}
     >
-      <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="auth__content content-modal"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <h3>
           {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
         </h3>
@@ -154,7 +157,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
             onChange={handleChange}
             name="name"
             id="name"
-            required
+            required={novelty.id ? false : true}
           />
         </div>
         <div className="input-box">
@@ -168,7 +171,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
             name="image"
             id="image"
             onChange={handleImage}
-            required
+            required={novelty.id ? false : true}
           />
         </div>
         <div className="input-box">
