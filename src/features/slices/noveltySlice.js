@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   novelties: [],
-  selected: null,
+  selected: {
+    name: null,
+    image: null,
+    content: null,
+    categoryId: null,
+    id: null,
+  },
 };
 
 export const noveltySlice = createSlice({
@@ -26,7 +32,10 @@ export const noveltySlice = createSlice({
         state.selected = state.novelties.filter(
           (novel) => novel.id === action.payload
         )[0];
-      else state.selected = null;
+      else state.selected = initialState.selected;
+    },
+    editSelected: (state, action) => {
+      state.selected = action.payload;
     },
     addNovelty: (state, action) => {
       state.novelties.unshift(action.payload);
@@ -40,6 +49,7 @@ export const {
   editNovelty,
   selectNovelty,
   addNovelty,
+  editSelected
 } = noveltySlice.actions;
 
 export default noveltySlice.reducer;

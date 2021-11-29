@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Modal, ModalBody } from "reactstrap";
+import React, { useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -11,13 +10,14 @@ import {
   addNovelty,
   deleteNovelty,
   editNovelty,
+  editSelected,
 } from "../../../features/slices/noveltySlice";
 import { loadCategories } from "../../../features/slices/categoriesSlice";
+import Modal from "../../../components/Modal/modal";
 
 const NoveltyModal = ({ isVisible, setIsVisible }) => {
-  const [novelty, setNovelty] = useState(blankNovelty);
   const dispatch = useDispatch();
-  const toModify = useSelector(
+  const novelty = useSelector(
     (state) => state.novelties.selected,
     shallowEqual
   );
@@ -25,20 +25,9 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
     (state) => state.categories.categories,
     shallowEqual
   );
-
-  useEffect(() => {
-    if (toModify) {
-      setNovelty({
-        name: toModify.name,
-        image: toModify.image,
-        content: toModify.content,
-        categoryId: toModify.categoryId,
-        id: toModify.id,
-      });
-    } else {
-      setNovelty(blankNovelty);
-    }
-  }, [toModify]);
+  const setNovelty = (payload) => {
+    dispatch(editSelected(payload));
+  };
 
   useEffect(() => {
     if (categories.length === 0) {
@@ -94,7 +83,6 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
         .then((res) => {
           if (res.status === 201) {
             dispatch(addNovelty(res.data.data));
-            setNovelty(blankNovelty);
             setIsVisible(false);
           }
         })
@@ -116,7 +104,6 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
         .then((res) => {
           if (res.status === 200) {
             dispatch(deleteNovelty(id));
-            setNovelty(blankNovelty);
             setIsVisible(false);
           }
         })
@@ -137,8 +124,7 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
         .put(`/news/${news.id}`, news)
         .then((res) => {
           if (res.status === 200) {
-            dispatch(editNovelty(news));
-            setNovelty(blankNovelty);
+            dispatch(editNovelty(res.data.data));
             setIsVisible(false);
           }
         })
@@ -150,117 +136,108 @@ const NoveltyModal = ({ isVisible, setIsVisible }) => {
   };
 
   return (
-    <Modal isOpen={isVisible} backdrop={true}>
-      <ModalBody>
-        <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
-          <h3>
-            {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
-          </h3>
-          <hr />
-          <div className="input-box">
-            <label htmlFor="name">Titulo</label>
-            <input
-              type="text"
-              className="input"
-              value={novelty.name}
-              onChange={handleChange}
-              name="name"
-              id="name"
-              required
-            />
-          </div>
-          <div className="input-box">
-            <label htmlFor="image">Imagen</label>
-            {novelty.image && (
-              <img className="fotito" src={novelty.image} alt="Imagen" />
-            )}
-            <input
-              type="file"
-              className="input"
-              name="image"
-              id="image"
-              onChange={handleImage}
-              required
-            />
-          </div>
-          <div className="input-box">
-            <label>Contenido</label>
-            <CKEditor
-              editor={ClassicEditor}
-              data={novelty.content}
-              name="content"
-              onChange={handleCkeditorState}
-            />
-          </div>
-          <div className="input-box">
-            <label className="">Categoria </label>
-            <select className="input" onChange={handleCategory}>
-              <option value="0" hidden>
-                {categories.length === 0 && "No hay categorias disponibles"}
-              </option>
-              {categories &&
-                categories.map((categ) => (
-                  <option
-                    key={categ.id}
-                    value={categ.id}
-                    selected={novelty.categoryId == categ.id ? true : false} //eslint-disable-line
-                  >
-                    {categ.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <hr />
-          <div className="buttons">
-            {novelty.id ? (
-              <>
-                <button
-                  className="button button-outline"
-                  onClick={() => handleEdit(novelty)}
+    <Modal
+      visible={isVisible}
+      onClose={() => setIsVisible((visibility) => !visibility)}
+    >
+      <form className="auth__content" onSubmit={(e) => e.preventDefault()}>
+        <h3>
+          {novelty.id ? "Editar una novedad" : "Agregar una nueva Novedad"}
+        </h3>
+        <hr />
+        <div className="input-box">
+          <label htmlFor="name">Titulo</label>
+          <input
+            type="text"
+            className="input"
+            value={novelty.name}
+            onChange={handleChange}
+            name="name"
+            id="name"
+            required
+          />
+        </div>
+        <div className="input-box">
+          <label htmlFor="image">Imagen</label>
+          {novelty.image && (
+            <img className="fotito" src={novelty.image} alt="Imagen" />
+          )}
+          <input
+            type="file"
+            className="input"
+            name="image"
+            id="image"
+            onChange={handleImage}
+            required
+          />
+        </div>
+        <div className="input-box">
+          <label>Contenido</label>
+          <CKEditor
+            editor={ClassicEditor}
+            data={novelty.content}
+            name="content"
+            onChange={handleCkeditorState}
+          />
+        </div>
+        <div className="input-box">
+          <label className="">Categoria </label>
+          <select className="input" onChange={handleCategory}>
+            <option value="0" hidden>
+              {categories.length === 0 && "No hay categorias disponibles"}
+            </option>
+            {categories &&
+              categories.map((categ) => (
+                <option
+                  key={categ.id}
+                  value={categ.id}
+                  selected={novelty.categoryId == categ.id ? true : false} //eslint-disable-line
                 >
-                  Editar
-                </button>
-                <button
-                  className="button button-secondary-outline "
-                  onClick={() => handleDelete(novelty.id)}
-                >
-                  Eliminar
-                </button>
-              </>
-            ) : (
+                  {categ.name}
+                </option>
+              ))}
+          </select>
+        </div>
+        <hr />
+        <div className="buttons">
+          {novelty.id ? (
+            <>
               <button
-                type="submit"
-                className="button button-primary"
-                onClick={(e) => {
-                  handleSubmit(e);
-                  setNovelty(blankNovelty);
-                }}
+                className="button button-outline"
+                onClick={() => handleEdit(novelty)}
               >
-                Agregar
+                Editar
               </button>
-            )}
+              <button
+                className="button button-secondary-outline "
+                onClick={() => handleDelete(novelty.id)}
+              >
+                Eliminar
+              </button>
+            </>
+          ) : (
             <button
-              className="button button-secondary"
+              type="submit"
+              className="button button-primary"
               onClick={(e) => {
-                e.preventDefault();
-                setNovelty(blankNovelty);
-                setIsVisible(false);
+                handleSubmit(e);
               }}
             >
-              Cancelar
+              Agregar
             </button>
-          </div>
-        </form>
-      </ModalBody>
+          )}
+          <button
+            className="button button-secondary"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsVisible(false);
+            }}
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 };
 export default NoveltyModal;
-
-const blankNovelty = {
-  name: "",
-  image: "",
-  content: "",
-  categoryId: "",
-  id: null,
-};
